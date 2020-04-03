@@ -1,11 +1,13 @@
-package com.example.infs3634_assignment_garden;
+package com.example.infs3634_assignment_garden.entities;
 
 import android.util.Log;
 
+import com.example.infs3634_assignment_garden.R;
+
 import java.util.ArrayList;
 
-public class User {
-    //user class encapsulates global information about current User's progress
+public class Garden {
+    //Garden class encapsulates global information about current user's progress
 
     private int ambienceLvl;
     private int ambienceTotal;
@@ -13,9 +15,7 @@ public class User {
     private int coins;
     private static ArrayList<Plant> plants;
 
-    private static int milestone1 = 1000;
-    private static int milestone2 = 1500;
-    private static int milestone3 = 4000;
+    private static int[] milestones = {500, 1000, 2000};
 
     // "ambience" = user's total exp
     // - ambienceLvl = what level the user is
@@ -23,7 +23,7 @@ public class User {
     //  - ambienceProgress = will be shown in the amb progress bar
     //  - milestones = amount needed for each level
 
-    public User() {
+    public Garden() {
         this.ambienceLvl = 0;
         this.ambienceTotal = 0;
         this.coins = 0;
@@ -68,8 +68,16 @@ public class User {
         return ambienceProgress;
     }
 
-    public void setAmbienceProgress(int ambienceProgress) {
+    public void setAmbienceProgress(double ambienceProgress) {
         this.ambienceProgress = ambienceProgress;
+    }
+
+    public static int[] getMilestones() {
+        return milestones;
+    }
+
+    public static void setMilestones(int[] milestones) {
+        Garden.milestones = milestones;
     }
 
     // ==============================================================
@@ -78,12 +86,12 @@ public class User {
 
         ambienceLvl = 0;
 
-        if (ambienceTotal > milestone1) {
-            ambienceLvl = 1;
-        } else if (ambienceTotal > milestone2) {
-            ambienceLvl = 2;
-        } else if (ambienceTotal > milestone3) {
+        if (ambienceTotal >= milestones[2]) {
             ambienceLvl = 3;
+        } else if (ambienceTotal >= milestones[1]) {
+            ambienceLvl = 2;
+        } else if (ambienceTotal >= milestones[0]) {
+            ambienceLvl = 1;
         }
 
         Log.d("TAG", "calcAmbienceLvl: ambienceLvl = " + ambienceLvl);
@@ -106,15 +114,19 @@ public class User {
         int amtNeeded = 0;
         int currAmt = 0;
 
-        if (ambienceLvl >= 0) {
-            amtNeeded = milestone1;
-            currAmt = ambienceTotal;
-        } else if (ambienceLvl >= 1) {
-            amtNeeded = milestone2 - milestone1;
-            currAmt = ambienceTotal - milestone1;
+        if (ambienceLvl >= 3) {
+            // show progress as max as soon as level 3 (max) is reached
+            ambienceProgress = 100;
+            return ambienceProgress;
         } else if (ambienceLvl >= 2) {
-            amtNeeded = milestone3 - milestone2;
-            currAmt = ambienceTotal - milestone2;
+            amtNeeded = milestones[2] - milestones[1];
+            currAmt = ambienceTotal - milestones[1];
+        } else if (ambienceLvl >= 1) {
+            amtNeeded = milestones[1] - milestones[0];
+            currAmt = ambienceTotal - milestones[0];
+        } else if (ambienceLvl >= 0){
+            amtNeeded = milestones[0];
+            currAmt = ambienceTotal;
         }
 
         ambienceProgress = (currAmt/ (double) amtNeeded) * 100;
@@ -132,7 +144,10 @@ public class User {
     }
 
     public void addPlant(Plant newPlant){
-        plants.add(newPlant);
+        // 16 is the max amount of plants you can have in the garden
+        if (plants.size() < 16) {
+            plants.add(newPlant);
+        }
     }
 
     // searches for a plant in the list based on ArrayList index
@@ -162,14 +177,14 @@ public class User {
         plants.add(new Plant(R.drawable.tree_sample, "Evergreen", "Microeconomics"));
         plants.add(new Plant(R.drawable.tree_sample, "Evergreen", "Microeconomics"));
         plants.add(new Plant(R.drawable.tree_sample, "Evergreen", "Microeconomics"));
-        plants.add(new Plant(R.drawable.tree_sample, "Evergreen", "Microeconomics"));
-        plants.add(new Plant(R.drawable.tree_sample, "Evergreen", "Microeconomics"));
-        plants.add(new Plant(R.drawable.tree_sample, "Evergreen", "Microeconomics"));
-        plants.add(new Plant(R.drawable.tree_sample, "Evergreen", "Microeconomics"));
-        plants.add(new Plant(R.drawable.tree_sample, "Evergreen", "Microeconomics"));
 
-        plants.get(0).setGrowthTotal(200);
-        plants.get(1).setGrowthTotal(100);
+
+        plants.get(0).setGrowthTotal(255);
+        plants.get(1).setGrowthTotal(50);
+        plants.get(2).setGrowthTotal(400);
+        plants.get(3).setGrowthTotal(250);
+        plants.get(4).setGrowthTotal(100);
+        plants.get(5).setGrowthTotal(1000);
         calcAmbience();
         Helper.calcAllGrowth(plants);
     }

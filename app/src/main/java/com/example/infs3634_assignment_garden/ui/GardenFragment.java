@@ -9,17 +9,13 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.infs3634_assignment_garden.MainActivity;
-import com.example.infs3634_assignment_garden.Plant;
+import com.example.infs3634_assignment_garden.entities.Plant;
 import com.example.infs3634_assignment_garden.PlantAdapter;
 import com.example.infs3634_assignment_garden.R;
 
@@ -43,7 +39,7 @@ public class GardenFragment extends Fragment implements PlantAdapter.LaunchListe
         RecyclerView myRecyclerView = root.findViewById(R.id.plantRecycler);
         myRecyclerView.setHasFixedSize(true);
 
-        myLayoutManager = new GridLayoutManager(getActivity(), 5);
+        myLayoutManager = new GridLayoutManager(getActivity(), 4);
         myRecyclerView.setLayoutManager(myLayoutManager);
 
         //create adapter (using Restaurant list as dataset)

@@ -1,4 +1,6 @@
-package com.example.infs3634_assignment_garden;
+package com.example.infs3634_assignment_garden.entities;
+
+import com.example.infs3634_assignment_garden.entities.Plant;
 
 import java.util.ArrayList;
 

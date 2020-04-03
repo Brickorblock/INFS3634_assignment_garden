@@ -2,6 +2,7 @@ package com.example.infs3634_assignment_garden;
 
 import android.os.Bundle;
 
+import com.example.infs3634_assignment_garden.entities.Garden;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -11,7 +12,7 @@ import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
 public class MainActivity extends AppCompatActivity {
-    public static User user;
+    public static Garden user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,8 +28,8 @@ public class MainActivity extends AppCompatActivity {
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(navView, navController);
 
-        //create User class (stores global info about progress, etc.)
-        this.user = new User();
+        //create Garden class (stores global info about progress, etc.)
+        this.user = new Garden();
         //TODO: remove this temp dev debugging method
         user.getTempPlants();
 
