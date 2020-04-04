@@ -1,10 +1,12 @@
 package com.example.infs3634_assignment_garden.ui;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -15,6 +17,7 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.infs3634_assignment_garden.MainActivity;
+import com.example.infs3634_assignment_garden.ShopActivity;
 import com.example.infs3634_assignment_garden.entities.Plant;
 import com.example.infs3634_assignment_garden.PlantAdapter;
 import com.example.infs3634_assignment_garden.R;
@@ -51,10 +54,18 @@ public class GardenFragment extends Fragment implements PlantAdapter.LaunchListe
         TextView ambienceLvl = root.findViewById(R.id.lvlText);
         ProgressBar ambienceBar = root.findViewById(R.id.ambienceBar);
         TextView coinText = root.findViewById(R.id.coinText);
+        Button shopButton = root.findViewById(R.id.shopButton);
 
         ambienceLvl.setText("Lvl " + Integer.toString(MainActivity.user.getAmbienceLvl()));
         ambienceBar.setProgress((int) MainActivity.user.getAmbienceProgress());
         coinText.setText(Integer.toString(MainActivity.user.getCoins()));
+        shopButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getContext(), ShopActivity.class);
+                startActivity(intent);
+            }
+        });
 
         return root;
     }
@@ -80,4 +91,6 @@ public class GardenFragment extends Fragment implements PlantAdapter.LaunchListe
         fragment.setArguments(positionBundle);
 
     }
+
+
 }

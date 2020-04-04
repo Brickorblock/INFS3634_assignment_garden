@@ -33,7 +33,6 @@ public class MainActivity extends AppCompatActivity {
         //TODO: remove this temp dev debugging method
         user.getTempPlants();
 
-
     }
 
 }

@@ -48,6 +48,14 @@ public class Garden {
         this.coins = coins;
     }
 
+    public void addCoins(int amt) {
+        coins += amt;
+    }
+
+    public void deductCoins(int amt) {
+        coins -= amt;
+    }
+
     public ArrayList<Plant> getPlants() {
         return plants;
     }
