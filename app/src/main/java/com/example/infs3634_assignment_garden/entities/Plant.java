@@ -2,7 +2,9 @@ package com.example.infs3634_assignment_garden.entities;
 
 import android.util.Log;
 
-public class Plant {
+import java.util.ArrayList;
+
+public class Plant extends ArrayList<Plant> {
     //TODO: will we need a PlantId?
     private int plantImage;
     private String name;
