@@ -59,7 +59,7 @@
             app:layout_constraintTop_toBottomOf="@+id/constraintLayout3">
 
             <TextView
-                android:id="@+id/costText"
+                android:id="@+id/questionsText"
                 style="@style/body"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -92,7 +92,7 @@
             app:layout_constraintTop_toBottomOf="@+id/constraintLayout4">
 
             <TextView
-                android:id="@+id/subjectText"
+                android:id="@+id/topicText"
                 style="@style/body"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

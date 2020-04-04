@@ -1,11 +1,14 @@
 package com.example.infs3634_assignment_garden;
 
+import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.infs3634_assignment_garden.entities.Plant;
@@ -20,22 +23,7 @@ public class QuizAdapter extends RecyclerView.Adapter<QuizAdapter.MyViewHolder> 
     public QuizAdapter(ArrayList<Quiz> dataset, LaunchListener launchListener) {
         this.dataset = dataset;
         this.mLaunchListener = launchListener;
-    }
-
-    @NonNull
-    @Override
-    public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return null;
-    }
-
-    @Override
-    public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
-
-    }
-
-    @Override
-    public int getItemCount() {
-        return 0;
+        Log.d("Quiz Adapter", "in constructor");
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
@@ -44,10 +32,17 @@ public class QuizAdapter extends RecyclerView.Adapter<QuizAdapter.MyViewHolder> 
         public TextView lvlText;
         public TextView topicText;
         public TextView questionsText;
+        LaunchListener launchListener;
 
         public MyViewHolder(@NonNull View itemView, LaunchListener launchListener) {
             super(itemView);
-
+            this.launchListener = launchListener;
+            this.plantImage = itemView.findViewById(R.id.plantImage);
+            this.plantNameText = itemView.findViewById(R.id.plantnameText);
+            this.lvlText = itemView.findViewById(R.id.lvlText);
+            this.topicText = itemView.findViewById(R.id.topicText);
+            this.questionsText = itemView.findViewById(R.id.questionsText);
+            Log.d("Quiz Adapter", "variables constructed ");
             //todo - code here
 
             itemView.setOnClickListener(this);
@@ -61,5 +56,42 @@ public class QuizAdapter extends RecyclerView.Adapter<QuizAdapter.MyViewHolder> 
 
     public interface LaunchListener{
         void launch(int position);
+    }
+
+    @NonNull
+    @Override
+    public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        ConstraintLayout v = (ConstraintLayout) LayoutInflater.from(parent.getContext())
+                .inflate(R.layout.quiz_itemview, parent, false);
+
+        MyViewHolder vh = new MyViewHolder(v, mLaunchListener);
+
+        Log.d("Quiz Adapter", "inflater set");
+
+        return vh;
+    }
+
+    @Override
+    public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
+            Quiz quiz = dataset.get(position);
+
+        Plant plant = quiz.getPlant();
+
+
+        Log.d("Quiz Adapter", "plantname  = " + plant.getName());
+
+        holder.topicText.setText(quiz.getTopic());
+        holder.questionsText.setText(quiz.getQuestions());
+        holder.plantNameText.setText(plant.getName());
+        holder.plantImage.setImageResource(plant.getPlantImage());
+        //static for now- need to come back to!!!
+        holder.lvlText.setText("3");
+
+
+    }
+
+    @Override
+    public int getItemCount() {
+        return 0;
     }
 }

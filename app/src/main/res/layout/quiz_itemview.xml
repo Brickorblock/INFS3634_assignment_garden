@@ -8,6 +8,7 @@
     app:cardElevation="3dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/container"
         android:layout_width="match_parent"
         android:layout_height="100dp"
         android:background="@color/colorPrimaryLight">
@@ -66,7 +67,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/costText"
+                android:id="@+id/questionsText"
                 style="@style/bodyAccentStrong"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -99,7 +100,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/subjectText"
+                android:id="@+id/topicText"
                 style="@style/bodyAccentStrong"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

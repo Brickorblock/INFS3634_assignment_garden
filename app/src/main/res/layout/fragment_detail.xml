@@ -50,7 +50,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/subjectText"
+            android:id="@+id/topicText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
@@ -68,7 +68,7 @@
             android:text="Quiz Ready!"
             android:textAppearance="@style/body"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/subjectText" />
+            app:layout_constraintTop_toBottomOf="@+id/topicText" />
 
         <Button
             android:id="@+id/acceptButton"
@@ -78,7 +78,7 @@
             android:layout_marginTop="10dp"
             android:text="ACCEPT QUIZ"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/subjectText" />
+            app:layout_constraintTop_toBottomOf="@+id/topicText" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

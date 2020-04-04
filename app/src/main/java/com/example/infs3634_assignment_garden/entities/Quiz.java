@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Quiz {
-    private Plant plant;
+    public Plant plant;
     private String questions;
     private String topic;
 
@@ -48,10 +48,12 @@ public class Quiz {
         Quizzes.add(new Quiz(new Plant(R.drawable.tree_sample, "Evergreen", "Cosmology"), "10", "Cosmology"));
         Quizzes.add(new Quiz(new Plant(R.drawable.tree_sample, "Evergreen", "Stars"), "10", "Stars"));
 
+
+
         return Quizzes;
     }
 
-    public static List<Quiz> CreateQuizzes (List<Quiz> quiz) {
+    public static ArrayList<Quiz> CreateQuizzes (ArrayList<Quiz> quiz) {
 
         ArrayList<Quiz> myquizzes = getTempQuizzes();
         quiz.addAll(myquizzes);
@@ -69,4 +71,12 @@ public class Quiz {
         return plantname;
     }
 
+    @Override
+    public String toString() {
+        return "Quiz{" +
+                "plant=" + plant +
+                ", questions='" + questions + '\'' +
+                ", topic='" + topic + '\'' +
+                '}';
+    }
 }

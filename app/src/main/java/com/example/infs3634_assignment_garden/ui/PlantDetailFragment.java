@@ -29,7 +29,7 @@ public class PlantDetailFragment extends Fragment{
         ProgressBar plantBar = getView().findViewById(R.id.plantBar);
         TextView nameText = getView().findViewById(R.id.nameText);
         TextView lvlText = getView().findViewById(R.id.lvlText);
-        TextView subjectText = getView().findViewById(R.id.subjectText);
+        TextView subjectText = getView().findViewById(R.id.topicText);
         TextView quizText = getView().findViewById(R.id.quizText);
         Button acceptButton = getView().findViewById(R.id.acceptButton);
         ImageView closeIcon = getView().findViewById(R.id.closeIcon);
