@@ -49,11 +49,10 @@ public class Quiz {
         Quizzes.add(new Quiz(new Plant(R.drawable.tree_sample, "Evergreen", "Stars"), "10", "Stars"));
 
 
-
         return Quizzes;
     }
 
-    public static ArrayList<Quiz> CreateQuizzes (ArrayList<Quiz> quiz) {
+    public static ArrayList<Quiz> createQuizzes(ArrayList<Quiz> quiz) {
 
         ArrayList<Quiz> myquizzes = getTempQuizzes();
         quiz.addAll(myquizzes);
@@ -74,7 +73,7 @@ public class Quiz {
     @Override
     public String toString() {
         return "Quiz{" +
-                "plant=" + plant +
+                "plant=" + plant.getName() +
                 ", questions='" + questions + '\'' +
                 ", topic='" + topic + '\'' +
                 '}';

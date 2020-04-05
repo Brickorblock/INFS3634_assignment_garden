@@ -27,7 +27,7 @@ public class QuizAdapter extends RecyclerView.Adapter<QuizAdapter.MyViewHolder> 
         Log.d("Quiz Adapter", "in constructor");
     }
 
-    public class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
+    public class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         public ImageView plantImage;
         public TextView plantNameText;
         public TextView lvlText;
@@ -55,7 +55,7 @@ public class QuizAdapter extends RecyclerView.Adapter<QuizAdapter.MyViewHolder> 
         }
     }
 
-    public interface LaunchListener{
+    public interface LaunchListener {
         void launch(int position);
     }
 
@@ -86,8 +86,10 @@ public class QuizAdapter extends RecyclerView.Adapter<QuizAdapter.MyViewHolder> 
         holder.plantNameText.setText(plant.getName());
         holder.plantImage.setImageResource(plant.getPlantImage());
         //static for now- need to come back to!!!
-        holder.lvlText.setText("3");
-
+        //@ Sudesh - set the levels text like this:
+        holder.lvlText.setText("(Lvl " + "3" + ")");
+        //not this:
+//        holder.lvlText.setText("3");
 
     }
 

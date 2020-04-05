@@ -21,6 +21,8 @@ public class PlantAdapter extends RecyclerView.Adapter<PlantAdapter.MyViewHolder
     public PlantAdapter(ArrayList<Plant> dataset, LaunchListener launchListener) {
         this.dataSet = dataset;
         this.mLaunchListener = launchListener;
+
+        Log.d("TAG", "PlantAdapter: 1");
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
@@ -32,6 +34,8 @@ public class PlantAdapter extends RecyclerView.Adapter<PlantAdapter.MyViewHolder
             this.launchListener = launchListener;
 
             this.plantImage = itemView.findViewById(R.id.plantImage);
+
+            Log.d("TAG", "PlantAdapter: 2");
 
             itemView.setOnClickListener(this);
         }
@@ -51,6 +55,8 @@ public class PlantAdapter extends RecyclerView.Adapter<PlantAdapter.MyViewHolder
 
         MyViewHolder vh = new MyViewHolder(v, mLaunchListener);
 
+        Log.d("TAG", "PlantAdapter: 3");
+
         return vh;
     }
 
@@ -59,6 +65,8 @@ public class PlantAdapter extends RecyclerView.Adapter<PlantAdapter.MyViewHolder
         Plant curr = dataSet.get(position);
 
         holder.plantImage.setImageResource(curr.getPlantImage());
+
+        Log.d("TAG", "PlantAdapter: 4");
     }
 
     @Override
