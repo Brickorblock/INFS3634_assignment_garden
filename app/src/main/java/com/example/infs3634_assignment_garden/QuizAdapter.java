@@ -8,6 +8,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -61,7 +62,7 @@ public class QuizAdapter extends RecyclerView.Adapter<QuizAdapter.MyViewHolder> 
     @NonNull
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        ConstraintLayout v = (ConstraintLayout) LayoutInflater.from(parent.getContext())
+        CardView v = (CardView) LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.quiz_itemview, parent, false);
 
         MyViewHolder vh = new MyViewHolder(v, mLaunchListener);
@@ -73,7 +74,7 @@ public class QuizAdapter extends RecyclerView.Adapter<QuizAdapter.MyViewHolder> 
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
-            Quiz quiz = dataset.get(position);
+        Quiz quiz = dataset.get(position);
 
         Plant plant = quiz.getPlant();
 
@@ -92,6 +93,6 @@ public class QuizAdapter extends RecyclerView.Adapter<QuizAdapter.MyViewHolder> 
 
     @Override
     public int getItemCount() {
-        return 0;
+        return dataset.size();
     }
 }
