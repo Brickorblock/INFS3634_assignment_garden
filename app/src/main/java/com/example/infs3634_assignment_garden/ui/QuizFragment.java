@@ -1,5 +1,6 @@
 package com.example.infs3634_assignment_garden.ui;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -11,6 +12,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.infs3634_assignment_garden.QuestionsQuiz;
 import com.example.infs3634_assignment_garden.QuizAdapter;
 import com.example.infs3634_assignment_garden.R;
 import com.example.infs3634_assignment_garden.entities.Plant;
@@ -19,6 +21,8 @@ import com.example.infs3634_assignment_garden.entities.Quiz;
 import java.util.ArrayList;
 
 public class QuizFragment extends Fragment implements QuizAdapter.LaunchListener {
+
+    public static final String EXTRA_MESSAGE = "com.example.infs3634_assignment_garden.MESSAGE";
     private RecyclerView myRecyclerView;
     private RecyclerView.Adapter myAdapter;
     private RecyclerView.LayoutManager myLayoutManager;
@@ -58,5 +62,29 @@ public class QuizFragment extends Fragment implements QuizAdapter.LaunchListener
     @Override
     public void launch(int position) {
 
+        Log.d("main activity", "I got clicked!");
+
+        String topic = getTopic(position);
+
+
+
+            Intent intent = new Intent(getActivity(), QuestionsQuiz.class);
+            Log.d("main activity", "Message:" + topic);
+            intent.putExtra(EXTRA_MESSAGE, topic);
+            startActivity(intent);
+
+
+    }
+
+    public String getTopic (int position) {
+
+        ArrayList<Quiz> myquizzes = Quiz.createQuizzes(currList);
+
+       Quiz chosenquiz = myquizzes.get(position);
+
+       String topic = chosenquiz.getTopic();
+
+
+       return topic;
     }
 }
