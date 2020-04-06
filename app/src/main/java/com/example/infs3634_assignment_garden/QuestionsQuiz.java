@@ -5,6 +5,7 @@ package com.example.infs3634_assignment_garden;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -32,10 +33,15 @@ public class QuestionsQuiz extends AppCompatActivity {
     private Button mButtonChoice4;
 
     private String mAnswer;
-    private int mScore = 0;
+    private int mScore = 0 ;
     private int mQuestionNumber = 0;
 
     public ArrayList<Question> currList = new ArrayList<>();
+
+    public  ArrayList<Question> questionBank = new ArrayList<>();
+
+    public  ArrayList<Question> randomisedQuestions = new ArrayList<>();
+
     public ArrayList<Question> Questions = Question.createQuestions(currList);
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
@@ -52,6 +58,41 @@ public class QuestionsQuiz extends AppCompatActivity {
         mButtonChoice3 = (Button)findViewById(R.id.choice3);
         mButtonChoice4 = (Button)findViewById(R.id.choice4);
 
+        Intent intent = getIntent();
+        String topic = intent.getStringExtra(QuizFragment.EXTRA_MESSAGE);
+        for (int i = 0; i < 20; i++ ) {
+
+
+            if(Questions.get(i).getTopic().equals(topic)) {
+
+                questionBank.add(Questions.get(i));
+
+            }
+
+        }
+
+        Log.d("TAG", "question bank: " + questionBank.size());
+        Random rand = new Random();
+        for (int i = 0; i < 10; i++) {
+
+            int min = 0;
+            int max = 19;
+
+            int x = rand.nextInt((max - min) + min);
+
+            Log.d("TAG", "random number: " + x);
+
+            Question newquestion = questionBank.get(x);
+
+            randomisedQuestions.add(newquestion);
+
+
+        }
+
+
+        Log.d("TAG", "randomised questions: " + randomisedQuestions.size());
+
+
         updateQuestion();
 
 
@@ -63,12 +104,14 @@ public class QuestionsQuiz extends AppCompatActivity {
                 if (mButtonChoice1.getText() == mAnswer){
                     mScore = mScore + 1;
                     updateScore(mScore);
+                    mQuestionNumber++;
                     updateQuestion();
                     //This line of code is optiona
                     Toast.makeText(QuestionsQuiz.this, "correct", Toast.LENGTH_SHORT).show();
 
                 }else {
                     Toast.makeText(QuestionsQuiz.this, "wrong", Toast.LENGTH_SHORT).show();
+                    mQuestionNumber++;
                     updateQuestion();
                 }
             }
@@ -83,6 +126,7 @@ public class QuestionsQuiz extends AppCompatActivity {
 
                 if (mButtonChoice2.getText() == mAnswer){
                     mScore = mScore + 1;
+                    mQuestionNumber++;
                     updateScore(mScore);
                     updateQuestion();
                     //This line of code is optiona
@@ -90,6 +134,7 @@ public class QuestionsQuiz extends AppCompatActivity {
 
                 }else {
                     Toast.makeText(QuestionsQuiz.this, "wrong", Toast.LENGTH_SHORT).show();
+                    mQuestionNumber++;
                     updateQuestion();
                 }
 
@@ -105,6 +150,7 @@ public class QuestionsQuiz extends AppCompatActivity {
 
                 if (mButtonChoice3.getText() == mAnswer){
                     mScore = mScore + 1;
+                    mQuestionNumber++;
                     updateScore(mScore);
                     updateQuestion();
                     //This line of code is optiona
@@ -112,6 +158,7 @@ public class QuestionsQuiz extends AppCompatActivity {
 
                 }else {
                     Toast.makeText(QuestionsQuiz.this, "wrong", Toast.LENGTH_SHORT).show();
+                    mQuestionNumber++;
                     updateQuestion();
                 }
 
@@ -128,12 +175,14 @@ public class QuestionsQuiz extends AppCompatActivity {
                 if (mButtonChoice4.getText() == mAnswer){
                     mScore = mScore + 1;
                     updateScore(mScore);
+                    mQuestionNumber++;
                     updateQuestion();
                     //This line of code is optiona
                     Toast.makeText(QuestionsQuiz.this, "correct", Toast.LENGTH_SHORT).show();
 
                 }else {
                     Toast.makeText(QuestionsQuiz.this, "wrong", Toast.LENGTH_SHORT).show();
+                    mQuestionNumber++;
                     updateQuestion();
                 }
 
@@ -149,75 +198,28 @@ public class QuestionsQuiz extends AppCompatActivity {
         Intent intent = getIntent();
         String topic = intent.getStringExtra(QuizFragment.EXTRA_MESSAGE);
 
-        Random rand = new Random();
-        if (topic.equals("Solar Systems")) {
+        Log.d("TAG", "randomised questions:" + randomisedQuestions);
 
-            int min = 0;
-            int max = 1;
+        //todo implement intent to new activity if the question number is > 9 here. Pass the score in the intent.
 
-            int x = ThreadLocalRandom.current().nextInt(min, max+1);
+        if(mQuestionNumber > 9) {
 
-            Question question = Questions.get(x);
+            //intent stuff
 
-            String randomtopic = question.getTopic();
+            Log.d("TAG", "randomised questions: " + mScore);
+        } else {
 
-            if(randomtopic.equals(topic)) {
+            Question finalquestion = randomisedQuestions.get(mQuestionNumber);
 
-                mQuestionView.setText(question.getQuestion());
-                mButtonChoice1.setText(question.getChoice1());
-                mButtonChoice2.setText(question.getChoice2());
-                mButtonChoice3.setText(question.getChoice3());
-                mButtonChoice4.setText(question.getChoice4());
+            mQuestionView.setText(finalquestion.getQuestion());
+            mButtonChoice1.setText(finalquestion.getChoice1());
+            mButtonChoice2.setText(finalquestion.getChoice2());
+            mButtonChoice3.setText(finalquestion.getChoice3());
+            mButtonChoice4.setText(finalquestion.getChoice4());
 
-                mAnswer = question.getAnswer();
-
-            }}
-
-        if (topic.equals("Cosmology")) {
-
-            int min = 2;
-            int max = 3;
-
-            int x = ThreadLocalRandom.current().nextInt(min, max+1);
-
-            Question question = Questions.get(x);
-
-            String randomtopic = question.getTopic();
-
-            if(randomtopic.equals(topic)) {
-
-                mQuestionView.setText(question.getQuestion());
-                mButtonChoice1.setText(question.getChoice1());
-                mButtonChoice2.setText(question.getChoice2());
-                mButtonChoice3.setText(question.getChoice3());
-                mButtonChoice4.setText(question.getChoice4());
-
-                mAnswer = question.getAnswer();
-
-            }}
-
-        if (topic.equals("Stars")) {
-
-            int min = 4;
-            int max = 5;
-
-            int x = ThreadLocalRandom.current().nextInt(min, max+1);
-
-            Question question = Questions.get(x);
-
-            String randomtopic = question.getTopic();
-
-            if(randomtopic.equals(topic)) {
-
-                mQuestionView.setText(question.getQuestion());
-                mButtonChoice1.setText(question.getChoice1());
-                mButtonChoice2.setText(question.getChoice2());
-                mButtonChoice3.setText(question.getChoice3());
-                mButtonChoice4.setText(question.getChoice4());
-
-                mAnswer = question.getAnswer();
-
-            }}
+            mAnswer = finalquestion.getAnswer();
+            Log.d("TAG", "question number: " + mQuestionNumber);
+        }
 
 
     }
