@@ -85,7 +85,7 @@ public class QuestionsQuiz extends AppCompatActivity {
             Question newquestion = questionBank.get(x);
 
             randomisedQuestions.add(newquestion);
-
+        //todo Double check for duplicate questions
 
         }
 
