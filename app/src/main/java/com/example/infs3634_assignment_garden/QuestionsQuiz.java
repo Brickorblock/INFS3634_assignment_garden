@@ -1,7 +1,6 @@
 package com.example.infs3634_assignment_garden;
 
 
-
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
@@ -27,48 +26,45 @@ public class QuestionsQuiz extends AppCompatActivity {
 
     private TextView mScoreView;
     private TextView mQuestionView;
+    private TextView mNumberView;
     private Button mButtonChoice1;
     private Button mButtonChoice2;
     private Button mButtonChoice3;
     private Button mButtonChoice4;
 
     private String mAnswer;
-    private int mScore = 0 ;
+    private int mScore = 0;
     private int mQuestionNumber = 0;
 
     public ArrayList<Question> currList = new ArrayList<>();
 
-    public  ArrayList<Question> questionBank = new ArrayList<>();
+    public ArrayList<Question> questionBank = new ArrayList<>();
 
-    public  ArrayList<Question> randomisedQuestions = new ArrayList<>();
+    public ArrayList<Question> randomisedQuestions = new ArrayList<>();
 
     public ArrayList<Question> Questions = Question.createQuestions(currList);
 
-    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
-    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.fragment_question);
 
         // String message = intent.getStringExtra(QuizFragment.EXTRA_MESSAGE);
-        mScoreView = (TextView)findViewById(R.id.Score);
-        mQuestionView = (TextView)findViewById(R.id.question);
-        mButtonChoice1 = (Button)findViewById(R.id.choice1);
-        mButtonChoice2 = (Button)findViewById(R.id.choice2);
-        mButtonChoice3 = (Button)findViewById(R.id.choice3);
-        mButtonChoice4 = (Button)findViewById(R.id.choice4);
+        mScoreView = findViewById(R.id.Score);
+        mNumberView = findViewById(R.id.numberText);
+        mQuestionView = findViewById(R.id.question);
+        mButtonChoice1 = findViewById(R.id.choice1);
+        mButtonChoice2 = findViewById(R.id.choice2);
+        mButtonChoice3 = findViewById(R.id.choice3);
+        mButtonChoice4 = findViewById(R.id.choice4);
 
         Intent intent = getIntent();
         String topic = intent.getStringExtra(QuizFragment.EXTRA_MESSAGE);
-        for (int i = 0; i < 20; i++ ) {
+        for (int i = 0; i < 20; i++) {
 
-
-            if(Questions.get(i).getTopic().equals(topic)) {
+            if (Questions.get(i).getTopic().equals(topic)) {
 
                 questionBank.add(Questions.get(i));
-
             }
-
         }
 
         Log.d("TAG", "question bank: " + questionBank.size());
@@ -85,115 +81,48 @@ public class QuestionsQuiz extends AppCompatActivity {
             Question newquestion = questionBank.get(x);
 
             randomisedQuestions.add(newquestion);
-        //todo Double check for duplicate questions
+            //todo Double check for duplicate questions
 
         }
 
-
         Log.d("TAG", "randomised questions: " + randomisedQuestions.size());
-
 
         updateQuestion();
 
+        mButtonChoice1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                setQuestionUpdates(mButtonChoice1);
+            }
+        });
 
-        mButtonChoice1.setOnClickListener(new View.OnClickListener(){
-
+        mButtonChoice2.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
-                if (mButtonChoice1.getText() == mAnswer){
-                    mScore = mScore + 1;
-                    updateScore(mScore);
-                    mQuestionNumber++;
-                    updateQuestion();
-                    //This line of code is optional
-                    Toast.makeText(QuestionsQuiz.this, "correct", Toast.LENGTH_SHORT).show();
+                setQuestionUpdates(mButtonChoice2);
+            }
+        });
 
-                }else {
-                    Toast.makeText(QuestionsQuiz.this, "wrong", Toast.LENGTH_SHORT).show();
-                    mQuestionNumber++;
-                    updateQuestion();
-                }
+        mButtonChoice3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                setQuestionUpdates(mButtonChoice3);
             }
         });
 
 
-        mButtonChoice2.setOnClickListener(new View.OnClickListener(){
+        mButtonChoice4.setOnClickListener(new View.OnClickListener() {
 
 
             @Override
             public void onClick(View v) {
-
-                if (mButtonChoice2.getText() == mAnswer){
-                    mScore = mScore + 1;
-                    mQuestionNumber++;
-                    updateScore(mScore);
-                    updateQuestion();
-                    //This line of code is optiona
-                    Toast.makeText(QuestionsQuiz.this, "correct", Toast.LENGTH_SHORT).show();
-
-                }else {
-                    Toast.makeText(QuestionsQuiz.this, "wrong", Toast.LENGTH_SHORT).show();
-                    mQuestionNumber++;
-                    updateQuestion();
-                }
-
+                setQuestionUpdates(mButtonChoice4);
             }
         });
-
-
-        mButtonChoice3.setOnClickListener(new View.OnClickListener(){
-
-
-            @Override
-            public void onClick(View v) {
-
-                if (mButtonChoice3.getText() == mAnswer){
-                    mScore = mScore + 1;
-                    mQuestionNumber++;
-                    updateScore(mScore);
-                    updateQuestion();
-                    //This line of code is optiona
-                    Toast.makeText(QuestionsQuiz.this, "correct", Toast.LENGTH_SHORT).show();
-
-                }else {
-                    Toast.makeText(QuestionsQuiz.this, "wrong", Toast.LENGTH_SHORT).show();
-                    mQuestionNumber++;
-                    updateQuestion();
-                }
-
-            }
-        });
-
-
-        mButtonChoice4.setOnClickListener(new View.OnClickListener(){
-
-
-            @Override
-            public void onClick(View v) {
-
-                if (mButtonChoice4.getText() == mAnswer){
-                    mScore = mScore + 1;
-                    updateScore(mScore);
-                    mQuestionNumber++;
-                    updateQuestion();
-                    //This line of code is optiona
-                    Toast.makeText(QuestionsQuiz.this, "correct", Toast.LENGTH_SHORT).show();
-
-                }else {
-                    Toast.makeText(QuestionsQuiz.this, "wrong", Toast.LENGTH_SHORT).show();
-                    mQuestionNumber++;
-                    updateQuestion();
-                }
-
-            }
-        });
-
-
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
-    private void updateQuestion(){
+    private void updateQuestion() {
 
         Intent intent = getIntent();
         String topic = intent.getStringExtra(QuizFragment.EXTRA_MESSAGE);
@@ -202,7 +131,7 @@ public class QuestionsQuiz extends AppCompatActivity {
 
         //todo implement intent to new activity if the question number is > 9 here. Pass the score in the intent.
 
-        if(mQuestionNumber > 9) {
+        if (mQuestionNumber > 9) {
 
             //intent stuff
 
@@ -226,6 +155,27 @@ public class QuestionsQuiz extends AppCompatActivity {
 
     private void updateScore(int point) {
         mScoreView.setText("" + mScore);
+    }
+
+    private void setQuestionUpdates(Button mButtonChoice) {
+        Log.d("TAG", "setQuestionUpdates: called");
+        //increment q number
+        mQuestionNumber++;
+        //displayQuestionNumber starts counting from 1; but mQuestionNumber starts counting from 0
+        int displayQuestionNumber = mQuestionNumber + 1;
+        mNumberView.setText("Q" + displayQuestionNumber);
+
+        if (mButtonChoice.getText() == mAnswer) {
+            mScore = mScore + 1;
+            updateScore(mScore);
+            updateQuestion();
+            //This line of code is optiona
+            Toast.makeText(QuestionsQuiz.this, "Correct!", Toast.LENGTH_SHORT).show();
+
+        } else {
+            Toast.makeText(QuestionsQuiz.this, "Incorrect", Toast.LENGTH_SHORT).show();
+            updateQuestion();
+        }
     }
 
 }

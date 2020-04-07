@@ -66,25 +66,23 @@ public class QuizFragment extends Fragment implements QuizAdapter.LaunchListener
 
         String topic = getTopic(position);
 
-
-
-            Intent intent = new Intent(getActivity(), QuestionsQuiz.class);
-            Log.d("main activity", "Message:" + topic);
-            intent.putExtra(EXTRA_MESSAGE, topic);
-            startActivity(intent);
+        Intent intent = new Intent(getActivity(), QuestionsQuiz.class);
+        Log.d("main activity", "Message:" + topic);
+        intent.putExtra(EXTRA_MESSAGE, topic);
+        startActivity(intent);
 
 
     }
 
-    public String getTopic (int position) {
+    public String getTopic(int position) {
 
         ArrayList<Quiz> myquizzes = Quiz.createQuizzes(currList);
 
-       Quiz chosenquiz = myquizzes.get(position);
+        Quiz chosenquiz = myquizzes.get(position);
 
-       String topic = chosenquiz.getTopic();
+        String topic = chosenquiz.getTopic();
 
 
-       return topic;
+        return topic;
     }
 }

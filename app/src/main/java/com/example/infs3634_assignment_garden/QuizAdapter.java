@@ -88,8 +88,6 @@ public class QuizAdapter extends RecyclerView.Adapter<QuizAdapter.MyViewHolder> 
         //static for now- need to come back to!!!
         //@ Sudesh - set the levels text like this:
         holder.lvlText.setText("(Lvl " + "3" + ")");
-        //not this:
-//        holder.lvlText.setText("3");
 
     }
 
