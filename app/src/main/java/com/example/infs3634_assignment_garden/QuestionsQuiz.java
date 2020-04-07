@@ -106,7 +106,7 @@ public class QuestionsQuiz extends AppCompatActivity {
                     updateScore(mScore);
                     mQuestionNumber++;
                     updateQuestion();
-                    //This line of code is optiona
+                    //This line of code is optional
                     Toast.makeText(QuestionsQuiz.this, "correct", Toast.LENGTH_SHORT).show();
 
                 }else {
