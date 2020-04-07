@@ -9,7 +9,15 @@
         android:id="@+id/navigation_garden"
         android:name="com.example.infs3634_assignment_garden.ui.GardenFragment"
         android:label="@string/title_garden"
-        tools:layout="@layout/fragment_garden" />
+        tools:layout="@layout/fragment_garden" >
+        <action
+            android:id="@+id/launchShop"
+            app:destination="@id/shopFragment"
+            app:enterAnim="@anim/fragment_open_enter"
+            app:exitAnim="@anim/fragment_fade_exit"
+            app:popUpTo="@id/navigation_garden"
+            app:popUpToInclusive="true" />
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_quiz"
@@ -26,4 +34,8 @@
         android:id="@+id/navigation_settings"
         android:name="com.example.infs3634_assignment_garden.ui.SettingsFragment"
         android:label="@string/title_settings" />
+    <fragment
+        android:id="@+id/shopFragment"
+        android:name="com.example.infs3634_assignment_garden.ui.ShopFragment"
+        android:label="Shop" />
 </navigation>

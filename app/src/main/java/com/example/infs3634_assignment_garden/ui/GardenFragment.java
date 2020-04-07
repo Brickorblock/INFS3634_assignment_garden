@@ -13,6 +13,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -59,13 +60,15 @@ public class GardenFragment extends Fragment implements PlantAdapter.LaunchListe
         ambienceLvl.setText("Lvl " + Integer.toString(MainActivity.user.getAmbienceLvl()));
         ambienceBar.setProgress((int) MainActivity.user.getAmbienceProgress());
         coinText.setText(Integer.toString(MainActivity.user.getCoins()));
-        shopButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getContext(), ShopActivity.class);
-                startActivity(intent);
-            }
-        });
+//        shopButton.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent intent = new Intent(getContext(), ShopActivity.class);
+//                startActivity(intent);
+//            }
+//        });
+
+        shopButton.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.launchShop));
 
         return root;
     }

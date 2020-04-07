@@ -82,7 +82,6 @@ public class QuizFragment extends Fragment implements QuizAdapter.LaunchListener
 
         String topic = chosenquiz.getTopic();
 
-
         return topic;
     }
 }

@@ -9,7 +9,7 @@ import java.util.ArrayList;
 public class Garden {
     //Garden class encapsulates global information about current user's progress
 
-    private int ambienceLvl;
+    private static int ambienceLvl;
     private int ambienceTotal;
     private double ambienceProgress;
     private int coins;
@@ -32,7 +32,7 @@ public class Garden {
         calcAmbience();
     }
 
-    public int getAmbienceLvl() {
+    public static int getAmbienceLvl() {
         return ambienceLvl;
     }
 
