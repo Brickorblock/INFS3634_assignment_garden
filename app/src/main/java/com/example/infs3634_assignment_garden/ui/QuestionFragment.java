@@ -101,8 +101,7 @@ public class QuestionFragment extends Fragment {
         //the reason i is 42 is because the number of questions in the question class is 42.
         // This loop goes through the entire list and filters for every question that has the topic that was clicked on from the Quiz Fragment
         //As a result, as all topics should have 20 questions (except stars for now!), the size of the question bank will always be 20.
-
-        for (int i = 0; i < 42; i++) {
+        for (int i = 0; i < Questions.size(); i++) {
 
             if (Questions.get(i).getTopic().equals(topic)) {
 
