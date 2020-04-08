@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.NavController;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -43,20 +44,14 @@ public class ShopFragment extends Fragment implements ShopAdapter.LaunchListener
 
         myRecyclerView.setAdapter(myAdapter);
 
-
         return root;
     }
-
-//    @Override
-//    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-//        super.onActivityCreated(savedInstanceState);
-//
-//
-//    }
 
     @Override
     public void launch(int position) {
         //todo - this method is called when an item is clicked
 
     }
+
+
 }

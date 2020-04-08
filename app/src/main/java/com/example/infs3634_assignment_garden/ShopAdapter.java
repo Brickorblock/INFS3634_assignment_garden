@@ -103,6 +103,7 @@ public class  ShopAdapter extends RecyclerView.Adapter<ShopAdapter.MyViewHolder>
         @Override
         public void onClick(View v) {
             mLaunchListener.launch(getAdapterPosition());
+
         }
     }
 

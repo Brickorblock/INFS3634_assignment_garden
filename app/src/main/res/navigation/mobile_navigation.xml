@@ -11,12 +11,8 @@
         android:label="@string/title_garden"
         tools:layout="@layout/fragment_garden" >
         <action
-            android:id="@+id/launchShop"
-            app:destination="@id/shopFragment"
-            app:enterAnim="@anim/fragment_open_enter"
-            app:exitAnim="@anim/fragment_fade_exit"
-            app:popUpTo="@id/navigation_garden"
-            app:popUpToInclusive="true" />
+            android:id="@+id/action_navigation_shop_to_navigation_learn"
+            app:destination="@id/navigation_shop" />
     </fragment>
 
     <fragment
@@ -35,7 +31,7 @@
         android:name="com.example.infs3634_assignment_garden.ui.SettingsFragment"
         android:label="@string/title_settings" />
     <fragment
-        android:id="@+id/shopFragment"
+        android:id="@+id/navigation_shop"
         android:name="com.example.infs3634_assignment_garden.ui.ShopFragment"
         android:label="Shop" />
 </navigation>

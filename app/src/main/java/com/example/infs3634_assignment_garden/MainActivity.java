@@ -3,9 +3,11 @@ package com.example.infs3634_assignment_garden;
 import android.os.Bundle;
 
 import com.example.infs3634_assignment_garden.entities.Garden;
+import com.example.infs3634_assignment_garden.ui.GardenFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
@@ -13,6 +15,7 @@ import androidx.navigation.ui.NavigationUI;
 
 public class MainActivity extends AppCompatActivity {
     public static Garden user;
+    public static NavController navController;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,9 +27,10 @@ public class MainActivity extends AppCompatActivity {
         AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(
                 R.id.navigation_garden, R.id.navigation_quiz, R.id.navigation_learn)
                 .build();
-        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
+        navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(navView, navController);
+
 
         //create Garden class (stores global info about progress, etc.)
         this.user = new Garden();
@@ -35,4 +39,14 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+//    @Override
+//    public void onBackPressed() {
+////        GardenFragment fragment = new GardenFragment();
+////
+////        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+////        transaction.replace(R.id.nav_host_fragment, fragment);
+////        transaction.commit();
+//
+//        navController.navigate(R.id.navigation_garden);
+//    }
 }

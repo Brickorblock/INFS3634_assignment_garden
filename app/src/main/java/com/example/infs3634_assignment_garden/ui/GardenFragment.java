@@ -1,6 +1,5 @@
 package com.example.infs3634_assignment_garden.ui;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -18,7 +17,6 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.infs3634_assignment_garden.MainActivity;
-import com.example.infs3634_assignment_garden.ShopActivity;
 import com.example.infs3634_assignment_garden.entities.Plant;
 import com.example.infs3634_assignment_garden.PlantAdapter;
 import com.example.infs3634_assignment_garden.R;
@@ -68,7 +66,9 @@ public class GardenFragment extends Fragment implements PlantAdapter.LaunchListe
 //            }
 //        });
 
-        shopButton.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.launchShop));
+        //bind shop fragment to navigation view host
+        shopButton.setOnClickListener(Navigation.createNavigateOnClickListener(
+                R.id.action_navigation_shop_to_navigation_learn));
 
         return root;
     }
@@ -94,6 +94,7 @@ public class GardenFragment extends Fragment implements PlantAdapter.LaunchListe
         fragment.setArguments(positionBundle);
 
     }
+
 
 
 }
