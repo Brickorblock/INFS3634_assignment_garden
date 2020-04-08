@@ -8,7 +8,9 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -27,6 +29,7 @@ public class QuizFragment extends Fragment implements QuizAdapter.LaunchListener
     private RecyclerView.Adapter myAdapter;
     private RecyclerView.LayoutManager myLayoutManager;
     private ArrayList<Quiz> currList = new ArrayList<>();
+   // public ConstraintLayout container;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -66,10 +69,21 @@ public class QuizFragment extends Fragment implements QuizAdapter.LaunchListener
 
         String topic = getTopic(position);
 
-        Intent intent = new Intent(getActivity(), QuestionsQuiz.class);
+        Log.d("main activity", "topic: ");
+
+
+        /*Intent intent = new Intent(getActivity(), QuestionsQuiz.class);
         Log.d("main activity", "Message:" + topic);
         intent.putExtra(EXTRA_MESSAGE, topic);
         startActivity(intent);
+*/
+        QuestionFragment fragment = new QuestionFragment();
+        replaceFragment(fragment);
+        myRecyclerView.setVisibility(View.INVISIBLE);
+
+        Bundle intentBundle = new Bundle();
+        intentBundle.putString(QuizFragment.EXTRA_MESSAGE, topic);
+        fragment.setArguments(intentBundle);
 
 
     }
@@ -78,10 +92,37 @@ public class QuizFragment extends Fragment implements QuizAdapter.LaunchListener
 
         ArrayList<Quiz> myquizzes = Quiz.createQuizzes(currList);
 
+        Log.d("main activity", "position: " + position);
+
         Quiz chosenquiz = myquizzes.get(position);
+
+        Log.d("main activity", "chosenquiz: " + chosenquiz);
 
         String topic = chosenquiz.getTopic();
 
         return topic;
+    }
+
+    private void replaceFragment (Fragment newFragment) {
+
+        FragmentTransaction trasection = getChildFragmentManager().beginTransaction();
+
+        if (!newFragment.isAdded()) {
+
+            try {
+
+                getChildFragmentManager().beginTransaction();
+                trasection.replace(R.id.container, newFragment);
+                trasection.addToBackStack(null);
+                trasection.commit();
+            } catch (Exception e) {
+
+
+            }
+        } else {
+
+            trasection.show(newFragment);
+        }
+
     }
 }

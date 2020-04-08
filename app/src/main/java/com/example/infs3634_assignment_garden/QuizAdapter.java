@@ -52,6 +52,9 @@ public class QuizAdapter extends RecyclerView.Adapter<QuizAdapter.MyViewHolder> 
         @Override
         public void onClick(View v) {
             mLaunchListener.launch(getAdapterPosition());
+
+
+
         }
     }
 
