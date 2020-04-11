@@ -69,7 +69,7 @@ public class TopicsAdapter extends RecyclerView.Adapter<TopicsAdapter.MyViewHold
         holder.topicText.setText(topic.getTopic());
 
     }
-
+//ss
     @Override
     public int getItemCount() {
         return dataset.size();
