@@ -43,7 +43,7 @@ public class YoutubeFragment extends Fragment implements YouTubePlayer.OnInitial
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
 //Google hasn't refactored youtube api library to androidx yet. This means that parsing a youtubeplayersupportfragment as a fragment can invoke an 'error'
 //Even if the app is run, the code works without an error regardless of the error shown here.
-//Need to find a way to get rid of error.
+//todo Need to find a way to get rid of error.
         fragmentTransaction.replace(R.id.frame_fragment, youtubePlayerFragment);
 
         fragmentTransaction.commit();
