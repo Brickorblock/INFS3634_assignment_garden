@@ -7,13 +7,14 @@ import com.example.infs3634_assignment_garden.R;
 import java.util.ArrayList;
 
 public class Garden {
-    //Garden class encapsulates global information about current user's progress
+    //this class encapsulates global information about user's progress, plants, quizzes, etc
 
     private static int ambienceLvl;
-    private int ambienceTotal;
-    private double ambienceProgress;
-    private int coins;
+    private static int ambienceTotal;
+    private static double ambienceProgress;
+    private static int coins;
     private static ArrayList<Plant> plants;
+    private static ArrayList<Quiz> quizzes;
 
     private static int[] milestones = {500, 1000, 2000};
 
@@ -28,6 +29,7 @@ public class Garden {
         this.ambienceTotal = 0;
         this.coins = 0;
         this.plants = new ArrayList<>();
+        this.quizzes = new ArrayList<>();
 
         calcAmbience();
     }
@@ -40,7 +42,7 @@ public class Garden {
         this.ambienceLvl = ambienceLvl;
     }
 
-    public int getCoins() {
+    public static int getCoins() {
         return coins;
     }
 
@@ -48,15 +50,15 @@ public class Garden {
         this.coins = coins;
     }
 
-    public void addCoins(int amt) {
+    public static void addCoins(int amt) {
         coins += amt;
     }
 
-    public void deductCoins(int amt) {
+    public static void deductCoins(int amt) {
         coins -= amt;
     }
 
-    public ArrayList<Plant> getPlants() {
+    public static ArrayList<Plant> getPlants() {
         return plants;
     }
 
@@ -64,7 +66,7 @@ public class Garden {
         this.plants = plants;
     }
 
-    public int getAmbienceTotal() {
+    public static int getAmbienceTotal() {
         return ambienceTotal;
     }
 
@@ -72,7 +74,7 @@ public class Garden {
         this.ambienceTotal = ambienceTotal;
     }
 
-    public double getAmbienceProgress() {
+    public static double getAmbienceProgress() {
         return ambienceProgress;
     }
 
@@ -86,6 +88,14 @@ public class Garden {
 
     public static void setMilestones(int[] milestones) {
         Garden.milestones = milestones;
+    }
+
+    public static ArrayList<Quiz> getQuizzes() {
+        return quizzes;
+    }
+
+    public static void setQuizzes(ArrayList<Quiz> quizzes) {
+        Garden.quizzes = quizzes;
     }
 
     // ==============================================================
@@ -166,12 +176,31 @@ public class Garden {
 
     }
 
+    // searches for the index of specified plant
+    public static int plantIndexSearch(Plant targetPlant){
+        int index = 0;
+
+        //loop through whole arraylist until reaching specified plant
+        int i = 0;
+        while (i < plants.size()){
+            if (plants.get(i) == targetPlant) {
+                index = i;
+                break;
+            } else {
+                i++;
+            }
+        }
+
+        return index;
+
+    }
+
 
     //TODO: this is a temp method for dev debugging
     public void getTempPlants(){
-        plants.add(new Plant(R.drawable.tree_sample, "Evergreen", "Microeconomics"));
-        plants.add(new Plant(R.drawable.tree_sample, "Evergreen", "Microeconomics"));
-        plants.add(new Plant(R.drawable.tree_sample, "Evergreen", "Microeconomics"));
+        plants.add(new Plant(R.drawable.tree_sample, "Evergreen", "Solar Systems"));
+        plants.add(new Plant(R.drawable.tree_sample, "Evergreen", "Cosmology"));
+        plants.add(new Plant(R.drawable.tree_sample, "Evergreen", "Stars"));
         plants.add(new Plant(R.drawable.tree_sample, "Evergreen", "Microeconomics"));
         plants.add(new Plant(R.drawable.tree_sample, "Evergreen", "Microeconomics"));
         plants.add(new Plant(R.drawable.tree_sample, "Evergreen", "Microeconomics"));
@@ -187,7 +216,7 @@ public class Garden {
         plants.add(new Plant(R.drawable.tree_sample, "Evergreen", "Microeconomics"));
 
 
-        plants.get(0).setGrowthTotal(255);
+        plants.get(0).setGrowthTotal(250);
         plants.get(1).setGrowthTotal(50);
         plants.get(2).setGrowthTotal(400);
         plants.get(3).setGrowthTotal(250);
@@ -195,5 +224,14 @@ public class Garden {
         plants.get(5).setGrowthTotal(1000);
         calcAmbience();
         Helper.calcAllGrowth(plants);
+    }
+
+    public static ArrayList<Quiz> getTempQuizzes() {
+
+        quizzes.add(new Quiz(plants.get(0), Quiz.QUESTION_SIZE));
+        quizzes.add(new Quiz(plants.get(1), Quiz.QUESTION_SIZE));
+        quizzes.add(new Quiz(plants.get(2), Quiz.QUESTION_SIZE));
+
+        return quizzes;
     }
 }

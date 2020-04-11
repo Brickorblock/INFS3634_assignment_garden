@@ -143,7 +143,7 @@ public class Plant extends ArrayList<Plant> {
         if (growthLvl != 3) {
             this.growthTotal += growthEXP;
         }
-
+        calcGrowth();
     }
 
     public int calcGrowthLvl(){

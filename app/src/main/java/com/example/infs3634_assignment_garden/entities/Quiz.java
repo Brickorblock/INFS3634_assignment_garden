@@ -7,13 +7,14 @@ import java.util.List;
 
 public class Quiz {
     public Plant plant;
-    private String questions;
+    private int questions;
     private String topic;
+    public static final int QUESTION_SIZE = 10;
 
-    public Quiz(Plant plant, String questions, String topic) {
+    public Quiz(Plant plant, int questions) {
         this.plant = plant;
         this.questions = questions;
-        this.topic = topic;
+        this.topic = plant.getSubject();
     }
 
     public Plant getPlant() {
@@ -24,11 +25,11 @@ public class Quiz {
         this.plant = plant;
     }
 
-    public String getQuestions() {
+    public int getQuestions() {
         return questions;
     }
 
-    public void setQuestions(String questions) {
+    public void setQuestions(int questions) {
         this.questions = questions;
     }
 
@@ -40,24 +41,12 @@ public class Quiz {
         this.topic = topic;
     }
 
-    public static ArrayList<Quiz> getTempQuizzes() {
+    public static ArrayList<Quiz> createQuizzes(ArrayList<Quiz> quizList) {
 
-        ArrayList<Quiz> Quizzes = new ArrayList<>();
+        ArrayList<Quiz> myquizzes = Garden.getTempQuizzes();
+        quizList.addAll(myquizzes);
 
-        Quizzes.add(new Quiz(new Plant(R.drawable.tree_sample, "Evergreen", "Solar Systems"), "10", "Solar Systems"));
-        Quizzes.add(new Quiz(new Plant(R.drawable.tree_sample, "Evergreen", "Cosmology"), "10", "Cosmology"));
-        Quizzes.add(new Quiz(new Plant(R.drawable.tree_sample, "Evergreen", "Stars"), "10", "Stars"));
-
-
-        return Quizzes;
-    }
-
-    public static ArrayList<Quiz> createQuizzes(ArrayList<Quiz> quiz) {
-
-        ArrayList<Quiz> myquizzes = getTempQuizzes();
-        quiz.addAll(myquizzes);
-
-        return quiz;
+        return quizList;
 
     }
 

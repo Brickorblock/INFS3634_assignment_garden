@@ -34,6 +34,7 @@ public class GardenFragment extends Fragment implements PlantAdapter.LaunchListe
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
+
         //specify fragment root
         View root = inflater.inflate(R.layout.fragment_garden, container, false);
 
@@ -45,7 +46,7 @@ public class GardenFragment extends Fragment implements PlantAdapter.LaunchListe
         myRecyclerView.setLayoutManager(myLayoutManager);
 
         //create adapter (using Restaurant list as dataset)
-        ArrayList<Plant> plants = MainActivity.user.getPlants();
+        ArrayList<Plant> plants = MainActivity.garden.getPlants();
         myAdapter = new PlantAdapter(plants, this);
         myRecyclerView.setAdapter(myAdapter);
 
@@ -55,16 +56,9 @@ public class GardenFragment extends Fragment implements PlantAdapter.LaunchListe
         TextView coinText = root.findViewById(R.id.coinText);
         Button shopButton = root.findViewById(R.id.shopButton);
 
-        ambienceLvl.setText("Lvl " + Integer.toString(MainActivity.user.getAmbienceLvl()));
-        ambienceBar.setProgress((int) MainActivity.user.getAmbienceProgress());
-        coinText.setText(Integer.toString(MainActivity.user.getCoins()));
-//        shopButton.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent intent = new Intent(getContext(), ShopActivity.class);
-//                startActivity(intent);
-//            }
-//        });
+        ambienceLvl.setText("Lvl " + Integer.toString(MainActivity.garden.getAmbienceLvl()));
+        ambienceBar.setProgress((int) MainActivity.garden.getAmbienceProgress());
+        coinText.setText(Integer.toString(MainActivity.garden.getCoins()));
 
         //bind shop fragment to navigation view host
         shopButton.setOnClickListener(Navigation.createNavigateOnClickListener(
@@ -79,6 +73,7 @@ public class GardenFragment extends Fragment implements PlantAdapter.LaunchListe
         PlantDetailFragment fragment = new PlantDetailFragment();
 
         FragmentTransaction transaction = getChildFragmentManager().beginTransaction();
+        transaction.setCustomAnimations(R.anim.slide_in_up, R.anim.fade_out);
         if (fragment == null) {
             Log.d("TAG", "launch: transaction.add()");
             transaction.add(R.id.plantDetailContainer, fragment);
@@ -94,7 +89,4 @@ public class GardenFragment extends Fragment implements PlantAdapter.LaunchListe
         fragment.setArguments(positionBundle);
 
     }
-
-
-
 }

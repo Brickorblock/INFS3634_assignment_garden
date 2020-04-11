@@ -106,7 +106,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <ProgressBar
-            android:id="@+id/plantBar"
+            android:id="@+id/oldPlantBar"
             style="?android:progressBarStyleHorizontal"
             android:layout_width="110dp"
             android:layout_height="110dp"

@@ -58,7 +58,7 @@ public class QuestionsQuiz extends AppCompatActivity {
         mButtonChoice4 = findViewById(R.id.choice4);
 
         Intent intent = getIntent();
-        String topic = intent.getStringExtra(QuizFragment.EXTRA_MESSAGE);
+        String topic = intent.getStringExtra(QuizFragment.KEY_TOPIC);
         for (int i = 0; i < 20; i++) {
 
             if (Questions.get(i).getTopic().equals(topic)) {
@@ -125,7 +125,7 @@ public class QuestionsQuiz extends AppCompatActivity {
     private void updateQuestion() {
 
         Intent intent = getIntent();
-        String topic = intent.getStringExtra(QuizFragment.EXTRA_MESSAGE);
+        String topic = intent.getStringExtra(QuizFragment.KEY_TOPIC);
 
         Log.d("TAG", "randomised questions:" + randomisedQuestions);
 

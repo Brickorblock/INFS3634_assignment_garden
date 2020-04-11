@@ -44,12 +44,15 @@ public class ShopFragment extends Fragment implements ShopAdapter.LaunchListener
 
         myRecyclerView.setAdapter(myAdapter);
 
+        Log.d("TAG", "onCreateView: prev screen is ");
+
         return root;
     }
 
     @Override
     public void launch(int position) {
         //todo - this method is called when an item is clicked
+
 
     }
 

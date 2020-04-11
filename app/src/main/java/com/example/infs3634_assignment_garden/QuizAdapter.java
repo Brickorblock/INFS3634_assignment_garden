@@ -12,6 +12,7 @@ import androidx.cardview.widget.CardView;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.infs3634_assignment_garden.entities.Garden;
 import com.example.infs3634_assignment_garden.entities.Plant;
 import com.example.infs3634_assignment_garden.entities.Quiz;
 
@@ -44,7 +45,6 @@ public class QuizAdapter extends RecyclerView.Adapter<QuizAdapter.MyViewHolder> 
             this.topicText = itemView.findViewById(R.id.topicText);
             this.questionsText = itemView.findViewById(R.id.questionsText);
             Log.d("Quiz Adapter", "variables constructed ");
-            //todo - code here
 
             itemView.setOnClickListener(this);
         }
@@ -52,9 +52,6 @@ public class QuizAdapter extends RecyclerView.Adapter<QuizAdapter.MyViewHolder> 
         @Override
         public void onClick(View v) {
             mLaunchListener.launch(getAdapterPosition());
-
-
-
         }
     }
 
@@ -77,20 +74,20 @@ public class QuizAdapter extends RecyclerView.Adapter<QuizAdapter.MyViewHolder> 
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
-        Quiz quiz = dataset.get(position);
 
-        Plant plant = quiz.getPlant();
+        if (Garden.getQuizzes() != null) {
+            Quiz quiz = dataset.get(position);
+            Plant plant = quiz.getPlant();
 
+            Log.d("Quiz Adapter", "plantname  = " + plant.getName());
 
-        Log.d("Quiz Adapter", "plantname  = " + plant.getName());
-
-        holder.topicText.setText(quiz.getTopic());
-        holder.questionsText.setText(quiz.getQuestions());
-        holder.plantNameText.setText(plant.getName());
-        holder.plantImage.setImageResource(plant.getPlantImage());
-        //static for now- need to come back to!!!
-        //@ Sudesh - set the levels text like this:
-        holder.lvlText.setText("(Lvl " + "3" + ")");
+            holder.topicText.setText(quiz.getTopic());
+            holder.questionsText.setText(Integer.toString(quiz.getQuestions()));
+            holder.plantNameText.setText(plant.getName());
+            holder.plantImage.setImageResource(plant.getPlantImage());
+            //@ Sudesh - set the levels text like this:
+            holder.lvlText.setText("(Lvl " + plant.getGrowthLvl() + ")");
+        }
 
     }
 

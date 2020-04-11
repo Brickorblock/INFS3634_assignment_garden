@@ -1,43 +1,32 @@
 package com.example.infs3634_assignment_garden.ui;
 
+import android.content.res.Resources;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
-import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.content.Intent;
-import android.os.Build;
-import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.RequiresApi;
-import androidx.appcompat.app.AppCompatActivity;
-
+import com.example.infs3634_assignment_garden.MainActivity;
 import com.example.infs3634_assignment_garden.R;
 import com.example.infs3634_assignment_garden.entities.Question;
 import com.example.infs3634_assignment_garden.entities.Quiz;
-import com.example.infs3634_assignment_garden.ui.QuizFragment;
 
+import java.security.SignedObject;
 import java.util.ArrayList;
 import java.util.Random;
-import java.util.concurrent.ThreadLocalRandom;
 
-import com.example.infs3634_assignment_garden.R;
-
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link QuestionFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class QuestionFragment extends Fragment {
+    public static final String KEY_SCORE = "QuestionFragment_Score";
+    public static final String KEY_PLANT = "QuestionFragment_Plant";
+
     private TextView mScoreView;
     private TextView mQuestionView;
     private TextView mNumberView;
@@ -49,44 +38,25 @@ public class QuestionFragment extends Fragment {
     private String mAnswer;
     private int mScore = 0;
     private int mQuestionNumber = 0;
-
-    public ArrayList<Question> currList = new ArrayList<>();
+    private int plantIndex;
 
     public ArrayList<Question> questionBank = new ArrayList<>();
-
     public ArrayList<Question> randomisedQuestions = new ArrayList<>();
+    public ArrayList<Question> allQuestions = new ArrayList<>();
 
-    public ArrayList<Question> Questions = Question.createQuestions(currList);
     public QuestionFragment() {
-        // Required empty public constructor
-    }
-    // TODO: Rename and change types and number of parameters
-    public static QuestionFragment newInstance(String param1, String param2) {
-        QuestionFragment fragment = new QuestionFragment();
-        Bundle args = new Bundle();
-
-        fragment.setArguments(args);
-        return fragment;
-    }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-
-        }
+        this.allQuestions = Question.createQuestions(allQuestions);
     }
 
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-
 
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View root = inflater.inflate(R.layout.fragment_question2, container, false);
+        View root = inflater.inflate(R.layout.fragment_question, container, false);
         mScoreView = root.findViewById(R.id.Score);
         mNumberView = root.findViewById(R.id.numberText);
         mQuestionView = root.findViewById(R.id.question);
@@ -95,36 +65,58 @@ public class QuestionFragment extends Fragment {
         mButtonChoice3 = root.findViewById(R.id.choice3);
         mButtonChoice4 = root.findViewById(R.id.choice4);
         Bundle bundle = getArguments();
-        String topic = bundle.getString(QuizFragment.EXTRA_MESSAGE);
+        String topic = bundle.getString(QuizFragment.KEY_TOPIC);
         Log.d("Question Fragment", "topic: " + topic);
+        plantIndex = bundle.getInt(QuizFragment.KEY_PLANT);
 
-        //the reason i is 42 is because the number of questions in the question class is 42.
         // This loop goes through the entire list and filters for every question that has the topic that was clicked on from the Quiz Fragment
         //As a result, as all topics should have 20 questions (except stars for now!), the size of the question bank will always be 20.
-        for (int i = 0; i < Questions.size(); i++) {
+        for (int i = 0; i < allQuestions.size(); i++) {
 
-            if (Questions.get(i).getTopic().equals(topic)) {
+            if (allQuestions.get(i).getTopic().equals(topic)) {
 
-                questionBank.add(Questions.get(i));
+                questionBank.add(allQuestions.get(i));
             }
         }
 
+        //generate a quiz of 10 questions, randomly pulling from the topic quizbank
+        // each number generated = a question in the bank
         Log.d("TAG", "question bank: " + questionBank.size());
         Random rand = new Random();
-        for (int i = 0; i < 10; i++) {
+        ArrayList<Integer> pastNums = new ArrayList<>();
+
+        int i = 0;
+        while (i < Quiz.QUESTION_SIZE) {
 
             int min = 0;
-            int max = 19;
+            int max = questionBank.size() - 1;
 
             int x = rand.nextInt((max - min) + min);
 
-            Log.d("TAG", "random number: " + x);
+            //first check if number (i.e. question) is a duplicate
+            Boolean duplicateFound = false;
+            if (pastNums.size() != 0) {
+                for (int j = 0; j < pastNums.size(); j++) {
+                    if (pastNums.get(j) == x){
+                        duplicateFound = true;
+                        Log.d("TAG", "onCreateView: dupe found!");
+                        break;
+                    }
+                }
+            }
 
-            Question newquestion = questionBank.get(x);
+            if (duplicateFound) {
+                //skip this iteration and re-roll another number
+                Log.d("TAG", "REROLLING " + x);
+                continue;
+            } else {
+                Log.d("TAG", "random number: " + x);
+                Question newquestion = questionBank.get(x);
+                randomisedQuestions.add(newquestion);
 
-            randomisedQuestions.add(newquestion);
-            //todo Double check for duplicate questions
-
+                pastNums.add(x);
+                i++;
+            }
         }
 
         Log.d("TAG", "randomised questions: " + randomisedQuestions.size());
@@ -163,13 +155,9 @@ public class QuestionFragment extends Fragment {
             }
         });
 
-
         // Inflate the layout for this fragment
         return root;
     }
-
-
-
 
 
     private void updateQuestion() {
@@ -178,9 +166,13 @@ public class QuestionFragment extends Fragment {
 
         //todo implement intent to new activity if the question number is > 9 here. Pass the score in the intent.
 
-        if (mQuestionNumber > 9) {
+        if (mQuestionNumber == Quiz.QUESTION_SIZE) {
 
-            //bundle stuff to new screen showing final score.
+            Bundle bundle = new Bundle();
+            bundle.putInt(KEY_SCORE, mScore);
+            bundle.putInt(KEY_PLANT, plantIndex);
+            MainActivity.navController.navigate(
+                    R.id.action_questionFragment_to_resultFragment, bundle);
 
             Log.d("TAG", "score: " + mScore);
         } else {
@@ -201,19 +193,9 @@ public class QuestionFragment extends Fragment {
     }
 
 
-
-
-
-
-
     private void updateScore(int point) {
         mScoreView.setText("" + mScore);
     }
-
-
-
-
-
 
 
     private void setQuestionUpdates(Button mButtonChoice) {
@@ -227,13 +209,12 @@ public class QuestionFragment extends Fragment {
         if (mButtonChoice.getText() == mAnswer) {
             mScore = mScore + 1;
             updateScore(mScore);
-            updateQuestion();
-            //This line of code is optiona
+
             Toast.makeText(getActivity(), "Correct!", Toast.LENGTH_SHORT).show();
 
         } else {
             Toast.makeText(getActivity(), "Incorrect", Toast.LENGTH_SHORT).show();
-            updateQuestion();
         }
+        updateQuestion();
     }
 }
