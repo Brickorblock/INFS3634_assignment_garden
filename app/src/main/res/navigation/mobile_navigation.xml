@@ -39,7 +39,11 @@
         android:id="@+id/navigation_learn"
         android:name="com.example.infs3634_assignment_garden.ui.LearnFragment"
         android:label="@string/title_learn"
-        tools:layout="@layout/fragment_learn" />
+        tools:layout="@layout/fragment_learn" >
+        <action
+            android:id="@+id/action_navigation_learn_to_chapterFragment"
+            app:destination="@id/chapterFragment" />
+    </fragment>
     <fragment
         android:id="@+id/navigation_settings"
         android:name="com.example.infs3634_assignment_garden.ui.SettingsFragment"
@@ -67,4 +71,9 @@
         android:name="com.example.infs3634_assignment_garden.ui.ResultFragment"
         android:label="Quiz Results"
         tools:layout="@layout/fragment_result" />
+    <fragment
+        android:id="@+id/chapterFragment"
+        android:name="com.example.infs3634_assignment_garden.ui.ChapterFragment"
+        android:label="fragment_chapter"
+        tools:layout="@layout/fragment_chapter" />
 </navigation>
