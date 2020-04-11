@@ -46,7 +46,7 @@ public class ShopItem {
 
         ShopThings.add(new ShopItem(new Plant(R.drawable.tree_sample, "Evergreen", "Solar Systems"), 100, 1));
         ShopThings.add(new ShopItem(new Plant(R.drawable.tree_sample, "Evergreen", "Micro-Economics"), 100, 1));
-        ShopThings.add(new ShopItem(new Plant(R.drawable.tree_sample, "Evergreen", "Innovation"), 100, 1));
+        ShopThings.add(new ShopItem(new Plant(R.drawable.tree_sample, "Evergreen", "Innovation"), 100, 4));
 
 
         return ShopThings;
