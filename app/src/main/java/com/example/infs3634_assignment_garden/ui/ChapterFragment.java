@@ -15,6 +15,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.infs3634_assignment_garden.ChapterAdapter;
+import com.example.infs3634_assignment_garden.MainActivity;
 import com.example.infs3634_assignment_garden.R;
 import com.example.infs3634_assignment_garden.entities.Chapters;
 
@@ -23,7 +24,7 @@ import java.util.ArrayList;
 /**
  */
 public class ChapterFragment extends Fragment implements ChapterAdapter.LaunchListener {
-
+    public static final String KEY_Youtubelink = "ChapterFragment_Youtubelink";
     private RecyclerView myRecyclerView;
     private RecyclerView.Adapter myAdapter;
     private RecyclerView.LayoutManager myLayoutManager;
@@ -90,5 +91,27 @@ public class ChapterFragment extends Fragment implements ChapterAdapter.LaunchLi
     @Override
     public void launch(int position) {
 
+        String youtubelink = getchapter(position);
+
+        Bundle intentBundle = new Bundle();
+        intentBundle.putString(KEY_Youtubelink, youtubelink);
+        MainActivity.navController.navigate(R.id.action_chapterFragment_to_youtubeFragment, intentBundle);
+
+
+    }
+
+    public String getchapter(int position) {
+
+       Chapters chosenchapter = FilteredList.get(position);
+
+        String youtubelink = chosenchapter.getYoutubelink();
+
+        Log.d("main activity", "position: " + position);
+
+
+        Log.d("main activity", "chosenquiz: " + youtubelink);
+
+
+        return youtubelink;
     }
 }

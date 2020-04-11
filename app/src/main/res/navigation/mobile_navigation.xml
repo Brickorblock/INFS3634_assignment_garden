@@ -75,5 +75,14 @@
         android:id="@+id/chapterFragment"
         android:name="com.example.infs3634_assignment_garden.ui.ChapterFragment"
         android:label="fragment_chapter"
-        tools:layout="@layout/fragment_chapter" />
+        tools:layout="@layout/fragment_chapter" >
+        <action
+            android:id="@+id/action_chapterFragment_to_youtubeFragment"
+            app:destination="@id/youtubeFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/youtubeFragment"
+        android:name="com.example.infs3634_assignment_garden.ui.YoutubeFragment"
+        android:label="fragment_youtube"
+        tools:layout="@layout/fragment_youtube" />
 </navigation>
