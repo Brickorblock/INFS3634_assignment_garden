@@ -31,8 +31,7 @@ public class YoutubeFragment extends Fragment implements YouTubePlayer.OnInitial
         final String youtubelink = bundle.getString(ChapterFragment.KEY_Youtubelink);
 
 
-        Log.d("YouTube Fragment","Chosen Chapter Link: " + youtubelink);
-
+        Log.d("YouTube Fragment", "Chosen Chapter Link: " + youtubelink);
 
 
         //////////////////////////////////////////////////////////////////////////
@@ -41,9 +40,9 @@ public class YoutubeFragment extends Fragment implements YouTubePlayer.OnInitial
         youtubePlayerFragment.initialize("AIzaSyDxidLcL8C1mzLznTTqmniCrGm6yT3Ymu4", this);
         FragmentManager fragmentManager = getChildFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-//Google hasn't refactored youtube api library to androidx yet. This means that parsing a youtubeplayersupportfragment as a fragment can invoke an 'error'
-//Even if the app is run, the code works without an error regardless of the error shown here.
-//todo Need to find a way to get rid of error.
+        //Google hasn't refactored youtube api library to androidx yet. This means that parsing a youtubeplayersupportfragment as a fragment can invoke an 'error'
+        //Even if the app is run, the code works without an error regardless of the error shown here.
+        //todo Need to find a way to get rid of error.
         fragmentTransaction.replace(R.id.frame_fragment, youtubePlayerFragment);
 
         fragmentTransaction.commit();
@@ -56,7 +55,7 @@ public class YoutubeFragment extends Fragment implements YouTubePlayer.OnInitial
     @Override
     public void onInitializationSuccess(YouTubePlayer.Provider provider, YouTubePlayer youTubePlayer, boolean b) {
 
-        if(!b){
+        if (!b) {
 
             Bundle bundle = getArguments();
             final String youtubelink = bundle.getString(ChapterFragment.KEY_Youtubelink);
@@ -69,6 +68,6 @@ public class YoutubeFragment extends Fragment implements YouTubePlayer.OnInitial
 
     @Override
     public void onInitializationFailure(YouTubePlayer.Provider provider, YouTubeInitializationResult youTubeInitializationResult) {
-        Toast.makeText(getActivity(),"fail",Toast.LENGTH_SHORT).show();
+        Toast.makeText(getActivity(), "fail", Toast.LENGTH_SHORT).show();
     }
 }

@@ -79,7 +79,7 @@ public class QuizAdapter extends RecyclerView.Adapter<QuizAdapter.MyViewHolder> 
             Quiz quiz = dataset.get(position);
             Plant plant = quiz.getPlant();
 
-            Log.d("Quiz Adapter", "plantname  = " + plant.getName());
+            Log.d("Quiz Adapter", "plant toString " + plant.toString());
 
             holder.topicText.setText(quiz.getTopic());
             holder.questionsText.setText(Integer.toString(quiz.getQuestions()));

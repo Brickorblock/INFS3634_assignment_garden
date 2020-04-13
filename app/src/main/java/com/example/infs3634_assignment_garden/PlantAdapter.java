@@ -27,6 +27,7 @@ public class PlantAdapter extends RecyclerView.Adapter<PlantAdapter.MyViewHolder
 
     public class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         public ImageView plantImage;
+        public ImageView alertImage;
         LaunchListener launchListener;
 
         public MyViewHolder(@NonNull View itemView, LaunchListener launchListener) {
@@ -34,6 +35,7 @@ public class PlantAdapter extends RecyclerView.Adapter<PlantAdapter.MyViewHolder
             this.launchListener = launchListener;
 
             this.plantImage = itemView.findViewById(R.id.plantImage);
+            this.alertImage = itemView.findViewById(R.id.alertImage);
 
             Log.d("TAG", "PlantAdapter: 2");
 
@@ -65,6 +67,12 @@ public class PlantAdapter extends RecyclerView.Adapter<PlantAdapter.MyViewHolder
         Plant curr = dataSet.get(position);
 
         holder.plantImage.setImageResource(curr.getPlantImage());
+
+        if (curr.isQuizReady()) {
+            holder.alertImage.setVisibility(View.VISIBLE);
+        } else {
+            holder.alertImage.setVisibility(View.INVISIBLE);
+        }
 
         Log.d("TAG", "PlantAdapter: 4");
     }

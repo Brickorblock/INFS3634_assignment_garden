@@ -29,27 +29,21 @@ public class QuizFragment extends Fragment implements QuizAdapter.LaunchListener
 
     public static final String KEY_TOPIC = "QuizFragment_Topic";
     public static final String KEY_PLANT = "QuizFragment_Plant";
+    public static final String KEY_QUIZ = "QuizFragment_Quiz";
+
     private RecyclerView myRecyclerView;
     private TextView noticeText;
     private RecyclerView.Adapter myAdapter;
     private RecyclerView.LayoutManager myLayoutManager;
-    private ArrayList<Quiz> currList = new ArrayList<>();
-
-    private Plant plant;
+//    private ArrayList<Quiz> currList = new ArrayList<>();
+    ArrayList<Quiz> quizzes;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_quiz, container, false);
-        ArrayList<Quiz> quizzes = Garden.getQuizzes();
+        quizzes = Garden.getQuizzes();
 
         if (quizzes.size() != 0) {
-            //todo remove debug code:
-            Quiz quiz1 = quizzes.get(0);
-            plant = quiz1.getPlant();
-
-            Log.d("main activity", "quizzes: " + quizzes);
-            Log.d("main activity", "quiz1: " + quiz1);
-            Log.d("main activity", "Plant: " + plant.getName());
 
             noticeText = root.findViewById(R.id.noticeText);
             noticeText.setVisibility(View.INVISIBLE);
@@ -87,9 +81,15 @@ public class QuizFragment extends Fragment implements QuizAdapter.LaunchListener
 
         Log.d("main activity", "topic: ");
 
+        //pass bundle containing quiz topic, quiz index & plant
         Bundle intentBundle = new Bundle();
         intentBundle.putString(KEY_TOPIC, topic);
+        intentBundle.putInt(KEY_QUIZ, position);
 
+        //get the plant belonging to the specific quiz that was just clicked
+        Plant plant = quizzes.get(position).getPlant();
+
+        //get that plant's index in the Garden Plant arrayList
         int plantIndex = Garden.plantIndexSearch(plant);
         intentBundle.putInt(KEY_PLANT, plantIndex);
         MainActivity.navController.navigate(R.id.action_navigation_quiz_to_questionFragment, intentBundle);

@@ -53,34 +53,33 @@
 
         <ProgressBar
             android:id="@+id/ambienceBar"
-            style="?android:attr/progressBarStyleHorizontal"
+            style="@style/Widget.AppCompat.ProgressBar.Horizontal"
             android:layout_width="135dp"
-            android:layout_height="8dp"
-            android:layout_marginStart="15dp"
-            android:layout_marginLeft="15dp"
-            android:layout_marginTop="5dp"
-            android:background="@color/colorPrimaryDark"
+            android:layout_height="10dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginLeft="20dp"
             android:progress="20"
+            android:progressDrawable="@drawable/rounded_bar"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toEndOf="@+id/imageView"
-            app:layout_constraintTop_toBottomOf="@+id/lvlText" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/lvlText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="15dp"
-            android:layout_marginLeft="15dp"
             android:text="Lvl 0"
             android:textAppearance="@style/bodyAccentStrong"
-            app:layout_constraintStart_toEndOf="@+id/imageView"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/imageView" />
 
         <ImageView
             android:id="@+id/imageView"
             android:layout_width="25dp"
             android:layout_height="25dp"
             android:src="@drawable/ic_ambience"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/lvlText"
+            app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
