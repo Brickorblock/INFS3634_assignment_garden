@@ -11,9 +11,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.infs3634_assignment_garden.R;
+import com.example.infs3634_assignment_garden.VideosFragment;
 import com.google.android.youtube.player.YouTubeInitializationResult;
 import com.google.android.youtube.player.YouTubePlayer;
 import com.google.android.youtube.player.YouTubePlayerFragment;
@@ -21,19 +23,28 @@ import com.google.android.youtube.player.YouTubePlayerSupportFragment;
 import com.google.android.youtube.player.YouTubePlayerView;
 
 public class YoutubeFragment extends Fragment implements YouTubePlayer.OnInitializedListener {
-
+TextView VideoTitle;
+TextView VideoDescription;
+TextView Videourl;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_youtube, container, false);
 
         Bundle bundle = getArguments();
-        final String youtubelink = bundle.getString(ChapterFragment.KEY_Youtubelink);
+     //   final String youtubelink = bundle.getString(ChapterFragment.KEY_Youtubelink);
 
+        final String Title = bundle.getString("Title");
+        final String Description = bundle.getString("Description");
+        final String url = bundle.getString("url");
 
-        Log.d("YouTube Fragment","Chosen Chapter Link: " + youtubelink);
+        VideoTitle = root.findViewById(R.id.videotitle);
+        VideoDescription = root.findViewById(R.id.videodescription);
+        Videourl = root.findViewById(R.id.videourl);
 
-
+        VideoTitle.setText(Title);
+        VideoDescription.setText(Description);
+        Videourl.setText(url);
 
         //////////////////////////////////////////////////////////////////////////
 
@@ -61,8 +72,9 @@ public class YoutubeFragment extends Fragment implements YouTubePlayer.OnInitial
         if(!b){
 
             Bundle bundle = getArguments();
-            final String youtubelink = bundle.getString(ChapterFragment.KEY_Youtubelink);
+            final String youtubelink = bundle.getString("videoId");
             youTubePlayer.cueVideo(youtubelink);
+            Log.d("YouTube Fragment","Link: " + youtubelink);
 
 
             Log.d("Youtube Fragment: ", "Video Cued Successfully!");

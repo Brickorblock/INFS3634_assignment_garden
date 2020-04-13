@@ -61,7 +61,7 @@
             android:layout_marginTop="5dp"
             android:background="@color/colorPrimaryDark"
             android:progress="20"
-            app:layout_constraintStart_toEndOf="@+id/imageView"
+            app:layout_constraintStart_toEndOf="@+id/imageVid"
             app:layout_constraintTop_toBottomOf="@+id/lvlText" />
 
         <TextView
@@ -72,11 +72,11 @@
             android:layout_marginLeft="15dp"
             android:text="Lvl 0"
             android:textAppearance="@style/bodyAccentStrong"
-            app:layout_constraintStart_toEndOf="@+id/imageView"
+            app:layout_constraintStart_toEndOf="@+id/imageVid"
             app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
-            android:id="@+id/imageView"
+            android:id="@+id/imageVid"
             android:layout_width="25dp"
             android:layout_height="25dp"
             android:src="@drawable/ic_ambience"

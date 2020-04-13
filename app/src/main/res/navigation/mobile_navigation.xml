@@ -43,6 +43,9 @@
         <action
             android:id="@+id/action_navigation_learn_to_chapterFragment"
             app:destination="@id/chapterFragment" />
+        <action
+            android:id="@+id/action_navigation_learn_to_videosFragment"
+            app:destination="@id/videosFragment" />
     </fragment>
     <fragment
         android:id="@+id/navigation_settings"
@@ -79,10 +82,22 @@
         <action
             android:id="@+id/action_chapterFragment_to_youtubeFragment"
             app:destination="@id/youtubeFragment" />
+        <action
+            android:id="@+id/action_chapterFragment_to_videosFragment"
+            app:destination="@id/videosFragment" />
     </fragment>
     <fragment
         android:id="@+id/youtubeFragment"
         android:name="com.example.infs3634_assignment_garden.ui.YoutubeFragment"
         android:label="fragment_youtube"
         tools:layout="@layout/fragment_youtube" />
+    <fragment
+        android:id="@+id/videosFragment"
+        android:name="com.example.infs3634_assignment_garden.VideosFragment"
+        android:label="fragment_videos"
+        tools:layout="@layout/fragment_videos" >
+        <action
+            android:id="@+id/action_videosFragment_to_youtubeFragment"
+            app:destination="@id/youtubeFragment" />
+    </fragment>
 </navigation>

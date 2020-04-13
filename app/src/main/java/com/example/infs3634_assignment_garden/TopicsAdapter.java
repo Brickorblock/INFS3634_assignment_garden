@@ -66,7 +66,12 @@ public class TopicsAdapter extends RecyclerView.Adapter<TopicsAdapter.MyViewHold
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
 
         Topics topic = dataset.get(position);
-        holder.topicText.setText(topic.getTopic());
+
+        String topicname = topic.getTopic();
+        String arr[] = topicname.split(" A", 2);
+        String finaltopicname = arr[0];
+
+        holder.topicText.setText(finaltopicname);
 
     }
 //ss
