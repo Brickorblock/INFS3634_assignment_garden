@@ -33,7 +33,7 @@ public class LearnFragment extends Fragment implements TopicsAdapter.LaunchListe
 
    public ArrayList<Quiz> quizzes = Garden.getQuizzes();
 
-   public ArrayList<Topics> TopicList = Topics.createTopicsfromQuizzes(quizzes);
+   public static final ArrayList<Topics> TopicList = Garden.getTempTopics();
     private RecyclerView myRecyclerView;
     private RecyclerView.Adapter myAdapter;
     private RecyclerView.LayoutManager myLayoutManager;

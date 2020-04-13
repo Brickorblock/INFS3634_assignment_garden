@@ -39,10 +39,12 @@ public class YoutubeFragment extends Fragment implements YouTubePlayer.OnInitial
 
         YouTubePlayerSupportFragment youtubePlayerFragment = new YouTubePlayerSupportFragment();
         youtubePlayerFragment.initialize("AIzaSyDxidLcL8C1mzLznTTqmniCrGm6yT3Ymu4", this);
+
         FragmentManager fragmentManager = getChildFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
 //Google hasn't refactored youtube api library to androidx yet. This means that parsing a youtubeplayersupportfragment as a fragment can invoke an 'error'
 //Even if the app is run, the code works without an error regardless of the error shown here.
+
 //todo Need to find a way to get rid of error.
         fragmentTransaction.replace(R.id.frame_fragment, youtubePlayerFragment);
 
@@ -61,6 +63,7 @@ public class YoutubeFragment extends Fragment implements YouTubePlayer.OnInitial
             Bundle bundle = getArguments();
             final String youtubelink = bundle.getString(ChapterFragment.KEY_Youtubelink);
             youTubePlayer.cueVideo(youtubelink);
+
 
             Log.d("Youtube Fragment: ", "Video Cued Successfully!");
         }

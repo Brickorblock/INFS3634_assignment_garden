@@ -15,6 +15,7 @@ public class Garden {
     private static int coins;
     private static ArrayList<Plant> plants;
     private static ArrayList<Quiz> quizzes;
+    public static ArrayList<Topics> Topics;
 
     private static int[] milestones = {500, 1000, 2000};
 
@@ -30,6 +31,7 @@ public class Garden {
         this.coins = 0;
         this.plants = new ArrayList<>();
         this.quizzes = new ArrayList<>();
+        this.Topics = new ArrayList<>();
 
         calcAmbience();
     }
@@ -233,5 +235,13 @@ public class Garden {
         quizzes.add(new Quiz(plants.get(2), Quiz.QUESTION_SIZE));
 
         return quizzes;
+    }
+
+    public static ArrayList<Topics> getTempTopics(){
+        Topics.add(new Topics("Solar Systems"));
+        Topics.add(new Topics("Cosmology"));
+        Topics.add(new Topics("Stars"));
+Log.d("Garden", "Topics: " + Topics);
+        return Topics;
     }
 }
