@@ -1,90 +1,83 @@
 package com.example.infs3634_assignment_garden;
 
-import android.content.Intent;
-import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.BaseAdapter;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import androidx.fragment.app.FragmentActivity;
+import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
+import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.infs3634_assignment_garden.entities.VideoDetails;
-import com.squareup.picasso.Picasso;
+import com.example.infs3634_assignment_garden.entities.Video.VideoDetails;
 
-import org.w3c.dom.Text;
+import java.util.List;
 
-import java.util.ArrayList;
+public class VideoAdapter extends RecyclerView.Adapter<VideoAdapter.VideoViewHolder> {
 
-public class VideoAdapter extends BaseAdapter {
+    private final List<VideoDetails> videoList;
+    private LaunchListener mLaunchListener;
 
-    FragmentActivity fragment;
-    ArrayList<VideoDetails> videoDetailsArrayList;
-    LayoutInflater inflater;
-
-
-    public VideoAdapter(FragmentActivity fragment, ArrayList<VideoDetails> videoDetailsArrayList) {
-
-        this.fragment = fragment;
-        this.videoDetailsArrayList = videoDetailsArrayList;
+    public VideoAdapter(List<VideoDetails> videoList, LaunchListener mLaunchListener) {
+        this.videoList = videoList;
+        this.mLaunchListener = mLaunchListener;
     }
 
+    public class VideoViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
-    @Override
-    public int getCount() {
-        return this.videoDetailsArrayList.size();
-    }
+        public TextView titlevideo;
+        LaunchListener launchListener;
 
-    @Override
-    public Object getItem(int position) {
-        return this.videoDetailsArrayList.get(position);
-    }
+        public VideoViewHolder(@NonNull View itemView, LaunchListener LaunchListener) {
+            super(itemView);
+            this.titlevideo = itemView.findViewById(R.id.titlevideo);
+            this.launchListener = launchListener;
 
-    @Override
-    public long getItemId(int position) {
-        return (long)position;
-    }
-
-    @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
-
-        if(inflater == null) {
-
-            inflater = this.fragment.getLayoutInflater();
+            itemView.setOnClickListener(this);
         }
 
-        if(convertView == null) {
-
-            convertView = inflater.inflate(R.layout.video_item,null);
+        @Override
+        public void onClick(View v) {
+            mLaunchListener.launch(getAdapterPosition());
         }
-
-      //  ImageView imageView = (ImageView) convertView.findViewById(R.id.imageVid);
-        TextView textView = (TextView) convertView.findViewById(R.id.title);
-        final VideoDetails videoDetails = (VideoDetails) this.videoDetailsArrayList.get(position);
-        LinearLayout linearLayout = (LinearLayout)convertView.findViewById(R.id.root);
-
-        linearLayout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Bundle intentBundle = new Bundle();
-                intentBundle.putString("videoId", videoDetails.getVideoId());
-                intentBundle.putString("Title", videoDetails.getTitle());
-                intentBundle.putString("Description", videoDetails.getDescription());
-                intentBundle.putString("url", videoDetails.getUrl());
-
-                MainActivity.navController.navigate(R.id.action_videosFragment_to_youtubeFragment, intentBundle);
-            }
-        });
-
-
-
-      //  Picasso.get().load(videoDetails.getUrl()).into(imageView);
-
-        textView.setText(videoDetails.getTitle());
-
-        return convertView;
     }
+
+    public interface LaunchListener {
+        void launch(int position);
+    }
+    @NonNull
+    @Override
+    public VideoAdapter.VideoViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+
+CardView v = (CardView) LayoutInflater.from(parent.getContext()).inflate(R.layout.video_item, parent, false);
+
+        VideoViewHolder vh = new VideoViewHolder(v, mLaunchListener);
+
+        Log.d("Video Adapter", "inflater set");
+
+        return vh;
+    }
+
+    @Override
+    public void onBindViewHolder(@NonNull VideoViewHolder holder, int position) {
+
+        VideoDetails chosenvideo = videoList.get(position);
+        Log.d("Video Adapter", "video title: " + chosenvideo.getTitle());
+        holder.titlevideo.setText(chosenvideo.getTitle());
+
+    }
+
+    @Override
+    public int getItemCount() {
+
+        int size = 0;
+                if(videoList != null) {
+                    size = videoList.size();
+
+                }
+        return size;
+    }
+
+
 }

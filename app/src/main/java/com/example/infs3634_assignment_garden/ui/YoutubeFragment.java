@@ -10,17 +10,13 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.infs3634_assignment_garden.R;
-import com.example.infs3634_assignment_garden.VideosFragment;
 import com.google.android.youtube.player.YouTubeInitializationResult;
 import com.google.android.youtube.player.YouTubePlayer;
-import com.google.android.youtube.player.YouTubePlayerFragment;
 import com.google.android.youtube.player.YouTubePlayerSupportFragment;
-import com.google.android.youtube.player.YouTubePlayerView;
 
 public class YoutubeFragment extends Fragment implements YouTubePlayer.OnInitializedListener {
 TextView VideoTitle;
@@ -34,9 +30,9 @@ TextView Videourl;
         Bundle bundle = getArguments();
      //   final String youtubelink = bundle.getString(ChapterFragment.KEY_Youtubelink);
 
-        final String Title = bundle.getString("Title");
-        final String Description = bundle.getString("Description");
-        final String url = bundle.getString("url");
+        final String Title = bundle.getString("title");
+        final String Description = bundle.getString("description");
+        final String url = "https://www.youtube.com/watch?v=" + bundle.getString("videoId");
 
         VideoTitle = root.findViewById(R.id.videotitle);
         VideoDescription = root.findViewById(R.id.videodescription);

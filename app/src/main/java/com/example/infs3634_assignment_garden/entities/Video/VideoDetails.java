@@ -1,13 +1,12 @@
-package com.example.infs3634_assignment_garden.entities;
+package com.example.infs3634_assignment_garden.entities.Video;
 
 public class VideoDetails {
-    public String videoId, title, description,url;
+    public String videoId, title, description;
 
-    public VideoDetails(String videoId, String title, String description, String url) {
+    public VideoDetails(String videoId, String title, String description) {
         this.videoId = videoId;
         this.title = title;
         this.description = description;
-        this.url = url;
     }
 
     public VideoDetails(){}
@@ -36,15 +35,6 @@ public class VideoDetails {
         this.description = description;
     }
 
-    public String getUrl() {
-        return url;
-    }
-
-    public void setUrl(String url) {
-        this.url = url;
-    }
-
-
 
     @Override
     public String toString() {
@@ -52,7 +42,6 @@ public class VideoDetails {
                 "videoId='" + videoId + '\'' +
                 ", title='" + title + '\'' +
                 ", description='" + description + '\'' +
-                ", url='" + url + '\'' +
                 '}';
     }
 }
