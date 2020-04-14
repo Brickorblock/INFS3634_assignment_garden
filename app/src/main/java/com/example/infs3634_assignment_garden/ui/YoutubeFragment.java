@@ -16,7 +16,7 @@ import android.widget.Toast;
 import com.example.infs3634_assignment_garden.R;
 import com.google.android.youtube.player.YouTubeInitializationResult;
 import com.google.android.youtube.player.YouTubePlayer;
-import com.google.android.youtube.player.YouTubePlayerSupportFragment;
+import com.google.android.youtube.player.YouTubePlayerSupportFragmentX;
 
 public class YoutubeFragment extends Fragment implements YouTubePlayer.OnInitializedListener {
 TextView VideoTitle;
@@ -44,7 +44,7 @@ TextView Videourl;
 
         //////////////////////////////////////////////////////////////////////////
 
-        YouTubePlayerSupportFragment youtubePlayerFragment = new YouTubePlayerSupportFragment();
+        YouTubePlayerSupportFragmentX youtubePlayerFragment = new YouTubePlayerSupportFragmentX();
         youtubePlayerFragment.initialize("AIzaSyDxidLcL8C1mzLznTTqmniCrGm6yT3Ymu4", this);
 
         FragmentManager fragmentManager = getChildFragmentManager();
