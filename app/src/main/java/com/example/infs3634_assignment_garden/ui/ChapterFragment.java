@@ -95,7 +95,7 @@ public class ChapterFragment extends Fragment implements ChapterAdapter.LaunchLi
 
         Bundle intentBundle = new Bundle();
         intentBundle.putString(KEY_Youtubelink, youtubelink);
-        MainActivity.navController.navigate(R.id.action_chapterFragment_to_youtubeFragment, intentBundle);
+       // MainActivity.navController.navigate(R.id.action_chapterFragment_to_youtubeFragment, intentBundle);
 
 
     }

@@ -41,9 +41,6 @@
         android:label="@string/title_learn"
         tools:layout="@layout/fragment_learn" >
         <action
-            android:id="@+id/action_navigation_learn_to_chapterFragment"
-            app:destination="@id/chapterFragment" />
-        <action
             android:id="@+id/action_navigation_learn_to_videosFragment"
             app:destination="@id/videosFragment" />
     </fragment>
@@ -74,18 +71,6 @@
         android:name="com.example.infs3634_assignment_garden.ui.ResultFragment"
         android:label="Quiz Results"
         tools:layout="@layout/fragment_result" />
-    <fragment
-        android:id="@+id/chapterFragment"
-        android:name="com.example.infs3634_assignment_garden.ui.ChapterFragment"
-        android:label="fragment_chapter"
-        tools:layout="@layout/fragment_chapter" >
-        <action
-            android:id="@+id/action_chapterFragment_to_youtubeFragment"
-            app:destination="@id/youtubeFragment" />
-        <action
-            android:id="@+id/action_chapterFragment_to_videosFragment"
-            app:destination="@id/videosFragment" />
-    </fragment>
     <fragment
         android:id="@+id/youtubeFragment"
         android:name="com.example.infs3634_assignment_garden.ui.YoutubeFragment"

@@ -212,6 +212,7 @@ public class Garden {
 
     //generates quizzes (sets quizReady = true) for 1-3 plants randomly
     // this is how users get more quizzes
+    //todo this is causing issues when the user finishes quizzes!!!
     public static int generateQuizzes(){
         // first RNG how many quizzes to generate (1 - 3)
         Random rand = new Random();

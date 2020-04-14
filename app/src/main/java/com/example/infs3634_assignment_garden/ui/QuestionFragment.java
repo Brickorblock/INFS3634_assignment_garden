@@ -20,6 +20,7 @@ import com.example.infs3634_assignment_garden.entities.Garden;
 import com.example.infs3634_assignment_garden.entities.Question;
 import com.example.infs3634_assignment_garden.entities.Quiz;
 
+import java.lang.reflect.Field;
 import java.security.SignedObject;
 import java.util.ArrayList;
 import java.util.Random;
@@ -228,4 +229,20 @@ public class QuestionFragment extends Fragment {
         // also generate new quizzes to add to list
         Garden.generateQuizzes();
     }
+
+//    @Override
+////    public void onDetach() {
+////        super.onDetach();
+////
+////        try {
+////            Field childFragmentManager = Fragment.class.getDeclaredField("mChildFragmentManager");
+////            childFragmentManager.setAccessible(true);
+////            childFragmentManager.set(this, null);
+////
+////        } catch (NoSuchFieldException e) {
+////            throw new RuntimeException(e);
+////        } catch (IllegalAccessException e) {
+////            throw new RuntimeException(e);
+////        }
+////    }
 }
