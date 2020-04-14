@@ -50,7 +50,7 @@ public class VideoAdapter extends RecyclerView.Adapter<VideoAdapter.VideoViewHol
     @Override
     public VideoAdapter.VideoViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
-CardView v = (CardView) LayoutInflater.from(parent.getContext()).inflate(R.layout.video_item, parent, false);
+CardView v = (CardView) LayoutInflater.from(parent.getContext()).inflate(R.layout.video_itemview, parent, false);
 
         VideoViewHolder vh = new VideoViewHolder(v, mLaunchListener);
 
