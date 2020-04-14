@@ -16,6 +16,7 @@ import android.widget.Toast;
 
 import com.example.infs3634_assignment_garden.MainActivity;
 import com.example.infs3634_assignment_garden.R;
+import com.example.infs3634_assignment_garden.entities.Garden;
 import com.example.infs3634_assignment_garden.entities.Question;
 import com.example.infs3634_assignment_garden.entities.Quiz;
 
@@ -39,6 +40,7 @@ public class QuestionFragment extends Fragment {
     private int mScore = 0;
     private int mQuestionNumber = 0;
     private int plantIndex;
+    private int quizIndex;
 
     public ArrayList<Question> questionBank = new ArrayList<>();
     public ArrayList<Question> randomisedQuestions = new ArrayList<>();
@@ -68,6 +70,7 @@ public class QuestionFragment extends Fragment {
         String topic = bundle.getString(QuizFragment.KEY_TOPIC);
         Log.d("Question Fragment", "topic: " + topic);
         plantIndex = bundle.getInt(QuizFragment.KEY_PLANT);
+        quizIndex = bundle.getInt(QuizFragment.KEY_QUIZ);
 
         // This loop goes through the entire list and filters for every question that has the topic that was clicked on from the Quiz Fragment
         //As a result, as all topics should have 20 questions (except stars for now!), the size of the question bank will always be 20.
@@ -91,7 +94,7 @@ public class QuestionFragment extends Fragment {
             int min = 0;
             int max = questionBank.size() - 1;
 
-            int x = rand.nextInt((max - min) + min);
+            int x = rand.nextInt((max - min) + 1) + min;
 
             //first check if number (i.e. question) is a duplicate
             Boolean duplicateFound = false;
@@ -164,17 +167,9 @@ public class QuestionFragment extends Fragment {
 
         Log.d("TAG", "randomised questions:" + randomisedQuestions);
 
-        //todo implement intent to new activity if the question number is > 9 here. Pass the score in the intent.
-
         if (mQuestionNumber == Quiz.QUESTION_SIZE) {
+            endQuiz();
 
-            Bundle bundle = new Bundle();
-            bundle.putInt(KEY_SCORE, mScore);
-            bundle.putInt(KEY_PLANT, plantIndex);
-            MainActivity.navController.navigate(
-                    R.id.action_questionFragment_to_resultFragment, bundle);
-
-            Log.d("TAG", "score: " + mScore);
         } else {
 
             Question finalquestion = randomisedQuestions.get(mQuestionNumber);
@@ -216,5 +211,21 @@ public class QuestionFragment extends Fragment {
             Toast.makeText(getActivity(), "Incorrect", Toast.LENGTH_SHORT).show();
         }
         updateQuestion();
+    }
+
+    private void endQuiz(){
+        // navigate to results fragment on last question
+        Bundle bundle = new Bundle();
+        bundle.putInt(KEY_SCORE, mScore);
+        bundle.putInt(KEY_PLANT, plantIndex);
+        MainActivity.navController.navigate(
+                R.id.action_questionFragment_to_resultFragment, bundle);
+
+        Log.d("TAG", "score: " + mScore);
+
+        // also remove this quiz from the quiz list since it's now complete
+        Garden.removeQuiz(quizIndex);
+        // also generate new quizzes to add to list
+        Garden.generateQuizzes();
     }
 }

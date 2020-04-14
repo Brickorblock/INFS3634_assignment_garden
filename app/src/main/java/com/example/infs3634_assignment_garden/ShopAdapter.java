@@ -44,9 +44,10 @@ public class  ShopAdapter extends RecyclerView.Adapter<ShopAdapter.MyViewHolder>
         ShopItem shop = dataset.get(position);
         Plant plant = shop.getPlant();
 
-        holder.topicText.setText(plant.getSubject());
+        holder.topicText.setText(plant.getTopic());
         holder.plantNameText.setText(plant.getName());
-        holder.plantImage.setImageResource(plant.getPlantImage());
+        Log.d("TAG", "onBindViewHolder: plant toString " + plant.toString());
+        holder.plantImage.setImageResource(plant.getPlantImages()[0]);
         holder.valueText.setText(Integer.toString(shop.getCost()));
         holder.requiredLvlText.setText(Integer.toString(shop.getLevelRequirement()));
 
@@ -84,8 +85,6 @@ public class  ShopAdapter extends RecyclerView.Adapter<ShopAdapter.MyViewHolder>
 
         public MyViewHolder(@NonNull View itemView, LaunchListener launchListener) {
             super(itemView);
-
-            //todo code here
 
             this.launchListener = launchListener;
             this.plantImage = itemView.findViewById(R.id.plantImage);

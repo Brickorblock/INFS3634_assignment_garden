@@ -1,6 +1,7 @@
 package com.example.infs3634_assignment_garden.entities;
 
 import com.example.infs3634_assignment_garden.R;
+import com.example.infs3634_assignment_garden.entities.subclasses.Evergreen;
 
 import java.util.ArrayList;
 
@@ -44,9 +45,9 @@ public class ShopItem {
 
         ArrayList<ShopItem> ShopThings = new ArrayList<>();
 
-        ShopThings.add(new ShopItem(new Plant(R.drawable.tree_sample, "Evergreen", "Solar Systems"), 100, 1));
-        ShopThings.add(new ShopItem(new Plant(R.drawable.tree_sample, "Evergreen", "Micro-Economics"), 100, 1));
-        ShopThings.add(new ShopItem(new Plant(R.drawable.tree_sample, "Evergreen", "Innovation"), 100, 1));
+        ShopThings.add(new ShopItem(new Evergreen(true), 100, 1));
+        ShopThings.add(new ShopItem(new Evergreen(true), 100, 1));
+        ShopThings.add(new ShopItem(new Evergreen(true), 100, 1));
 
 
         return ShopThings;
