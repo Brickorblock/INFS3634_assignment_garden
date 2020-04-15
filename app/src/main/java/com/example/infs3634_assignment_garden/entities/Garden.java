@@ -10,6 +10,8 @@ import java.util.Random;
 public class Garden {
     //this class encapsulates global information about user's progress, plants, quizzes, etc
 
+    public static final int MAX_PLANTS = 16;
+
     private static int ambienceLvl;
     private static int ambienceTotal;
     private static double ambienceProgress;
@@ -164,11 +166,8 @@ public class Garden {
         Log.d("TAG", "calcAmbience: called - ambienceTotal = " + ambienceTotal);
     }
 
-    public void addPlant(Plant newPlant) {
-        // 16 is the max amount of plants you can have in the garden
-        if (plants.size() < 16) {
-            plants.add(newPlant);
-        }
+    public static void addPlant(Plant newPlant) {
+        plants.add(newPlant);
     }
 
     // searches for a plant in the list based on ArrayList index
@@ -286,21 +285,12 @@ public class Garden {
         plants.add(new Evergreen(true));
         plants.add(new Evergreen(true));
         plants.add(new Evergreen(true));
-        plants.add(new Evergreen(true));
-        plants.add(new Evergreen(true));
-        plants.add(new Evergreen(true));
-        plants.add(new Evergreen(true));
-        plants.add(new Evergreen(true));
-        plants.add(new Evergreen(true));
-        plants.add(new Evergreen(true));
-        plants.add(new Evergreen(true));
-        plants.add(new Evergreen(false));
-        plants.add(new Evergreen(false));
+
 
 
         plants.get(0).setGrowthTotal(250);
         plants.get(1).setGrowthTotal(80);
-        plants.get(2).setGrowthTotal(400);
+        plants.get(2).setGrowthTotal(4000);
         calcAmbience();
         Helper.calcAllGrowth(plants);
     }

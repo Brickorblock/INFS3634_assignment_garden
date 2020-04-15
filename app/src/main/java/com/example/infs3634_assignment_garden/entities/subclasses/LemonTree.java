@@ -7,15 +7,16 @@ public class LemonTree extends Plant {
     public LemonTree(Boolean quizReady) {
         super(quizReady);
 
-        super.setName("Evergreen");
-        super.setTopic("Solar Systems");
+        super.setName("Lemon Tree");
+        super.setTopic("Stars");
         int[] plantImages = {
-                R.drawable.evergreen0,
-                R.drawable.evergreen1,
-                R.drawable.evergreen2,
-                R.drawable.evergreen3};
+                R.drawable.lemontree0,
+                R.drawable.lemontree1,
+                R.drawable.lemontree2,
+                R.drawable.lemontree3};
 
         super.setPlantImages(plantImages);
-
+        super.setRarity(1);
+        super.calcGrowth();
     }
 }

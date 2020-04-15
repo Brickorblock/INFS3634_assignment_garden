@@ -16,6 +16,8 @@ public class Evergreen extends Plant {
                 R.drawable.evergreen3};
 
         super.setPlantImages(plantImages);
+        super.calcGrowth();
+        super.setRarity(0);
 
     }
 }

@@ -7,15 +7,17 @@ public class AppleTree extends Plant {
     public AppleTree(Boolean quizReady) {
         super(quizReady);
 
-        super.setName("Evergreen");
+        super.setName("Apple Tree");
         super.setTopic("Solar Systems");
         int[] plantImages = {
-                R.drawable.evergreen0,
-                R.drawable.evergreen1,
-                R.drawable.evergreen2,
-                R.drawable.evergreen3};
+                R.drawable.appletree0,
+                R.drawable.appletree1,
+                R.drawable.appletree2,
+                R.drawable.appletree3};
 
         super.setPlantImages(plantImages);
+        super.calcGrowth();
+        super.setRarity(3);
 
     }
 }

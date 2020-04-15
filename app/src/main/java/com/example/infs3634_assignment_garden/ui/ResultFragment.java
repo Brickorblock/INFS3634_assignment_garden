@@ -122,19 +122,42 @@ public class ResultFragment extends Fragment {
     }
 
     private int calcCoinsReward() {
-        int coinsReward = COINS_BASE * score;
-        //add coins
-        Garden.addCoins(coinsReward);
+        //rarity will influence rewards e.g:
+        // plant with rarity = 0 will have multiplier of x1
+        // plant with rarity = 1 will have multiplier of x1.1
+        double rarityMultiplier;
+        if (plant.getRarity() == 0) {
+            rarityMultiplier = 1;
+        } else {
+            rarityMultiplier = (plant.getRarity()/(double) 10) + 1;
+        }
+        double coinsReward = COINS_BASE * score * rarityMultiplier;
 
-        return coinsReward;
+        //round amt to nearest int
+        int coinsRewardRounded = (int) Math.round(coinsReward);
+        //add coins
+        Garden.addCoins(coinsRewardRounded);
+
+        return coinsRewardRounded;
     }
 
     private int calcExpReward() {
-        int expReward = EXP_BASE * score;
+        //rarity will influence rewards e.g:
+        // plant with rarity = 0 will have multiplier of x1
+        // plant with rarity = 1 will have multiplier of x1.1
+        double rarityMultiplier;
+        if (plant.getRarity() == 0) {
+            rarityMultiplier = 1;
+        } else {
+            rarityMultiplier = (plant.getRarity()/(double) 10) + 1;
+        }
+        double expReward = EXP_BASE * score * rarityMultiplier;
+        //round amt to nearest int
+        int expRewardRounded = (int) Math.round(expReward);
         //add exp
-        plant.addGrowth(expReward);
+        plant.addGrowth(expRewardRounded);
 
-        return expReward;
+        return expRewardRounded;
     }
 
 

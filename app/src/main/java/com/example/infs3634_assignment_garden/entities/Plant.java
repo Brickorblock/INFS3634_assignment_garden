@@ -16,6 +16,8 @@ public class Plant extends ArrayList<Plant> {
     private int growthLvl;
     private double growthProgress;
     private boolean quizReady;
+    //rarity = used to determine unlock level & rewards multiplier
+    private int rarity;
 
     private static int[] milestones = {100, 200, 400};
 
@@ -25,11 +27,8 @@ public class Plant extends ArrayList<Plant> {
     //  - growthProgress = will be shown in the plant progress bar
     //  - milestones = amount needed for each level
 
-    //todo implement quiz, multiple plantImages per level
-
-
     public Plant(Boolean quizReady) {
-        //name, subject & image fields are set by subclasses
+        //name, subject, image & rarity fields are set by subclasses
         this.growthTotal = 0;
         this.growthLvl = 0;
         this.growthProgress = 0;
@@ -112,6 +111,14 @@ public class Plant extends ArrayList<Plant> {
 
     public static void setMilestones(int[] milestones) {
         Plant.milestones = milestones;
+    }
+
+    public int getRarity() {
+        return rarity;
+    }
+
+    public void setRarity(int rarity) {
+        this.rarity = rarity;
     }
 
     @Override
