@@ -70,7 +70,17 @@
         android:id="@+id/resultFragment"
         android:name="com.example.infs3634_assignment_garden.ui.ResultFragment"
         android:label="Quiz Results"
-        tools:layout="@layout/fragment_result" />
+        tools:layout="@layout/fragment_result" >
+        <action
+            android:id="@+id/action_resultFragment_to_navigation_garden"
+            app:destination="@id/navigation_garden"
+            app:enterAnim="@anim/fade_in"
+            app:exitAnim="@anim/fade_out"
+            app:popEnterAnim="@anim/fade_in"
+            app:popExitAnim="@anim/fade_out"
+            app:popUpTo="@id/mobile_navigation"
+            app:popUpToInclusive="false" />
+    </fragment>
     <fragment
         android:id="@+id/chapterFragment"
         android:name="com.example.infs3634_assignment_garden.ui.ChapterFragment"

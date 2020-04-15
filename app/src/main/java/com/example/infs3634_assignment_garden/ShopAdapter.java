@@ -55,11 +55,12 @@ public class  ShopAdapter extends RecyclerView.Adapter<ShopAdapter.MyViewHolder>
         int requiredlvl = shop.getLevelRequirement();
         int userLvl = Garden.getAmbienceLvl();
 
-        if(userLvl > requiredlvl || userLvl == requiredlvl){
-            holder.buyButton.setVisibility(View.INVISIBLE);
-        }
-        else if(userLvl == requiredlvl || requiredlvl > userLvl){
+        if(userLvl >= requiredlvl){
+            //user has met required level
             holder.requiredLvlConstraint.setVisibility(View.INVISIBLE);
+        } else {
+            //user has NOT met required level
+            holder.buyButton.setVisibility(View.INVISIBLE);
         }
 
     }

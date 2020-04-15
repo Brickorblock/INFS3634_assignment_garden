@@ -63,15 +63,16 @@ public class ResultFragment extends Fragment {
         okButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //pops to back stack which is home page (Garden fragment), as defined in nav graph
-                MainActivity.navController.popBackStack();
+                //navigate to home page (Garden Fragment)
+                Garden.calcAmbience();
+                MainActivity.navController.navigate(R.id.action_resultFragment_to_navigation_garden);
             }
         });
 
         scoreText.setText(Integer.toString(score));
 
         // set congrats text
-        double scorePercent = score/ (double) Quiz.QUESTION_SIZE;
+        double scorePercent = score / (double) Quiz.QUESTION_SIZE;
         Log.d("TAG", "onCreateView: scorePercent = " + scorePercent);
         if (scorePercent >= 0.8) {
             congratsText.setText("Fantastic!");
@@ -104,7 +105,7 @@ public class ResultFragment extends Fragment {
         newPlantBar.setProgress((int) newGrowthProgress);
 
         //set visibility of lvlupText
-        if (oldLvl == 3){
+        if (oldLvl == 3) {
             //level max
             lvlupText.setText("LEVEL MAX!");
             lvlupText.setVisibility(View.VISIBLE);
