@@ -68,10 +68,10 @@ public class TopicsAdapter extends RecyclerView.Adapter<TopicsAdapter.MyViewHold
         Topics topic = dataset.get(position);
 
         String topicname = topic.getTopic();
-        String arr[] = topicname.split(" A", 2);
-        String finaltopicname = arr[0];
+    //    String arr[] = topicname.split(" Astro", 2);
+    //    String finaltopicname = arr[0];
 
-        holder.topicText.setText(finaltopicname);
+        holder.topicText.setText(topicname);
 
     }
 //ss

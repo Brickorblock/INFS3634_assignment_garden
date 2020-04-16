@@ -1,12 +1,13 @@
 package com.example.infs3634_assignment_garden.entities.Video;
 
 public class VideoDetails {
-    public String videoId, title, description;
+    public String videoId, title, description, channeltitle;
 
-    public VideoDetails(String videoId, String title, String description) {
+    public VideoDetails(String videoId, String title, String description, String channeltitle) {
         this.videoId = videoId;
         this.title = title;
         this.description = description;
+        this.channeltitle = channeltitle;
     }
 
     public VideoDetails(){}
@@ -35,6 +36,13 @@ public class VideoDetails {
         this.description = description;
     }
 
+    public String getChanneltitle() {
+        return channeltitle;
+    }
+
+    public void setChanneltitle(String channeltitle) {
+        this.channeltitle = channeltitle;
+    }
 
     @Override
     public String toString() {

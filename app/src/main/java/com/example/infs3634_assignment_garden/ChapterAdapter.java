@@ -67,7 +67,10 @@ public class ChapterAdapter extends RecyclerView.Adapter<ChapterAdapter.MyViewHo
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
 
         Chapters chapter = dataset.get(position);
-        holder.chapterText.setText(chapter.getChapter());
+        String chaptername = chapter.getChapter();
+        String arr[] = chaptername.split(" Astro", 2);
+          String finalchaptername = arr[0];
+        holder.chapterText.setText(finalchaptername);
 
     }
 

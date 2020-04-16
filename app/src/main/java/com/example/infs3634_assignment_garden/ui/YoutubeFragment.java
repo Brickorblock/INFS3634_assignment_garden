@@ -22,6 +22,7 @@ public class YoutubeFragment extends Fragment implements YouTubePlayer.OnInitial
 TextView VideoTitle;
 TextView VideoDescription;
 TextView Videourl;
+TextView ChannelName;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -33,14 +34,19 @@ TextView Videourl;
         final String Title = bundle.getString("title");
         final String Description = bundle.getString("description");
         final String url = "https://www.youtube.com/watch?v=" + bundle.getString("videoId");
+        final String ChannelTitle = bundle.getString("channeltitle");
 
         VideoTitle = root.findViewById(R.id.videotitle);
         VideoDescription = root.findViewById(R.id.videodescription);
         Videourl = root.findViewById(R.id.videourl);
+        ChannelName = root.findViewById(R.id.channelName);
+
+        Log.d("Youtube Fragment: ", "Channel Name: " + ChannelName);
 
         VideoTitle.setText(Title);
         VideoDescription.setText(Description);
         Videourl.setText(url);
+        ChannelName.setText(ChannelTitle);
 
         //////////////////////////////////////////////////////////////////////////
 

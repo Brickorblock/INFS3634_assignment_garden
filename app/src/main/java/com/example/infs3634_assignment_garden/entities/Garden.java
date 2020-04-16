@@ -307,9 +307,9 @@ public class Garden {
     }
 
     public static ArrayList<Topics> getTempTopics(){
-        Topics.add(new Topics("Solar Systems Astronomy"));
-        Topics.add(new Topics("Cosmology Astronomy"));
-        Topics.add(new Topics("Stars Astronomy"));
+        Topics.add(new Topics("Solar Systems"));
+        Topics.add(new Topics("Cosmology"));
+        Topics.add(new Topics("Stars"));
 Log.d("Garden", "Topics: " + Topics);
         return Topics;
     }
