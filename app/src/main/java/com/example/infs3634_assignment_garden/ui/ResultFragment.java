@@ -59,6 +59,7 @@ public class ResultFragment extends Fragment {
         ProgressBar oldPlantBar = root.findViewById(R.id.oldPlantBar);
         ProgressBar newPlantBar = root.findViewById(R.id.newPlantBar);
         Button okButton = root.findViewById(R.id.okButton);
+        Log.d("ResultFragment", "In Result Fragment!");
 
         okButton.setOnClickListener(new View.OnClickListener() {
             @Override

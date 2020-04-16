@@ -39,15 +39,14 @@ public class Topics {
 
         }
 
-        ArrayList<Object> listwithoutduplicates = (ArrayList<Object>) StringTopicList.stream().distinct().collect(Collectors.toList());
 
-        ArrayList<Topics> TopicList = Topics.createTopic(listwithoutduplicates);
+        ArrayList<Topics> TopicList = Topics.createTopic(StringTopicList);
 
         return TopicList;
 
     }
 
-    public static ArrayList<Topics> createTopic(ArrayList<Object> topics) {
+    public static ArrayList<Topics> createTopic(ArrayList<String> topics) {
 
         ArrayList<Topics> TopicList = new ArrayList<>();
 
