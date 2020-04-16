@@ -200,7 +200,10 @@ public class QuestionFragment extends Fragment {
         mQuestionNumber++;
         //displayQuestionNumber starts counting from 1; but mQuestionNumber starts counting from 0
         int displayQuestionNumber = mQuestionNumber + 1;
-        mNumberView.setText("Q" + displayQuestionNumber);
+        if (mQuestionNumber < Quiz.QUESTION_SIZE) {
+            // only continue incrementing up to the last question
+            mNumberView.setText("Q" + displayQuestionNumber);
+        }
 
         if (mButtonChoice.getText() == mAnswer) {
             mScore = mScore + 1;

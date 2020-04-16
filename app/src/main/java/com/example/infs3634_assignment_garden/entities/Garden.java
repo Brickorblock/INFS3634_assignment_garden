@@ -292,7 +292,7 @@ public class Garden {
 
         plants.get(0).setGrowthTotal(250);
         plants.get(1).setGrowthTotal(80);
-        plants.get(2).setGrowthTotal(4000);
+        plants.get(2).setGrowthTotal(400);
         calcAmbience();
         Helper.calcAllGrowth(plants);
     }
