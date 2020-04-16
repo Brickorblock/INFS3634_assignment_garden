@@ -31,8 +31,8 @@
             app:exitAnim="@anim/fragment_open_exit"
             app:popEnterAnim="@anim/fragment_open_enter"
             app:popExitAnim="@anim/fragment_open_exit"
-            app:popUpTo="@id/navigation_quiz"
-            app:popUpToInclusive="true" />
+            app:popUpTo="@id/questionFragment"
+            app:popUpToInclusive="false" />
     </fragment>
 
     <fragment
@@ -41,8 +41,8 @@
         android:label="@string/title_learn"
         tools:layout="@layout/fragment_learn" >
         <action
-            android:id="@+id/action_navigation_learn_to_chapterFragment"
-            app:destination="@id/chapterFragment" />
+            android:id="@+id/action_navigation_learn_to_videosFragment"
+            app:destination="@id/videosFragment" />
     </fragment>
     <fragment
         android:id="@+id/navigation_settings"
@@ -60,29 +60,39 @@
             android:id="@+id/action_questionFragment_to_resultFragment"
             app:destination="@id/resultFragment"
             app:enterAnim="@anim/slide_in_right"
-            app:exitAnim="@anim/slide_out_left"
+            app:exitAnim="@anim/slide_out_right"
             app:popEnterAnim="@anim/slide_in_right"
-            app:popExitAnim="@anim/slide_out_left"
+            app:popExitAnim="@anim/slide_out_right"
             app:popUpTo="@id/navigation_garden"
-            app:popUpToInclusive="true" />
+            app:popUpToInclusive="false" />
     </fragment>
     <fragment
         android:id="@+id/resultFragment"
         android:name="com.example.infs3634_assignment_garden.ui.ResultFragment"
         android:label="Quiz Results"
-        tools:layout="@layout/fragment_result" />
-    <fragment
-        android:id="@+id/chapterFragment"
-        android:name="com.example.infs3634_assignment_garden.ui.ChapterFragment"
-        android:label="fragment_chapter"
-        tools:layout="@layout/fragment_chapter" >
+        tools:layout="@layout/fragment_result" >
         <action
-            android:id="@+id/action_chapterFragment_to_youtubeFragment"
-            app:destination="@id/youtubeFragment" />
+            android:id="@+id/action_resultFragment_to_navigation_garden"
+            app:destination="@id/navigation_garden"
+            app:enterAnim="@anim/fade_in"
+            app:exitAnim="@anim/fade_out"
+            app:popEnterAnim="@anim/fade_in"
+            app:popExitAnim="@anim/fade_out"
+            app:popUpTo="@id/mobile_navigation"
+            app:popUpToInclusive="false" />
     </fragment>
     <fragment
         android:id="@+id/youtubeFragment"
         android:name="com.example.infs3634_assignment_garden.ui.YoutubeFragment"
         android:label="fragment_youtube"
         tools:layout="@layout/fragment_youtube" />
+    <fragment
+        android:id="@+id/videosFragment"
+        android:name="com.example.infs3634_assignment_garden.VideosFragment"
+        android:label="fragment_videos"
+        tools:layout="@layout/fragment_videos" >
+        <action
+            android:id="@+id/action_videosFragment_to_youtubeFragment"
+            app:destination="@id/youtubeFragment" />
+    </fragment>
 </navigation>

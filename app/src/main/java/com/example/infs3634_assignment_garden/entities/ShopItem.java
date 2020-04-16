@@ -1,6 +1,9 @@
 package com.example.infs3634_assignment_garden.entities;
 
-import com.example.infs3634_assignment_garden.R;
+import com.example.infs3634_assignment_garden.entities.subclasses.AppleTree;
+import com.example.infs3634_assignment_garden.entities.subclasses.Evergreen;
+import com.example.infs3634_assignment_garden.entities.subclasses.LemonTree;
+import com.example.infs3634_assignment_garden.entities.subclasses.OrangeTree;
 
 import java.util.ArrayList;
 
@@ -39,28 +42,17 @@ public class ShopItem {
         this.levelRequirement = levelRequirement;
     }
 
-    //TEMPORARY FOR TESTING AND DE-BUGGING
-    public static ArrayList<ShopItem> getTempShopItem() {
+    public static ArrayList<ShopItem> getShopItems() {
 
         ArrayList<ShopItem> ShopThings = new ArrayList<>();
 
-        ShopThings.add(new ShopItem(new Plant(R.drawable.tree_sample, "Evergreen", "Solar Systems"), 100, 1));
-        ShopThings.add(new ShopItem(new Plant(R.drawable.tree_sample, "Evergreen", "Micro-Economics"), 100, 1));
-        ShopThings.add(new ShopItem(new Plant(R.drawable.tree_sample, "Evergreen", "Innovation"), 100, 4));
+        ShopThings.add(new ShopItem(new Evergreen(true), 100, 0));
+        ShopThings.add(new ShopItem(new LemonTree(true), 200, 1));
+        ShopThings.add(new ShopItem(new OrangeTree(true), 400, 2));
+        ShopThings.add(new ShopItem(new AppleTree(true), 600, 3));
 
 
         return ShopThings;
-    }
-
-    //TEMPORARY FOR TESTING AND DE-BUGGING
-    public static ArrayList<ShopItem> createShopItem(ArrayList<ShopItem> shop) {
-
-        ArrayList<ShopItem> ShopThings = getTempShopItem();
-        shop.addAll(ShopThings);
-
-        return shop;
-
-
     }
 
     @Override

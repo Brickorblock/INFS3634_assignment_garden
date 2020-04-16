@@ -17,6 +17,7 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.infs3634_assignment_garden.MainActivity;
+import com.example.infs3634_assignment_garden.entities.Garden;
 import com.example.infs3634_assignment_garden.entities.Plant;
 import com.example.infs3634_assignment_garden.PlantAdapter;
 import com.example.infs3634_assignment_garden.R;
@@ -55,6 +56,8 @@ public class GardenFragment extends Fragment implements PlantAdapter.LaunchListe
         ProgressBar ambienceBar = root.findViewById(R.id.ambienceBar);
         TextView coinText = root.findViewById(R.id.coinText);
         Button shopButton = root.findViewById(R.id.shopButton);
+
+        Garden.calcAmbience();
 
         ambienceLvl.setText("Lvl " + Integer.toString(MainActivity.garden.getAmbienceLvl()));
         ambienceBar.setProgress((int) MainActivity.garden.getAmbienceProgress());

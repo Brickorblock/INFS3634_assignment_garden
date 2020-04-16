@@ -3,16 +3,21 @@ package com.example.infs3634_assignment_garden.entities;
 import android.util.Log;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class Plant extends ArrayList<Plant> {
     //TODO: will we need a PlantId?
     private int plantImage;
+    //array of images to store different images for each level
+    private int[] plantImages = new int[4];
     private String name;
-    private String subject;
+    private String topic;
     private int growthTotal;
     private int growthLvl;
     private double growthProgress;
     private boolean quizReady;
+    //rarity = used to determine unlock level & rewards multiplier
+    private int rarity;
 
     private static int[] milestones = {100, 200, 400};
 
@@ -22,17 +27,12 @@ public class Plant extends ArrayList<Plant> {
     //  - growthProgress = will be shown in the plant progress bar
     //  - milestones = amount needed for each level
 
-    //todo implement quiz, multiple plantImages per level
-
-
-    public Plant(int plantImage, String name, String subject) {
-        this.plantImage = plantImage;
-        this.name = name;
-        this.subject = subject;
+    public Plant(Boolean quizReady) {
+        //name, subject, image & rarity fields are set by subclasses
         this.growthTotal = 0;
         this.growthLvl = 0;
         this.growthProgress = 0;
-        this.quizReady = false;
+        this.quizReady = quizReady;
 
         calcGrowth();
     }
@@ -45,6 +45,14 @@ public class Plant extends ArrayList<Plant> {
         this.plantImage = plantImage;
     }
 
+    public int[] getPlantImages() {
+        return plantImages;
+    }
+
+    public void setPlantImages(int[] plantImages) {
+        this.plantImages = plantImages;
+    }
+
     public String getName() {
         return name;
     }
@@ -53,12 +61,12 @@ public class Plant extends ArrayList<Plant> {
         this.name = name;
     }
 
-    public String getSubject() {
-        return subject;
+    public String getTopic() {
+        return topic;
     }
 
-    public void setSubject(String subject) {
-        this.subject = subject;
+    public void setTopic(String topic) {
+        this.topic = topic;
     }
 
     public int getGrowthTotal() {
@@ -105,12 +113,37 @@ public class Plant extends ArrayList<Plant> {
         Plant.milestones = milestones;
     }
 
+    public int getRarity() {
+        return rarity;
+    }
+
+    public void setRarity(int rarity) {
+        this.rarity = rarity;
+    }
+
+    @Override
+    public String toString() {
+        return "Plant{" +
+                "plantImage=" + plantImage +
+                ", plantImages=" + Arrays.toString(plantImages) +
+                ", name='" + name + '\'' +
+                ", topic='" + topic + '\'' +
+                ", growthTotal=" + growthTotal +
+                ", growthLvl=" + growthLvl +
+                ", growthProgress=" + growthProgress +
+                ", quizReady=" + quizReady +
+                '}';
+    }
+
     // ================================================================
 
     public void calcGrowth(){
+        Log.d("TAG", "calcGrowth: called!");
         calcGrowthLvl();
         calcGrowthProgress();
     }
+
+    //used to calculate progress towards next level as a percentage (used for progress bars)
     public double calcGrowthProgress(){
         int amtNeeded = 0;
         int currAmt = 0;
@@ -146,15 +179,21 @@ public class Plant extends ArrayList<Plant> {
         calcGrowth();
     }
 
+    //calculates current growth based on total & milestone
+    // also sets the corresponding plant img for the current level
     public int calcGrowthLvl(){
         this.growthLvl = 0;
+        plantImage = plantImages[0];
 
         if (growthTotal >= milestones[2]) {
             growthLvl = 3;
+            plantImage = plantImages[3];
         } else if (growthTotal >= milestones[1]) {
             growthLvl = 2;
+            plantImage = plantImages[2];
         } else if (growthTotal >= milestones[0]) {
             growthLvl = 1;
+            plantImage = plantImages[1];
         }
 
         return growthLvl;

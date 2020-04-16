@@ -1,9 +1,6 @@
 package com.example.infs3634_assignment_garden.entities;
 
-import com.example.infs3634_assignment_garden.R;
-
 import java.util.ArrayList;
-import java.util.List;
 
 public class Quiz {
     public Plant plant;
@@ -14,7 +11,7 @@ public class Quiz {
     public Quiz(Plant plant, int questions) {
         this.plant = plant;
         this.questions = questions;
-        this.topic = plant.getSubject();
+        this.topic = plant.getTopic();
     }
 
     public Plant getPlant() {
