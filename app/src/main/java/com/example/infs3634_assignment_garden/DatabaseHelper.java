@@ -166,6 +166,48 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         insertQuestions(q20);
         Question q21 = new Question("Solar Systems", "Name the molecule or element that is part of the current atmosphere but would not be in the original atmosphere of the Earth:", "Carbon Dioxide", "Oxygen", "Methane", "Nitrogen", "Oxygen");
         insertQuestions(q21);
+
+        Question q22 = new Question("Cosmology", "The expansion age of the universe is about _________", "10.2 billion years", "13.7 billion years", "5.3 billion years", "16.9 billion years", "13.7 billion years");
+        insertQuestions(q22);
+        Question q23 = new Question("Cosmology", "The rate of expansion of the universe is __________", "Decelerating", "Accelerating", "Constant", "Zero", "Accelerating");
+        insertQuestions(q23);
+        Question q24 = new Question("Cosmology", "What type of galaxy shape is the milky way?", "Elliptical", "Irregular", "Spiral", "Barred spiral", "Spiral");
+        insertQuestions(q24);
+        Question q25 = new Question("Cosmology", "What can be said about the location of the centre of our expanding universe?", "The Earth is at the center", "The Sun is at the center", "the Milky Way Galaxy is at the center", "The universe does not have a center", "The universe does not have a center");
+        insertQuestions(q25);
+        Question q26 = new Question("Cosmology", "How are galaxies important to our existence?", "Without galaxies, the universe could not be expanding", "Without galaxies, there could not have been a Big Bang", "Galaxies recycle elements produced in stars into future star generations", "Galaxies provide the gravity that prevents us from falling off the earth", "Galaxies recycle elements produced in stars into future star generations");
+        insertQuestions(q26);
+        Question q27 = new Question("Cosmology", "Galaxies that move closer to us show a what shift?", "Red Shift", "Green Shift", "Orange Shift", "Blue Shift", "Red Shift");
+        insertQuestions(q27);
+        Question q28 = new Question("Cosmology", "In relation to us, most galaxies are…", "Moving away from us", "Moving toward us", "Not moving", "Moving perpendicular to us", "Moving away from us");
+        insertQuestions(q28);
+        Question q29 = new Question("Cosmology", "Why is the CMB so cool now?", "The expansion of the universe has cooled the radiation", "Dense clouds of dust have blocked most of it", "The cosmological constant has cooled it", "Hydrogen atoms have condensed on it and chilled it", "The expansion of the universe has cooled the radiation");
+        insertQuestions(q29);
+        Question q30 = new Question("Cosmology", "Which piece of evidence supports the Big Bang theory?", "The more distant galaxies are moving the slowest", "The more distant galaxies are moving the quickest", "The more distant galaxies are moving towards us", "Galaxies and space is not changing", "The more distant galaxies are moving the quickest");
+        insertQuestions(q30);
+        Question q31 = new Question("Cosmology", "The \"afterglow\" of the energy from the origin of the universe that we see today", "Sunlight", "Cosmic explosions", "Cosmic background radiation", "Doppler effect", "Cosmic background radiation");
+        insertQuestions(q31);
+        Question q32 = new Question("Cosmology", "Who discovered that the galaxies were moving away from one another?", "Issac Newton", "Albert Einstein", "Galileo Galile", "Edwin Hubble", "Edwin Hubble");
+        insertQuestions(q32);
+        Question q33 = new Question("Cosmology", "What happens if you reverse the galaxy motion and go back in time?", "Everything must have been condensed into a singularity", "Everything would still be where it is today", "Some things would remain, some would have moved back", "Nobody has a clue", "Everything must have been condensed into a singularity");
+        insertQuestions(q33);
+        Question q34 = new Question("Cosmology", "What happened to the radiation emitted from the Big Bang?", "It is visible in telescopes", "It has stretched out to the microwave part of the spectrum", "It has moved to the gamma ray part of the spectrum", "It is too old and no longer exists", "It has stretched out to the microwave part of the spectrum");
+        insertQuestions(q34);
+        Question q35 = new Question("Cosmology", "What is the universe made up of?", "Energy", "Matter/dark matter", "Spacetime", "All of the above", "All of the above");
+        insertQuestions(q35);
+        Question q36 = new Question("Cosmology", "Hubble's law states which of the following?", "We live in an expanding universe", "Galaxies far away look redder through a telescope", "The further away a galaxy is, the faster it is receding", "All of these", "All of these");
+        insertQuestions(q36);
+        Question q37 = new Question("Cosmology",  "The first particles of matter included which of the following?", "Electrons", "Helium atoms", "Carbon atoms", "All of these", "Electron");
+        insertQuestions(q37);
+        Question q38 = new Question("Cosmology",  "What does the strong nuclear force control?", "It attracts all matter to each other", "It holds protons and neutrons in nuclei together", "It holds electrons in orbit in atoms", "Radioactive decay", "It holds protons and neutrons in nuclei together");
+        insertQuestions(q38);
+        Question q39 = new Question("Cosmology",  "What percentage of the universe do scientists predict dark energy to occupy?", "90%", "38%", "68%", "52%", "68%");
+        insertQuestions(q39);
+        Question q40 =  new Question("Cosmology",  "What is NOT true about the big bang?", "It started 13.7 billion years ago", "At one point space was moving faster than light itself", "The 4 fundamental forces were combined together at the start", "The speed of light was reduced at the beginning", "The speed of light was reduced at the beginning");
+        insertQuestions(q40);
+        Question q41 =  new Question("Cosmology",  "What is a singularity?", "A zone of infinite pressure, and density that is infinitely small and hot", "No one knows", "A zone of specific pressure and density", "A zone of low pressure and density that is small and hot", "A zone of infinite pressure, and density that is infinitely small and hot");
+        insertQuestions(q41);
+
     }
 
 }
