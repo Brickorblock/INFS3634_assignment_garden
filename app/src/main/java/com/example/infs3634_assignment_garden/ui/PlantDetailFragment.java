@@ -30,7 +30,7 @@ public class PlantDetailFragment extends Fragment{
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         final ConstraintLayout root = getView().findViewById(R.id.root);
 
-        ImageView plantImage = getView().findViewById(R.id.plantImage);
+        ImageView plantImage = getView().findViewById(R.id.topicImage);
         ProgressBar plantBar = getView().findViewById(R.id.oldPlantBar);
         TextView nameText = getView().findViewById(R.id.nameText);
         TextView lvlText = getView().findViewById(R.id.lvlText);

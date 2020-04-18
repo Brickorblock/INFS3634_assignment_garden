@@ -26,13 +26,13 @@ public class TopicsAdapter extends RecyclerView.Adapter<TopicsAdapter.MyViewHold
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-        public ImageView plantImage;
+        public ImageView topicImage;
         public TextView topicText;
         LaunchListener launchListener;
 
         public MyViewHolder(@NonNull View itemView, LaunchListener LaunchListener) {
             super(itemView);
-            this.plantImage = itemView.findViewById(R.id.plantImage);
+            this.topicImage = itemView.findViewById(R.id.topicImage);
             this.topicText = itemView.findViewById(R.id.topicText);
             this.launchListener = launchListener;
 
@@ -68,13 +68,13 @@ public class TopicsAdapter extends RecyclerView.Adapter<TopicsAdapter.MyViewHold
         Topics topic = dataset.get(position);
 
         String topicname = topic.getTopic();
-    //    String arr[] = topicname.split(" Astro", 2);
-    //    String finaltopicname = arr[0];
+        int image = topic.getImage();
 
         holder.topicText.setText(topicname);
+        holder.topicImage.setImageResource(image);
 
     }
-//ss
+
     @Override
     public int getItemCount() {
         return dataset.size();
