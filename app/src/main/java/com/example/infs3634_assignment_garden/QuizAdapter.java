@@ -9,7 +9,6 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
-import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.infs3634_assignment_garden.entities.Garden;
@@ -39,7 +38,7 @@ public class QuizAdapter extends RecyclerView.Adapter<QuizAdapter.MyViewHolder> 
         public MyViewHolder(@NonNull View itemView, LaunchListener launchListener) {
             super(itemView);
             this.launchListener = launchListener;
-            this.plantImage = itemView.findViewById(R.id.plantImage);
+            this.plantImage = itemView.findViewById(R.id.topicImage);
             this.plantNameText = itemView.findViewById(R.id.plantnameText);
             this.lvlText = itemView.findViewById(R.id.lvlText);
             this.topicText = itemView.findViewById(R.id.topicText);

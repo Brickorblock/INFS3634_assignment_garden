@@ -16,6 +16,8 @@ public class MainActivity extends AppCompatActivity {
     public static NavController navController;
     DatabaseHelper databaseHelper;
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

@@ -28,10 +28,12 @@ public class VideoAdapter extends RecyclerView.Adapter<VideoAdapter.VideoViewHol
 
         public TextView titlevideo;
         LaunchListener launchListener;
+        public TextView channelName;
 
         public VideoViewHolder(@NonNull View itemView, LaunchListener LaunchListener) {
             super(itemView);
             this.titlevideo = itemView.findViewById(R.id.titlevideo);
+            this.channelName = itemView.findViewById(R.id.channelName);
             this.launchListener = launchListener;
 
             itemView.setOnClickListener(this);
@@ -65,6 +67,7 @@ CardView v = (CardView) LayoutInflater.from(parent.getContext()).inflate(R.layou
         VideoDetails chosenvideo = videoList.get(position);
         Log.d("Video Adapter", "video title: " + chosenvideo.getTitle());
         holder.titlevideo.setText(chosenvideo.getTitle());
+        holder.channelName.setText(chosenvideo.getChanneltitle());
 
     }
 

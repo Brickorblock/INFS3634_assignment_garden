@@ -55,7 +55,7 @@ public class ResultFragment extends Fragment {
         TextView coinsText = root.findViewById(R.id.coinsText);
         TextView expText = root.findViewById(R.id.expText);
         TextView lvlupText = root.findViewById(R.id.lvlupText);
-        ImageView plantImage = root.findViewById(R.id.plantImage);
+        ImageView plantImage = root.findViewById(R.id.topicImage);
         ProgressBar oldPlantBar = root.findViewById(R.id.oldPlantBar);
         ProgressBar newPlantBar = root.findViewById(R.id.newPlantBar);
         Button okButton = root.findViewById(R.id.okButton);

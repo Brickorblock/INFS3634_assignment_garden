@@ -41,8 +41,12 @@
         android:label="@string/title_learn"
         tools:layout="@layout/fragment_learn" >
         <action
-            android:id="@+id/action_navigation_learn_to_videosFragment"
-            app:destination="@id/videosFragment" />
+            android:id="@+id/action_navigation_learn_to_chapterFragment"
+            app:destination="@id/chapterFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
     </fragment>
     <fragment
         android:id="@+id/navigation_settings"
@@ -84,15 +88,32 @@
     <fragment
         android:id="@+id/youtubeFragment"
         android:name="com.example.infs3634_assignment_garden.ui.YoutubeFragment"
-        android:label="fragment_youtube"
+        android:label="Learn - Video"
         tools:layout="@layout/fragment_youtube" />
     <fragment
         android:id="@+id/videosFragment"
         android:name="com.example.infs3634_assignment_garden.VideosFragment"
-        android:label="fragment_videos"
-        tools:layout="@layout/fragment_videos" >
+        android:label="Learn - Videos"
+        tools:layout="@layout/fragment_videos">
         <action
             android:id="@+id/action_videosFragment_to_youtubeFragment"
-            app:destination="@id/youtubeFragment" />
+            app:destination="@id/youtubeFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+    </fragment>
+    <fragment
+        android:id="@+id/chapterFragment"
+        android:name="com.example.infs3634_assignment_garden.ui.ChapterFragment"
+        android:label="Learn -  Chapters"
+        tools:layout="@layout/fragment_chapter">
+        <action
+            android:id="@+id/action_chapterFragment_to_videosFragment"
+            app:destination="@id/videosFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
     </fragment>
 </navigation>

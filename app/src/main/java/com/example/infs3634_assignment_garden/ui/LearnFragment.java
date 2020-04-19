@@ -66,7 +66,7 @@ public class LearnFragment extends Fragment implements TopicsAdapter.LaunchListe
         Bundle intentBundle = new Bundle();
         intentBundle.putString(KEY_TOPIC, topic);
       //  MainActivity.navController.navigate(R.id.action_navigation_learn_to_chapterFragment, intentBundle);
-        MainActivity.navController.navigate(R.id.action_navigation_learn_to_videosFragment, intentBundle);
+        MainActivity.navController.navigate(R.id.action_navigation_learn_to_chapterFragment, intentBundle);
 
     }
 
