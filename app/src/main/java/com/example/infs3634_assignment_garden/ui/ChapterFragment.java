@@ -97,7 +97,6 @@ public class ChapterFragment extends Fragment implements ChapterAdapter.LaunchLi
         intentBundle.putString(KEY_ChapterName , chaptername);
         MainActivity.navController.navigate(R.id.action_chapterFragment_to_videosFragment, intentBundle);
 
-
     }
 
     public String getchapter(int position) {
@@ -108,9 +107,7 @@ public class ChapterFragment extends Fragment implements ChapterAdapter.LaunchLi
 
         Log.d("main activity", "position: " + position);
 
-
         Log.d("main activity", "chosenquiz: " + chaptername);
-
 
         return chaptername;
     }

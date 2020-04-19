@@ -11,6 +11,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.example.infs3634_assignment_garden.entities.Video.Item;
 import com.example.infs3634_assignment_garden.entities.Video.VideoDetails;
@@ -33,6 +34,7 @@ private static List<VideoDetails> FinalVideoList;
 
     private RecyclerView myRecyclerView;
     private RecyclerView.Adapter myAdapter;
+    private TextView loading;
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
@@ -40,7 +42,7 @@ private static List<VideoDetails> FinalVideoList;
         myRecyclerView = root.findViewById(R.id.videorecyler);
         myRecyclerView.setHasFixedSize(true);
         myRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-
+        loading = root.findViewById(R.id.loadingText);
 //        Bundle bundle = getArguments();
 //        String chapter = null;
 //        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
@@ -136,7 +138,7 @@ private static List<VideoDetails> FinalVideoList;
             super.onPostExecute(VideoList);
 
             if(VideoList != null) {
-                setVidoes(VideoList);
+                setVideos(VideoList);
             } else {
 
 
@@ -147,11 +149,12 @@ private static List<VideoDetails> FinalVideoList;
     }
 
 
-    public void setVidoes(List<VideoDetails> newVideos){
+    public void setVideos(List<VideoDetails> newVideos){
 
         FinalVideoList = newVideos;
         myAdapter = new VideoAdapter(FinalVideoList, this);
         myRecyclerView.setAdapter(myAdapter);
+        loading.setVisibility(View.INVISIBLE);
         Log.d("Main Activity", "FinalVideoList " + FinalVideoList);
 
     }
