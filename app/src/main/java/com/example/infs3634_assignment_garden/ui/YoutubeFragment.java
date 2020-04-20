@@ -57,7 +57,7 @@ public class YoutubeFragment extends Fragment implements YouTubePlayer.OnInitial
         Videourl.setText(url);
 
         //Upon clicking on the video url, a new implicit intent is created passing in the url of the video chosen.
-        //This then opens the youtube application and allows users to view the videos there. 
+        //This then opens the youtube application and allows users to view the videos there.
 
 Videourl.setOnClickListener(new View.OnClickListener() {
     @Override
