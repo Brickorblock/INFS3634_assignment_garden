@@ -92,7 +92,7 @@ public class  ShopAdapter extends RecyclerView.Adapter<ShopAdapter.MyViewHolder>
             super(itemView);
 
             this.clickListener = clickListener;
-            this.plantImage = itemView.findViewById(R.id.plantImage);
+            this.plantImage = itemView.findViewById(R.id.topicImage);
             this.plantNameText = itemView.findViewById(R.id.plantnameText);
             this.topicText = itemView.findViewById(R.id.topicText);
             this.valueText = itemView.findViewById(R.id.valueText);

@@ -2,6 +2,7 @@ package com.example.infs3634_assignment_garden.entities;
 
 import android.util.Log;
 
+import com.example.infs3634_assignment_garden.R;
 import com.example.infs3634_assignment_garden.entities.subclasses.Evergreen;
 
 import java.util.ArrayList;
@@ -9,7 +10,6 @@ import java.util.Random;
 
 public class Garden {
     //this class encapsulates global information about user's progress, plants, quizzes, etc
-
     public static final int MAX_PLANTS = 16;
 
     private static int ambienceLvl;
@@ -18,9 +18,9 @@ public class Garden {
     private static int coins;
     private static ArrayList<Plant> plants;
     private static ArrayList<Quiz> quizzes;
-    public static ArrayList<Topics> Topics;
+    public static ArrayList<Topics> topics;
 
-    private static int[] milestones = {500, 1000, 2000};
+    private static int[] milestones = {300, 800, 1500};
 
     // "ambience" = user's total exp
     // - ambienceLvl = what level the user is
@@ -34,7 +34,7 @@ public class Garden {
         this.coins = 0;
         this.plants = new ArrayList<>();
         this.quizzes = new ArrayList<>();
-        this.Topics = new ArrayList<>();
+        this.topics = new ArrayList<>();
 
         calcAmbience();
     }
@@ -288,8 +288,6 @@ public class Garden {
         plants.add(new Evergreen(true));
         plants.add(new Evergreen(true));
 
-
-
         plants.get(0).setGrowthTotal(250);
         plants.get(1).setGrowthTotal(80);
         plants.get(2).setGrowthTotal(400);
@@ -306,11 +304,11 @@ public class Garden {
         return quizzes;
     }
 
-    public static ArrayList<Topics> getTempTopics(){
-        Topics.add(new Topics("Solar Systems Astronomy"));
-        Topics.add(new Topics("Cosmology Astronomy"));
-        Topics.add(new Topics("Stars Astronomy"));
-Log.d("Garden", "Topics: " + Topics);
-        return Topics;
+    public static ArrayList<Topics> getTopics() {
+        topics.add(new Topics("Solar Systems", R.drawable.solarsystem));
+        topics.add(new Topics("Cosmology", R.drawable.cosmology));
+        topics.add(new Topics("Stars", R.drawable.stars));
+        Log.d("Garden", "Topics: " + topics);
+        return topics;
     }
 }

@@ -34,7 +34,7 @@ public class PlantAdapter extends RecyclerView.Adapter<PlantAdapter.MyViewHolder
             super(itemView);
             this.launchListener = launchListener;
 
-            this.plantImage = itemView.findViewById(R.id.plantImage);
+            this.plantImage = itemView.findViewById(R.id.topicImage);
             this.alertImage = itemView.findViewById(R.id.alertImage);
 
             Log.d("TAG", "PlantAdapter: 2");

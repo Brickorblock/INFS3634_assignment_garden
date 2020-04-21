@@ -12,8 +12,6 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
-        <activity android:name=".QuestionsQuiz" />
-        <activity android:name=".ShopActivity" />
         <activity
             android:name=".SplashActivity" android:theme="@style/SplashTheme"
             android:label="@string/app_name">

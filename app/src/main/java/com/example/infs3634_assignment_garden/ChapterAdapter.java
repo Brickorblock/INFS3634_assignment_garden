@@ -4,6 +4,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -28,12 +29,14 @@ public class ChapterAdapter extends RecyclerView.Adapter<ChapterAdapter.MyViewHo
     public class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         public TextView chapterText;
+        public ImageView chapterImage;
         LaunchListener launchListener;
 
 
         public MyViewHolder(@NonNull View itemView, LaunchListener mLaunchListener) {
             super(itemView);
             this.chapterText = itemView.findViewById(R.id.chapterText);
+            this.chapterImage = itemView.findViewById(R.id.topicImage);
             this.launchListener = launchListener;
 
             itemView.setOnClickListener(this);
@@ -44,10 +47,10 @@ public class ChapterAdapter extends RecyclerView.Adapter<ChapterAdapter.MyViewHo
             mLaunchListener.launch(getAdapterPosition());
         }
     }
+
     public interface LaunchListener {
         void launch(int position);
     }
-
 
 
     @NonNull
@@ -67,7 +70,15 @@ public class ChapterAdapter extends RecyclerView.Adapter<ChapterAdapter.MyViewHo
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
 
         Chapters chapter = dataset.get(position);
-        holder.chapterText.setText(chapter.getChapter());
+        String chaptername = chapter.getChapter();
+        int image = chapter.getChapterImage();
+
+        // parse the topic name before displaying
+        String arr[] = chaptername.split(" Astro", 2);
+        String finalchaptername = arr[0];
+
+        holder.chapterText.setText(finalchaptername);
+        holder.chapterImage.setImageResource(image);
 
     }
 

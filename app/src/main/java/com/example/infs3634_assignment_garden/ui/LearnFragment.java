@@ -6,14 +6,10 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -21,7 +17,6 @@ import com.example.infs3634_assignment_garden.MainActivity;
 import com.example.infs3634_assignment_garden.R;
 import com.example.infs3634_assignment_garden.TopicsAdapter;
 import com.example.infs3634_assignment_garden.entities.Garden;
-import com.example.infs3634_assignment_garden.entities.Plant;
 import com.example.infs3634_assignment_garden.entities.Quiz;
 import com.example.infs3634_assignment_garden.entities.Topics;
 
@@ -33,7 +28,7 @@ public class LearnFragment extends Fragment implements TopicsAdapter.LaunchListe
 
    public ArrayList<Quiz> quizzes = Garden.getQuizzes();
 
-   public static final ArrayList<Topics> TopicList = Garden.getTempTopics();
+   public static final ArrayList<Topics> TopicList = Garden.getTopics();
     private RecyclerView myRecyclerView;
     private RecyclerView.Adapter myAdapter;
     private RecyclerView.LayoutManager myLayoutManager;
@@ -66,7 +61,7 @@ public class LearnFragment extends Fragment implements TopicsAdapter.LaunchListe
         Bundle intentBundle = new Bundle();
         intentBundle.putString(KEY_TOPIC, topic);
       //  MainActivity.navController.navigate(R.id.action_navigation_learn_to_chapterFragment, intentBundle);
-        MainActivity.navController.navigate(R.id.action_navigation_learn_to_videosFragment, intentBundle);
+        MainActivity.navController.navigate(R.id.action_navigation_learn_to_chapterFragment, intentBundle);
 
     }
 

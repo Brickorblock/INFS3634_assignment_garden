@@ -19,28 +19,35 @@ import com.google.android.youtube.player.YouTubePlayer;
 import com.google.android.youtube.player.YouTubePlayerSupportFragmentX;
 
 public class YoutubeFragment extends Fragment implements YouTubePlayer.OnInitializedListener {
-TextView VideoTitle;
-TextView VideoDescription;
-TextView Videourl;
+    TextView VideoTitle;
+    TextView VideoDescription;
+    TextView Videourl;
+    TextView ChannelName;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_youtube, container, false);
 
         Bundle bundle = getArguments();
-     //   final String youtubelink = bundle.getString(ChapterFragment.KEY_Youtubelink);
+        //   final String youtubelink = bundle.getString(ChapterFragment.KEY_Youtubelink);
 
         final String Title = bundle.getString("title");
         final String Description = bundle.getString("description");
         final String url = "https://www.youtube.com/watch?v=" + bundle.getString("videoId");
+        final String ChannelTitle = bundle.getString("channeltitle");
 
         VideoTitle = root.findViewById(R.id.videotitle);
         VideoDescription = root.findViewById(R.id.videodescription);
         Videourl = root.findViewById(R.id.videourl);
+        ChannelName = root.findViewById(R.id.channelName);
+
+        Log.d("Youtube Fragment: ", "Channel Name: " + ChannelName);
 
         VideoTitle.setText(Title);
         VideoDescription.setText(Description);
         Videourl.setText(url);
+        ChannelName.setText(ChannelTitle);
 
         //////////////////////////////////////////////////////////////////////////
 
@@ -49,10 +56,7 @@ TextView Videourl;
 
         FragmentManager fragmentManager = getChildFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-//Google hasn't refactored youtube api library to androidx yet. This means that parsing a youtubeplayersupportfragment as a fragment can invoke an 'error'
-//Even if the app is run, the code works without an error regardless of the error shown here.
 
-//todo Need to find a way to get rid of error.
         fragmentTransaction.replace(R.id.frame_fragment, youtubePlayerFragment);
 
         fragmentTransaction.commit();
@@ -65,12 +69,12 @@ TextView Videourl;
     @Override
     public void onInitializationSuccess(YouTubePlayer.Provider provider, YouTubePlayer youTubePlayer, boolean b) {
 
-        if(!b){
+        if (!b) {
 
             Bundle bundle = getArguments();
             final String youtubelink = bundle.getString("videoId");
             youTubePlayer.cueVideo(youtubelink);
-            Log.d("YouTube Fragment","Link: " + youtubelink);
+            Log.d("YouTube Fragment", "Link: " + youtubelink);
 
 
             Log.d("Youtube Fragment: ", "Video Cued Successfully!");
@@ -80,6 +84,6 @@ TextView Videourl;
 
     @Override
     public void onInitializationFailure(YouTubePlayer.Provider provider, YouTubeInitializationResult youTubeInitializationResult) {
-        Toast.makeText(getActivity(),"fail",Toast.LENGTH_SHORT).show();
+        Toast.makeText(getActivity(), "fail", Toast.LENGTH_SHORT).show();
     }
 }
