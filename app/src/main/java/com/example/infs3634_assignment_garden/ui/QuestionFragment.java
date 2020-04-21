@@ -5,6 +5,9 @@ import android.os.Bundle;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.lifecycle.ViewModelProviders;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,6 +18,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.infs3634_assignment_garden.MainActivity;
+import com.example.infs3634_assignment_garden.QuestionsViewModel;
 import com.example.infs3634_assignment_garden.R;
 import com.example.infs3634_assignment_garden.entities.Garden;
 import com.example.infs3634_assignment_garden.entities.Question;
@@ -23,6 +27,7 @@ import com.example.infs3634_assignment_garden.entities.Quiz;
 import java.lang.reflect.Field;
 import java.security.SignedObject;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 public class QuestionFragment extends Fragment {
@@ -42,6 +47,7 @@ public class QuestionFragment extends Fragment {
     private int mQuestionNumber = 0;
     private int plantIndex;
     private int quizIndex;
+    private QuestionsViewModel viewModel;
 
     public ArrayList<Question> questionBank = new ArrayList<>();
     public ArrayList<Question> randomisedQuestions = new ArrayList<>();
@@ -53,6 +59,15 @@ public class QuestionFragment extends Fragment {
 
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+
+        viewModel  = new ViewModelProvider(this).get(QuestionsViewModel.class);
+        viewModel.getAllQuestions().observe(getViewLifecycleOwner(), new Observer<List<Question>>(){
+
+            @Override
+            public void onChanged(@Nullable List<Question> questions) {
+
+            }
+        });
 
     }
 
