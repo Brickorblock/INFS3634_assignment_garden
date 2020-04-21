@@ -3,7 +3,10 @@ package com.example.infs3634_assignment_garden.entities;
 import android.util.Log;
 
 import com.example.infs3634_assignment_garden.R;
+import com.example.infs3634_assignment_garden.entities.subclasses.AppleTree;
 import com.example.infs3634_assignment_garden.entities.subclasses.Evergreen;
+import com.example.infs3634_assignment_garden.entities.subclasses.LemonTree;
+import com.example.infs3634_assignment_garden.entities.subclasses.OrangeTree;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -283,14 +286,9 @@ public class Garden {
     //TODO: this is a temp method for dev debugging
     public void getTempPlants() {
         plants.add(new Evergreen(true));
-        plants.add(new Evergreen(true));
-        plants.add(new Evergreen(true));
-        plants.add(new Evergreen(true));
-        plants.add(new Evergreen(true));
+        plants.add(new LemonTree(true));
+        plants.add(new OrangeTree(true));
 
-        plants.get(0).setGrowthTotal(250);
-        plants.get(1).setGrowthTotal(80);
-        plants.get(2).setGrowthTotal(400);
         calcAmbience();
         Helper.calcAllGrowth(plants);
     }
