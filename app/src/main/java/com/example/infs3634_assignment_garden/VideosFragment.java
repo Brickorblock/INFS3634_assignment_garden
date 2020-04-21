@@ -31,7 +31,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class VideosFragment extends Fragment implements VideoAdapter.LaunchListener {
 
-//Establishing global varaibles so that they can be dynamically set and called upon later.
+//Establishing global variables so that they can be dynamically set and called upon later.
 
 private static List<VideoDetails> FinalVideoList;
     private RecyclerView myRecyclerView;
