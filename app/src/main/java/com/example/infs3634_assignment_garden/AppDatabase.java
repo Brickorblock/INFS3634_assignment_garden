@@ -89,8 +89,6 @@ public abstract class AppDatabase extends RoomDatabase {
             questionsDao.insert(new Question("Cosmology",  "What is NOT true about the big bang?", "It started 13.7 billion years ago", "At one point space was moving faster than light itself", "The 4 fundamental forces were combined together at the start", "The speed of light was reduced at the beginning", "The speed of light was reduced at the beginning"));
             questionsDao.insert(new Question("Cosmology",  "What is a singularity?", "A zone of infinite pressure, and density that is infinitely small and hot", "No one knows", "A zone of specific pressure and density", "A zone of low pressure and density that is small and hot", "A zone of infinite pressure, and density that is infinitely small and hot"));
 
-
-
             return null;
         }
     }
