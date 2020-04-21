@@ -10,7 +10,6 @@ import java.util.Random;
 
 public class Garden {
     //this class encapsulates global information about user's progress, plants, quizzes, etc
-
     public static final int MAX_PLANTS = 16;
 
     private static int ambienceLvl;
@@ -21,7 +20,7 @@ public class Garden {
     private static ArrayList<Quiz> quizzes;
     public static ArrayList<Topics> topics;
 
-    private static int[] milestones = {500, 1000, 2000};
+    private static int[] milestones = {300, 800, 1500};
 
     // "ambience" = user's total exp
     // - ambienceLvl = what level the user is
@@ -289,7 +288,6 @@ public class Garden {
         plants.add(new Evergreen(true));
         plants.add(new Evergreen(true));
 
-
         plants.get(0).setGrowthTotal(250);
         plants.get(1).setGrowthTotal(80);
         plants.get(2).setGrowthTotal(400);
@@ -306,7 +304,7 @@ public class Garden {
         return quizzes;
     }
 
-    public static ArrayList<Topics> getTempTopics() {
+    public static ArrayList<Topics> getTopics() {
         topics.add(new Topics("Solar Systems", R.drawable.solarsystem));
         topics.add(new Topics("Cosmology", R.drawable.cosmology));
         topics.add(new Topics("Stars", R.drawable.stars));

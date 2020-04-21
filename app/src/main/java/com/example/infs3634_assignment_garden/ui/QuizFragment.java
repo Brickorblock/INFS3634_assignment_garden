@@ -83,7 +83,7 @@ public class QuizFragment extends Fragment implements QuizAdapter.LaunchListener
         intentBundle.putInt(KEY_QUIZ, position);
 
         //get the plant belonging to the specific quiz that was just clicked
-        Plant plant = quizzes.get(position).getPlant();
+        Plant plant = Garden.plantSearch(quizzes.get(position).getPlantIndex());
 
         //get that plant's index in the Garden Plant arrayList
         int plantIndex = Garden.plantIndexSearch(plant);

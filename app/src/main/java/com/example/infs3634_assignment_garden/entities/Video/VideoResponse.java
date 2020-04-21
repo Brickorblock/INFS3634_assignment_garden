@@ -6,7 +6,7 @@ import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
 
-public class VideoLoreResponse {
+public class VideoResponse {
 
     @SerializedName("kind")
     @Expose
@@ -78,7 +78,7 @@ public class VideoLoreResponse {
 
     @Override
     public String toString() {
-        return "VideoLoreResponse{" +
+        return "VideoResponse{" +
                 "kind='" + kind + '\'' +
                 ", etag='" + etag + '\'' +
                 ", nextPageToken='" + nextPageToken + '\'' +

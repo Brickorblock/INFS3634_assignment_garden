@@ -14,7 +14,7 @@ import android.view.ViewGroup;
 
 import com.example.infs3634_assignment_garden.entities.Video.Item;
 import com.example.infs3634_assignment_garden.entities.Video.VideoDetails;
-import com.example.infs3634_assignment_garden.entities.Video.VideoLoreResponse;
+import com.example.infs3634_assignment_garden.entities.Video.VideoResponse;
 import com.example.infs3634_assignment_garden.entities.Video.VideoService;
 import com.example.infs3634_assignment_garden.ui.ChapterFragment;
 
@@ -22,7 +22,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
-import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
@@ -52,12 +51,12 @@ private static List<VideoDetails> FinalVideoList;
 //                .addConverterFactory(GsonConverterFactory.create());
 //        Retrofit retrofit = builder.build();
 //        VideoService service = retrofit.create(VideoService.class);
-//        Call<VideoLoreResponse> call = service.getVideo("snippet", chapter, "video", "closedCaption", "10", "AIzaSyDxidLcL8C1mzLznTTqmniCrGm6yT3Ymu4");
-//        call.enqueue(new Callback<VideoLoreResponse>() {
+//        Call<VideoResponse> call = service.getVideo("snippet", chapter, "video", "closedCaption", "10", "AIzaSyDxidLcL8C1mzLznTTqmniCrGm6yT3Ymu4");
+//        call.enqueue(new Callback<VideoResponse>() {
 //            @Override
-//            public void onResponse(Call<VideoLoreResponse> call, Response<VideoLoreResponse> response) {
+//            public void onResponse(Call<VideoResponse> call, Response<VideoResponse> response) {
 //
-//                VideoLoreResponse videos = response.body();
+//                VideoResponse videos = response.body();
 //                Log.d("Main Activity", "Video Response: " + videos);
 //                List<Item> videoitems = videos.getItems();
 //                Log.d("Main Activity", "Video Items: " + videoitems);
@@ -78,7 +77,7 @@ private static List<VideoDetails> FinalVideoList;
 //            }
 //
 //            @Override
-//            public void onFailure(Call<VideoLoreResponse> call, Throwable t) {
+//            public void onFailure(Call<VideoResponse> call, Throwable t) {
 //                Log.d("Main Activity", "Failed to get Videos");
 //            }
 //        });
@@ -103,11 +102,11 @@ private static List<VideoDetails> FinalVideoList;
                     .addConverterFactory(GsonConverterFactory.create());
             Retrofit retrofit = builder.build();
             VideoService service = retrofit.create(VideoService.class);
-            Call<VideoLoreResponse> call = service.getVideo("snippet", chapter, "video", "closedCaption", "10", "AIzaSyDxidLcL8C1mzLznTTqmniCrGm6yT3Ymu4");
+            Call<VideoResponse> call = service.getVideo("snippet", chapter, "video", "closedCaption", "10", "AIzaSyDxidLcL8C1mzLznTTqmniCrGm6yT3Ymu4");
             List<VideoDetails> VideoList = new ArrayList<VideoDetails>();
         try {
-            Response<VideoLoreResponse> response = call.execute();
-            VideoLoreResponse videos = response.body();
+            Response<VideoResponse> response = call.execute();
+            VideoResponse videos = response.body();
             Log.d("Main Activity", "Video Response: " + videos);
             List<Item> videoitems = videos.getItems();
             Log.d("Main Activity", "Video Items: " + videoitems);
