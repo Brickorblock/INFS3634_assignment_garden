@@ -3,23 +3,23 @@ package com.example.infs3634_assignment_garden.entities;
 import java.util.ArrayList;
 
 public class Quiz {
-    public Plant plant;
+    public int plantIndex;
     private int questions;
     private String topic;
     public static final int QUESTION_SIZE = 10;
 
     public Quiz(Plant plant, int questions) {
-        this.plant = plant;
+        this.plantIndex = Garden.plantIndexSearch(plant);
         this.questions = questions;
         this.topic = plant.getTopic();
     }
 
-    public Plant getPlant() {
-        return plant;
+    public int getPlantIndex() {
+        return plantIndex;
     }
 
-    public void setPlant(Plant plant) {
-        this.plant = plant;
+    public void setPlantIndex(int plantIndex) {
+        this.plantIndex = plantIndex;
     }
 
     public int getQuestions() {
@@ -47,20 +47,11 @@ public class Quiz {
 
     }
 
-    public static String getplantname(Quiz quiz){
-
-        Plant Plant = quiz.getPlant();
-
-        String plantname = Plant.getName();
-
-        return plantname;
-    }
-
     @Override
     public String toString() {
         return "Quiz{" +
-                "plant=" + plant.getName() +
-                ", questions='" + questions + '\'' +
+                "plantIndex=" + plantIndex +
+                ", questions=" + questions +
                 ", topic='" + topic + '\'' +
                 '}';
     }

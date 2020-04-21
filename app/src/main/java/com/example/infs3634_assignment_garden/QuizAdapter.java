@@ -76,7 +76,7 @@ public class QuizAdapter extends RecyclerView.Adapter<QuizAdapter.MyViewHolder> 
 
         if (Garden.getQuizzes() != null) {
             Quiz quiz = dataset.get(position);
-            Plant plant = quiz.getPlant();
+            Plant plant = Garden.plantSearch(quiz.getPlantIndex());
 
             Log.d("Quiz Adapter", "plant toString " + plant.toString());
 
