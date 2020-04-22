@@ -17,8 +17,8 @@ public interface QuestionsDao {
     @Insert
     void insert(Question question);
 
-    @Query("SELECT * FROM Question WHERE topic = topic")
-    LiveData<List<Question>> getAllQuestion();
+    @Query("SELECT * FROM Question WHERE topic = :topic")
+    LiveData<List<Question>> getAllQuestion(String topic);
 
 
 

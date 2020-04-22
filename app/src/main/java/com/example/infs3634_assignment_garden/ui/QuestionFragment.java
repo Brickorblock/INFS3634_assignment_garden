@@ -97,6 +97,8 @@ public class QuestionFragment extends Fragment {
                 questionBank.add(allQuestions.get(i));
             }
         }
+        //call async task that populates question bank with the select query from question dao passing in the topic which is coming from a bundle from quiz
+        //database in main activity
 
         //generate a quiz of 10 questions, randomly pulling from the topic quizbank
         // each number generated = a question in the bank
