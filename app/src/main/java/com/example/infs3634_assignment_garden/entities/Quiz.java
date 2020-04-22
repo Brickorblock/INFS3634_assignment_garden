@@ -1,7 +1,8 @@
 package com.example.infs3634_assignment_garden.entities;
 
 import java.util.ArrayList;
-
+//This class stores quiz objects which are used to allow users to access quizzes for specific plants.
+//Done through using a plant Index- essentially a foreign that links plants to quizzes.
 public class Quiz {
     public int plantIndex;
     private int questions;

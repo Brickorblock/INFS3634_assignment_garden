@@ -7,7 +7,7 @@ import com.google.gson.annotations.SerializedName;
 import java.util.List;
 
 public class VideoResponse {
-
+//Stores all the appropriate information concerning videos from YouTube.
     @SerializedName("kind")
     @Expose
     private String kind;

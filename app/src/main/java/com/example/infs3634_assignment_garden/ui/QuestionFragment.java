@@ -34,6 +34,7 @@ public class QuestionFragment extends Fragment {
     public static final String KEY_SCORE = "QuestionFragment_Score";
     public static final String KEY_PLANT = "QuestionFragment_Plant";
 
+//Setting up the question, buttons views.
     private TextView mScoreView;
     private TextView mQuestionView;
     private TextView mNumberView;
@@ -41,7 +42,7 @@ public class QuestionFragment extends Fragment {
     private Button mButtonChoice2;
     private Button mButtonChoice3;
     private Button mButtonChoice4;
-
+//Having global variables for the answer, score, question number etc.
     private String mAnswer;
     private int mScore = 0;
     private int mQuestionNumber = 0;
@@ -49,6 +50,7 @@ public class QuestionFragment extends Fragment {
     private int quizIndex;
     private QuestionsViewModel viewModel;
 
+    //setting up array lists as global variables that will be used layer.
     public ArrayList<Question> questionBank = new ArrayList<>();
     public ArrayList<Question> randomisedQuestions = new ArrayList<>();
     public ArrayList<Question> allQuestions = new ArrayList<>();
@@ -85,12 +87,12 @@ public class QuestionFragment extends Fragment {
         Bundle bundle = getArguments();
         String topic = bundle.getString(QuizFragment.KEY_TOPIC);
         Log.d("Question Fragment", "topic: " + topic);
+        //Grabbing the plant and quix index from the quix fragment.
         plantIndex = bundle.getInt(QuizFragment.KEY_PLANT);
         quizIndex = bundle.getInt(QuizFragment.KEY_QUIZ);
 
         // This loop goes through the entire list and filters for every question that has the topic that was clicked on from the Quiz Fragment
         //As a result, as all topics should have 20 questions (except stars for now!), the size of the question bank will always be 20.
-       //SELECT * FROM QUESTIONS WHERE topic = :topic;
         for (int i = 0; i < allQuestions.size(); i++) {
 
             if (allQuestions.get(i).getTopic().equals(topic)) {
@@ -144,9 +146,9 @@ public class QuestionFragment extends Fragment {
         }
 
         Log.d("TAG", "randomised questions: " + randomisedQuestions.size());
-
+//Updating the first question shown.
         updateQuestion();
-
+//Whenever a choice button is clicked a questions are updated and so are the button choices.
         mButtonChoice1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -183,16 +185,16 @@ public class QuestionFragment extends Fragment {
         return root;
     }
 
-
+//This method updates the question and button choices.
     private void updateQuestion() {
 
         Log.d("TAG", "randomised questions:" + randomisedQuestions);
-
+//If the question number reaches 10, the the quiz is finished.
         if (mQuestionNumber == Quiz.QUESTION_SIZE) {
             endQuiz();
 
         } else {
-
+//This grabs the next question in the randomised Questions bank.
             Question finalquestion = randomisedQuestions.get(mQuestionNumber);
 
             mQuestionView.setText(finalquestion.getQuestion());
@@ -208,12 +210,12 @@ public class QuestionFragment extends Fragment {
         }
     }
 
-
+//This method just updates the textview containing the score.
     private void updateScore(int point) {
         mScoreView.setText("" + mScore);
     }
 
-
+//This method increases the question number whenever a button is clicked, along with calling the update question method to update the question.
     private void setQuestionUpdates(Button mButtonChoice) {
         Log.d("TAG", "setQuestionUpdates: called");
         //increment q number

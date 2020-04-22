@@ -4,7 +4,7 @@ import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
 import java.util.ArrayList;
-
+//A class that stores question objects- the questions for each quiz which are topic specific.
 @Entity
 public class Question {
     private String topic;
