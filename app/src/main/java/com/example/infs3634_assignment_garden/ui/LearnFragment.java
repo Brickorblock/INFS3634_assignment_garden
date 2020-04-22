@@ -26,9 +26,10 @@ import java.util.ArrayList;
 public class LearnFragment extends Fragment implements TopicsAdapter.LaunchListener {
     public static final String KEY_TOPIC = "LearnFragment_Topic";
 
-   public ArrayList<Quiz> quizzes = Garden.getQuizzes();
-
+    //Create the list of static topics from Garden.
    public static final ArrayList<Topics> TopicList = Garden.getTopics();
+
+   //Set up the recyclerview.
     private RecyclerView myRecyclerView;
     private RecyclerView.Adapter myAdapter;
     private RecyclerView.LayoutManager myLayoutManager;
@@ -36,8 +37,8 @@ public class LearnFragment extends Fragment implements TopicsAdapter.LaunchListe
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_learn, container, false);
-        Log.d("learn fragment", "quizzes: " + quizzes + quizzes.size());
         Log.d("learn fragment", "topics: " + TopicList + TopicList.size());
+        //Setting up the recyclerview with the topics list.
         myRecyclerView = root.findViewById(R.id.learnRecycler);
         myRecyclerView.setHasFixedSize(true);
         myAdapter = new TopicsAdapter(TopicList, this);
@@ -53,6 +54,7 @@ public class LearnFragment extends Fragment implements TopicsAdapter.LaunchListe
 
     }
 
+    //Whenever a topic is clicked, the topic name is sent through a bundle to the chapter fragment
     @Override
     public void launch(int position) {
 
@@ -60,11 +62,11 @@ public class LearnFragment extends Fragment implements TopicsAdapter.LaunchListe
 
         Bundle intentBundle = new Bundle();
         intentBundle.putString(KEY_TOPIC, topic);
-      //  MainActivity.navController.navigate(R.id.action_navigation_learn_to_chapterFragment, intentBundle);
+       //This action changes the navigation to the chapter fragment.
         MainActivity.navController.navigate(R.id.action_navigation_learn_to_chapterFragment, intentBundle);
 
     }
-
+//This method uses the clicked position to get the chosen topic name.
     public String getTopic(int position) {
 
         Topics chosentopic = TopicList.get(position);

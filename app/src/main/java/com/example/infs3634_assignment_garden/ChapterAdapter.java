@@ -17,7 +17,7 @@ import java.util.ArrayList;
 
 public class ChapterAdapter extends RecyclerView.Adapter<ChapterAdapter.MyViewHolder> {
 
-
+//Setting the adapter and data set.
     private ArrayList<Chapters> dataset;
     private LaunchListener mLaunchListener;
 

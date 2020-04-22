@@ -37,8 +37,9 @@ public class QuizFragment extends Fragment implements QuizAdapter.LaunchListener
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_quiz, container, false);
+        //Grabbing the list of quizzes from Garden.
         quizzes = Garden.getQuizzes();
-
+//Whenever a user has no quizzes, a notice text is shown telling them that they have no active quizzes.
         if (quizzes.size() != 0) {
 
             noticeText = root.findViewById(R.id.noticeText);
@@ -67,7 +68,7 @@ public class QuizFragment extends Fragment implements QuizAdapter.LaunchListener
 
         return root;
     }
-
+//Whenever a quiz is clicked the quiz details are passed in a bundle to the question fragment.
     @Override
     public void launch(int position) {
 
@@ -91,7 +92,7 @@ public class QuizFragment extends Fragment implements QuizAdapter.LaunchListener
         MainActivity.navController.navigate(R.id.action_navigation_quiz_to_questionFragment, intentBundle);
 
     }
-
+//Grabs the topic name using the clicked position of the chosen quiz.
     public String getTopic(int position) {
 
         ArrayList<Quiz> myquizzes = Garden.getQuizzes();

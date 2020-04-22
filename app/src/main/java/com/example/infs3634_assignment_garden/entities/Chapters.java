@@ -3,7 +3,8 @@ package com.example.infs3634_assignment_garden.entities;
 import com.example.infs3634_assignment_garden.R;
 
 import java.util.ArrayList;
-
+//Stores the chapters for each topic.
+//This chapter is what leads to video searches on chapter names.
 public class Chapters {
 
     private String topic;
@@ -39,6 +40,8 @@ public class Chapters {
     public void setChapterImage(int chapterImage) {
         this.chapterImage = chapterImage;
     }
+
+    //This method manually creates the static list of chapters per topic. We limited it to 5 per topic.
 
     public static ArrayList<Chapters> getTempChapters() {
 

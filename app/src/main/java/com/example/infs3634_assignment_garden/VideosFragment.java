@@ -14,7 +14,7 @@ import android.view.ViewGroup;
 
 import com.example.infs3634_assignment_garden.entities.Video.Item;
 import com.example.infs3634_assignment_garden.entities.Video.VideoDetails;
-import com.example.infs3634_assignment_garden.entities.Video.VideoLoreResponse;
+import com.example.infs3634_assignment_garden.entities.Video.VideoResponse;
 import com.example.infs3634_assignment_garden.entities.Video.VideoService;
 import com.example.infs3634_assignment_garden.ui.ChapterFragment;
 
@@ -83,34 +83,44 @@ private static List<VideoDetails> FinalVideoList;
 //            }
 //        });
 
+//Creating a network assignment object so that we can run the API call
         new NetworkAssignment().execute();
         return root;
     }
-
+//Async Task for API call.
     public class NetworkAssignment extends AsyncTask<Void, Integer, List<VideoDetails>> {
 
 
         @Override
         protected List<VideoDetails> doInBackground(Void... voids) {
-
+//Grabbing the chapter name from the chapter fragment
             Bundle bundle = getArguments();
             String chapter = null;
             if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
                 chapter = bundle.getString(ChapterFragment.KEY_ChapterName);
             }
+
             Retrofit.Builder builder = new Retrofit.Builder()
                     .baseUrl("https://www.googleapis.com/youtube/v3/")
                     .addConverterFactory(GsonConverterFactory.create());
             Retrofit retrofit = builder.build();
             VideoService service = retrofit.create(VideoService.class);
-            Call<VideoLoreResponse> call = service.getVideo("snippet", chapter, "video", "closedCaption", "10", "AIzaSyDxidLcL8C1mzLznTTqmniCrGm6yT3Ymu4");
+            //When calling the API we have to pass in video details.
+            //In particular we need to pass in the search query of the chapter name dynamically which we do through using a bundle.
+            //We also set the max results to 10 as this is the max amount of videos we want to show on this page.
+            Call<VideoResponse> call = service.getVideo("snippet", chapter, "video", "closedCaption", "10", "AIzaSyDxidLcL8C1mzLznTTqmniCrGm6yT3Ymu4");
             List<VideoDetails> VideoList = new ArrayList<VideoDetails>();
         try {
-            Response<VideoLoreResponse> response = call.execute();
-            VideoLoreResponse videos = response.body();
+            Response<VideoResponse> response = call.execute();
+            //After API call we get the class body and create a video response class from it.
+            VideoResponse videos = response.body();
             Log.d("Main Activity", "Video Response: " + videos);
+            //As we only care about the items of this response, we create a Video Item list of all items in the search (10).
             List<Item> videoitems = videos.getItems();
             Log.d("Main Activity", "Video Items: " + videoitems);
+
+            //This loop goes through every item and gets the appropriate video details from it.
+            //It then creates a video detail object for these attributes and adds this to the video details class we created earlier.
             for(int i = 0; i < videoitems.size(); i++) {
 
                 String videoid = videoitems.get(i).getId().getVideoId();
@@ -130,7 +140,7 @@ private static List<VideoDetails> FinalVideoList;
 
             return VideoList;
         }
-
+//this method sets the adapter with the final video list so that the UI changes dynamically to our API call data.
         @Override
         protected void onPostExecute (List<VideoDetails> VideoList) {
             super.onPostExecute(VideoList);
@@ -146,7 +156,7 @@ private static List<VideoDetails> FinalVideoList;
 
     }
 
-
+//This method sets the given list into the adapter and sets the adapter to the recycler view.
     public void setVidoes(List<VideoDetails> newVideos){
 
         FinalVideoList = newVideos;
@@ -156,12 +166,13 @@ private static List<VideoDetails> FinalVideoList;
 
     }
 
-
+//Whenever a video is clicked the appropriate details are sent to the YouTube Fragment so that they can display the video itself along with its details.
     @Override
     public void launch(int position) {
 
         VideoDetails targetVideo = videoSearch(position);
         String title = targetVideo.getTitle();
+        //This video id is what is used to get the specific video from YouTube to be displayed in the YouTube player.
         String videoId = targetVideo.getVideoId();
         String description = targetVideo.getDescription();
         String channeltitle = targetVideo.getChanneltitle();
@@ -175,7 +186,7 @@ private static List<VideoDetails> FinalVideoList;
 
     }
 
-
+//This method gets the chosen video as an object based on the clicked video position.
     public static VideoDetails videoSearch(int position) {
 
         VideoDetails targetVideo = FinalVideoList.get(position);
