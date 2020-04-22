@@ -39,6 +39,9 @@ public class MainActivity extends AppCompatActivity {
 
 
         //create Garden class (stores global info about progress, etc.)
+
+
+
         this.garden = new Garden();
         //TODO: remove this temp dev debugging method
         garden.getTempPlants();

@@ -90,6 +90,7 @@ public class QuestionFragment extends Fragment {
 
         // This loop goes through the entire list and filters for every question that has the topic that was clicked on from the Quiz Fragment
         //As a result, as all topics should have 20 questions (except stars for now!), the size of the question bank will always be 20.
+       //SELECT * FROM QUESTIONS WHERE topic = :topic;
         for (int i = 0; i < allQuestions.size(); i++) {
 
             if (allQuestions.get(i).getTopic().equals(topic)) {
@@ -99,6 +100,8 @@ public class QuestionFragment extends Fragment {
         }
         //call async task that populates question bank with the select query from question dao passing in the topic which is coming from a bundle from quiz
         //database in main activity
+
+
 
         //generate a quiz of 10 questions, randomly pulling from the topic quizbank
         // each number generated = a question in the bank
@@ -265,4 +268,6 @@ public class QuestionFragment extends Fragment {
 ////            throw new RuntimeException(e);
 ////        }
 ////    }
+
+
 }

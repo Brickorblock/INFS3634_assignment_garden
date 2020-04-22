@@ -1,11 +1,16 @@
 package com.example.infs3634_assignment_garden.ui;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.text.Html;
+import android.text.Spanned;
+import android.text.method.LinkMovementMethod;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -23,6 +28,7 @@ public class YoutubeFragment extends Fragment implements YouTubePlayer.OnInitial
     TextView VideoDescription;
     TextView Videourl;
     TextView ChannelName;
+    Spanned Text;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -46,8 +52,20 @@ public class YoutubeFragment extends Fragment implements YouTubePlayer.OnInitial
 
         VideoTitle.setText(Title);
         VideoDescription.setText(Description);
-        Videourl.setText(url);
         ChannelName.setText(ChannelTitle);
+
+        Videourl.setText(url);
+
+        //Upon clicking on the video url, a new implicit intent is created passing in the url of the video chosen.
+        //This then opens the youtube application and allows users to view the videos there.
+
+Videourl.setOnClickListener(new View.OnClickListener() {
+    @Override
+    public void onClick(View v) {
+        Intent webIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+        startActivity(webIntent);
+    }
+});
 
         //////////////////////////////////////////////////////////////////////////
 
