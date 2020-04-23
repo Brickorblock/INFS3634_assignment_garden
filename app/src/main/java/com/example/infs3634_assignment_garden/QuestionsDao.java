@@ -18,7 +18,7 @@ public interface QuestionsDao {
     void insert(Question...question);
 
     @Query("SELECT * FROM Question WHERE topic = :topic")
-    LiveData<List<Question>> getAllQuestion(String topic);
+   List<Question> PopulateQuestionBank(String topic);
 
     @Query("SELECT * FROM Question")
     List<Question> getData();
