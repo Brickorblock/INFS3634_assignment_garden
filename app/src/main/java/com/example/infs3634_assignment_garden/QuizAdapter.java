@@ -84,7 +84,6 @@ public class QuizAdapter extends RecyclerView.Adapter<QuizAdapter.MyViewHolder> 
             holder.questionsText.setText(Integer.toString(quiz.getQuestions()));
             holder.plantNameText.setText(plant.getName());
             holder.plantImage.setImageResource(plant.getPlantImage());
-            //@ Sudesh - set the levels text like this:
             holder.lvlText.setText("(Lvl " + plant.getGrowthLvl() + ")");
         }
 

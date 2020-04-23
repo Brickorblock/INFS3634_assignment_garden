@@ -2,9 +2,12 @@ package com.example.infs3634_assignment_garden.entities;
 
 import android.util.Log;
 
+import androidx.room.Entity;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 
+@Entity
 public class Plant extends ArrayList<Plant> {
 
     private int plantIndex;

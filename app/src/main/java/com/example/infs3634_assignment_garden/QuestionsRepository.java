@@ -12,12 +12,13 @@ import java.util.List;
 public class QuestionsRepository {
     private QuestionsDao questionsDao;
     private LiveData<List<Question>> allQuestion;
+    String topic;
 
     public QuestionsRepository(Application application){
         AppDatabase database = AppDatabase.getInstance(application);
         questionsDao = database.questionsDao();
 
-        allQuestion = questionsDao.getAllQuestion();
+        allQuestion = questionsDao.getAllQuestion(topic);
 
     }
     public void insert(Question question){

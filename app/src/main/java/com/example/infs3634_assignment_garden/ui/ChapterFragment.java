@@ -25,12 +25,16 @@ import java.util.ArrayList;
  */
 public class ChapterFragment extends Fragment implements ChapterAdapter.LaunchListener {
     public static final String KEY_ChapterName = "ChapterFragment_ChapterName";
+    //setting up recyclerview.
     private RecyclerView myRecyclerView;
     private RecyclerView.Adapter myAdapter;
     private RecyclerView.LayoutManager myLayoutManager;
 
+
+    //Creating the static list of chapters from the chapter class.
     public ArrayList<Chapters> ChapterList = Chapters.getTempChapters();
 
+    //This is a filtered list based on the topic name
     public ArrayList<Chapters> FilteredList = new ArrayList<>();
 
 
@@ -52,7 +56,7 @@ public class ChapterFragment extends Fragment implements ChapterAdapter.LaunchLi
                              Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_chapter, container, false);
 
-
+//Grabbing the topic name from the topic fragment
         Bundle bundle = getArguments();
         String topic = null;
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
@@ -63,7 +67,7 @@ public class ChapterFragment extends Fragment implements ChapterAdapter.LaunchLi
         myRecyclerView = root.findViewById(R.id.chapterRecycler);
         myRecyclerView.setHasFixedSize(true);
 
-
+//This loop goes through the chapter list that we created and only gets the chapters which have the chosen topic name.
         for (int i = 0; i < ChapterList.size(); i++) {
 
             String topicname = ChapterList.get(i).getTopic();
@@ -79,6 +83,8 @@ public class ChapterFragment extends Fragment implements ChapterAdapter.LaunchLi
 
         Log.d("Chapter Fragment","Filtered List " + FilteredList);
 
+        //adapter is called.
+
         myAdapter = new ChapterAdapter(FilteredList, this);
         myRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         myRecyclerView.setAdapter(myAdapter);
@@ -88,6 +94,8 @@ public class ChapterFragment extends Fragment implements ChapterAdapter.LaunchLi
         return root;
     }
 
+
+    //whenever a chapter is clicked a bundle is sent to the video fragment containing the chapter name.
     @Override
     public void launch(int position) {
 
@@ -95,10 +103,11 @@ public class ChapterFragment extends Fragment implements ChapterAdapter.LaunchLi
 
         Bundle intentBundle = new Bundle();
         intentBundle.putString(KEY_ChapterName , chaptername);
+        //The appropriate navigation action is used to switch to the video fragment
         MainActivity.navController.navigate(R.id.action_chapterFragment_to_videosFragment, intentBundle);
 
     }
-
+//this method gets the chapter name through using the position clicked.
     public String getchapter(int position) {
 
        Chapters chosenchapter = FilteredList.get(position);

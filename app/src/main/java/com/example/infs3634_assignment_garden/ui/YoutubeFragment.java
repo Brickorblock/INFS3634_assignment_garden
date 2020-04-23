@@ -37,9 +37,10 @@ public class YoutubeFragment extends Fragment implements YouTubePlayer.OnInitial
 
         Bundle bundle = getArguments();
         //   final String youtubelink = bundle.getString(ChapterFragment.KEY_Youtubelink);
-
+//Grabbing the video details from the video fragment.
         final String Title = bundle.getString("title");
         final String Description = bundle.getString("description");
+        //Concatenating strings to make the youtube url
         final String url = "https://www.youtube.com/watch?v=" + bundle.getString("videoId");
         final String ChannelTitle = bundle.getString("channeltitle");
 
@@ -58,7 +59,6 @@ public class YoutubeFragment extends Fragment implements YouTubePlayer.OnInitial
 
         //Upon clicking on the video url, a new implicit intent is created passing in the url of the video chosen.
         //This then opens the youtube application and allows users to view the videos there.
-
 Videourl.setOnClickListener(new View.OnClickListener() {
     @Override
     public void onClick(View v) {
@@ -68,6 +68,10 @@ Videourl.setOnClickListener(new View.OnClickListener() {
 });
 
         //////////////////////////////////////////////////////////////////////////
+
+
+        //This creates a new youtube support fragment player using the public API that we created when creating the Youtube Data project on Google cloud.
+        //This then replaces the frame layout in the xml with this fragment.
 
         YouTubePlayerSupportFragmentX youtubePlayerFragment = new YouTubePlayerSupportFragmentX();
         youtubePlayerFragment.initialize("AIzaSyDxidLcL8C1mzLznTTqmniCrGm6yT3Ymu4", this);
@@ -83,7 +87,7 @@ Videourl.setOnClickListener(new View.OnClickListener() {
         // Inflate the layout for this fragment
         return root;
     }
-
+//This method physically cues the video to be played through using the video ID sent from the video fragment
     @Override
     public void onInitializationSuccess(YouTubePlayer.Provider provider, YouTubePlayer youTubePlayer, boolean b) {
 
