@@ -3,19 +3,23 @@ package com.example.infs3634_assignment_garden;
 import android.os.Bundle;
 
 import com.example.infs3634_assignment_garden.entities.Garden;
+import com.example.infs3634_assignment_garden.entities.Question;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
+import java.util.List;
+
 public class MainActivity extends AppCompatActivity {
     public static Garden garden;
     public static NavController navController;
-
-
 
 
     @Override

@@ -18,6 +18,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.infs3634_assignment_garden.MainActivity;
+import com.example.infs3634_assignment_garden.QuestionsDao;
 import com.example.infs3634_assignment_garden.QuestionsViewModel;
 import com.example.infs3634_assignment_garden.R;
 import com.example.infs3634_assignment_garden.entities.Garden;
@@ -51,7 +52,7 @@ public class QuestionFragment extends Fragment {
     private QuestionsViewModel viewModel;
 
     //setting up array lists as global variables that will be used layer.
-    public ArrayList<Question> questionBank = new ArrayList<>();
+    public List<Question> questionBank;
     public ArrayList<Question> randomisedQuestions = new ArrayList<>();
     public ArrayList<Question> allQuestions = new ArrayList<>();
 
@@ -93,13 +94,15 @@ public class QuestionFragment extends Fragment {
 
         // This loop goes through the entire list and filters for every question that has the topic that was clicked on from the Quiz Fragment
         //As a result, as all topics should have 20 questions (except stars for now!), the size of the question bank will always be 20.
-        for (int i = 0; i < allQuestions.size(); i++) {
+//        for (int i = 0; i < allQuestions.size(); i++) {
+//
+//            if (allQuestions.get(i).getTopic().equals(topic)) {
+//
+//                questionBank.add(allQuestions.get(i));
+//            }
+//        }
 
-            if (allQuestions.get(i).getTopic().equals(topic)) {
 
-                questionBank.add(allQuestions.get(i));
-            }
-        }
         //call async task that populates question bank with the select query from question dao passing in the topic which is coming from a bundle from quiz
         //database in main activity
 
