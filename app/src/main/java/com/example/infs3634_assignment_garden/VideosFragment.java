@@ -76,7 +76,8 @@ public class VideosFragment extends Fragment implements VideoAdapter.LaunchListe
             //Physically calling the video service interface to grab the search data from the google API.
             // The parameters allow us to control the information that is grabbed from the internet.
             //e.g. the search query of the chapter name, the number of max results which we need to be 10, and the public API key we will use to access YouTube data.
-            Call<VideoResponse> call = service.getVideo("snippet", chapter, "video", "closedCaption", "10", "AIzaSyDxidLcL8C1mzLznTTqmniCrGm6yT3Ymu4");
+            //Old Key = AIzaSyDxidLcL8C1mzLznTTqmniCrGm6yT3Ymu4
+            Call<VideoResponse> call = service.getVideo("snippet", chapter, "video", "closedCaption", "10", "AIzaSyBtIjC6RTOMN3ZAq_pvpjympgqfjjGCn1s");
             //Establishing a Video Details Arraylist which will be filled in during the execution of the call.
             List<VideoDetails> VideoList = new ArrayList<VideoDetails>();
             try {
