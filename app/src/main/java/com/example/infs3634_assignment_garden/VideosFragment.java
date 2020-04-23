@@ -33,10 +33,11 @@ public class VideosFragment extends Fragment implements VideoAdapter.LaunchListe
 
 //Establishing global variables so that they can be dynamically set and called upon later.
 
-private static List<VideoDetails> FinalVideoList;
+    private static List<VideoDetails> FinalVideoList;
     private RecyclerView myRecyclerView;
     private RecyclerView.Adapter myAdapter;
     private TextView loading;
+
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
@@ -98,7 +99,7 @@ private static List<VideoDetails> FinalVideoList;
 
         @Override
         protected List<VideoDetails> doInBackground(Void... voids) {
-//Grabbing the bundle of chapter name from the chapter Fragment, this is so we can dynamically pass it into the retrofit call
+        //Grabbing the bundle of chapter name from the chapter Fragment, this is so we can dynamically pass it into the retrofit call
             Bundle bundle = getArguments();
             String chapter = null;
             if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
@@ -116,43 +117,43 @@ private static List<VideoDetails> FinalVideoList;
             // The parameters allow us to control the information that is grabbed from the internet.
             //e.g. the search query of the chapter name, the number of max results which we need to be 10, and the public API key we will use to access YouTube data.
             Call<VideoLoreResponse> call = service.getVideo("snippet", chapter, "video", "closedCaption", "10", "AIzaSyDxidLcL8C1mzLznTTqmniCrGm6yT3Ymu4");
-           //Establishing a Video Details Arraylist which will be filled in during the execution of the call.
+            //Establishing a Video Details Arraylist which will be filled in during the execution of the call.
             List<VideoDetails> VideoList = new ArrayList<VideoDetails>();
-        try {
-            Response<VideoLoreResponse> response = call.execute();
-            VideoLoreResponse videos = response.body();
-            Log.d("Main Activity", "Video Response: " + videos);
-            //Grabbing the item data from the response. Items holds the useful information about the videos that we need.
-            List<Item> videoitems = videos.getItems();
-            Log.d("Main Activity", "Video Items: " + videoitems);
-            for(int i = 0; i < videoitems.size(); i++) {
+            try {
+                Response<VideoLoreResponse> response = call.execute();
+                VideoLoreResponse videos = response.body();
+                Log.d("Main Activity", "Video Response: " + videos);
+                //Grabbing the item data from the response. Items holds the useful information about the videos that we need.
+                List<Item> videoitems = videos.getItems();
+                Log.d("Main Activity", "Video Items: " + videoitems);
+                for (int i = 0; i < videoitems.size(); i++) {
 //This for loop goes through every item on the list (10 due to our query parameter) and grabs the video id, video title, video description and video channel.
-                //This information will be the attributes passed into the adapter to display on the recyclerview and YouTube Fragment.
-                String videoid = videoitems.get(i).getId().getVideoId();
-                String videotitle = videoitems.get(i).getSnippet().getTitle();
-                String videodescription = videoitems.get(i).getSnippet().getDescription();
-                String videochannel = videoitems.get(i).getSnippet().getChannelTitle();
+                    //This information will be the attributes passed into the adapter to display on the recyclerview and YouTube Fragment.
+                    String videoid = videoitems.get(i).getId().getVideoId();
+                    String videotitle = videoitems.get(i).getSnippet().getTitle();
+                    String videodescription = videoitems.get(i).getSnippet().getDescription();
+                    String videochannel = videoitems.get(i).getSnippet().getChannelTitle();
 
-                VideoDetails finalvideo = new VideoDetails(videoid, videotitle, videodescription, videochannel);
-                Log.d("Main Activity", "Final Video: " + finalvideo);
-                VideoList.add(finalvideo);
+                    VideoDetails finalvideo = new VideoDetails(videoid, videotitle, videodescription, videochannel);
+                    Log.d("Main Activity", "Final Video: " + finalvideo);
+                    VideoList.add(finalvideo);
+                }
+                Log.d("Main Activity", "VideoList: " + VideoList);
+
+            } catch (Exception e) {
+                e.printStackTrace();
             }
-            Log.d("Main Activity", "VideoList: " + VideoList);
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
 
             return VideoList;
         }
 
         @Override
-        protected void onPostExecute (List<VideoDetails> VideoList) {
+        protected void onPostExecute(List<VideoDetails> VideoList) {
 
             //This method calls the set Videos method to set the adapter to the Video Details ArrayList
             super.onPostExecute(VideoList);
 
-            if(VideoList != null) {
+            if (VideoList != null) {
                 setVideos(VideoList);
             } else {
 
@@ -164,7 +165,7 @@ private static List<VideoDetails> FinalVideoList;
     }
 
 
-    public void setVideos(List<VideoDetails> newVideos){
+    public void setVideos(List<VideoDetails> newVideos) {
 //This method sets the adapter and recyclerview to use the Video Details ArrayList which was just filled in during the Async Task execution before hand.
         FinalVideoList = newVideos;
         myAdapter = new VideoAdapter(FinalVideoList, this);
