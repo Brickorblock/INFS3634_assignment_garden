@@ -141,6 +141,7 @@ public class Question {
                 ", choice3='" + choice3 + '\'' +
                 ", choice4='" + choice4 + '\'' +
                 ", answer='" + answer + '\'' +
+                ", id=" + id +
                 '}';
     }
 }

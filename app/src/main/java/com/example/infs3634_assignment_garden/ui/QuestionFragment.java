@@ -19,7 +19,7 @@ import android.widget.Toast;
 
 import com.example.infs3634_assignment_garden.MainActivity;
 import com.example.infs3634_assignment_garden.QuestionsDao;
-import com.example.infs3634_assignment_garden.QuestionsViewModel;
+//import com.example.infs3634_assignment_garden.QuestionsViewModel;
 import com.example.infs3634_assignment_garden.R;
 import com.example.infs3634_assignment_garden.entities.Garden;
 import com.example.infs3634_assignment_garden.entities.Question;
@@ -49,7 +49,7 @@ public class QuestionFragment extends Fragment {
     private int mQuestionNumber = 0;
     private int plantIndex;
     private int quizIndex;
-    private QuestionsViewModel viewModel;
+ //   private QuestionsViewModel viewModel;
 
     //setting up array lists as global variables that will be used layer.
     public List<Question> questionBank;
@@ -63,14 +63,14 @@ public class QuestionFragment extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        viewModel  = new ViewModelProvider(this).get(QuestionsViewModel.class);
-        viewModel.getAllQuestions().observe(getViewLifecycleOwner(), new Observer<List<Question>>(){
-
-            @Override
-            public void onChanged(@Nullable List<Question> questions) {
-
-            }
-        });
+//        viewModel  = new ViewModelProvider(this).get(QuestionsViewModel.class);
+//        viewModel.getAllQuestions().observe(getViewLifecycleOwner(), new Observer<List<Question>>(){
+//
+//            @Override
+//            public void onChanged(@Nullable List<Question> questions) {
+//
+//            }
+//        });
 
     }
 

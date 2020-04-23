@@ -2,6 +2,7 @@ package com.example.infs3634_assignment_garden;
 
 import android.content.Context;
 import android.os.AsyncTask;
+import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.room.Database;
@@ -11,14 +12,15 @@ import androidx.sqlite.db.SupportSQLiteDatabase;
 
 import com.example.infs3634_assignment_garden.entities.Question;
 
-@Database(entities = {Question.class}, version = 1)
+@Database(entities = {Question.class}, version = 1, exportSchema = false)
 public abstract class AppDatabase extends RoomDatabase {
 
-    private static AppDatabase instance;
+   // private static AppDatabase instance;
 
     public abstract QuestionsDao questionsDao();
 
-    public static synchronized AppDatabase getInstance(Context context){
+
+  /*  public static synchronized AppDatabase getInstance(Context context){
         if(instance == null){
             instance = Room.databaseBuilder(context.getApplicationContext(),
                     AppDatabase.class, "garden_database")
@@ -92,5 +94,5 @@ public abstract class AppDatabase extends RoomDatabase {
             return null;
         }
     }
-
+*/
 }
