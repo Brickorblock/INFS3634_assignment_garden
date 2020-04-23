@@ -49,8 +49,8 @@
             app:popExitAnim="@anim/slide_out_right" />
     </fragment>
     <fragment
-        android:id="@+id/navigation_settings"
-        android:name="com.example.infs3634_assignment_garden.ui.SettingsFragment"
+        android:id="@+id/navigation_help"
+        android:name="com.example.infs3634_assignment_garden.ui.HelpFragment"
         android:label="@string/title_settings" />
     <fragment
         android:id="@+id/navigation_shop"

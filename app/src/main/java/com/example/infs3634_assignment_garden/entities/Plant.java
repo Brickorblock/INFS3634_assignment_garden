@@ -6,7 +6,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 public class Plant extends ArrayList<Plant> {
-    //TODO: will we need a PlantId?
+
+    private int plantIndex;
     private int plantImage;
     //array of images to store different images for each level
     private int[] plantImages = new int[4];

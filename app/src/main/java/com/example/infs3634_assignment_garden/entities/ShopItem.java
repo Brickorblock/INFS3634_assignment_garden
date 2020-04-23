@@ -51,7 +51,6 @@ public class ShopItem {
         ShopThings.add(new ShopItem(new OrangeTree(true), 400, 2));
         ShopThings.add(new ShopItem(new AppleTree(true), 600, 3));
 
-
         return ShopThings;
     }
 

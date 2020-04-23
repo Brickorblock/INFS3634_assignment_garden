@@ -2,12 +2,15 @@ package com.example.infs3634_assignment_garden.ui;
 
 import android.os.Bundle;
 
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
@@ -27,6 +30,10 @@ public class ResultFragment extends Fragment {
     private int score;
     private int plantIndex;
     private Plant plant;
+
+    private ConstraintLayout coinsConstraint;
+    private ConstraintLayout expConstraint;
+    private Button okButton;
 
     public ResultFragment() {
         // Required empty public constructor
@@ -58,13 +65,16 @@ public class ResultFragment extends Fragment {
         ImageView plantImage = root.findViewById(R.id.topicImage);
         ProgressBar oldPlantBar = root.findViewById(R.id.oldPlantBar);
         ProgressBar newPlantBar = root.findViewById(R.id.newPlantBar);
-        Button okButton = root.findViewById(R.id.okButton);
+        coinsConstraint = root.findViewById(R.id.coinsConstraint);
+        expConstraint = root.findViewById(R.id.expConstraint);
+        okButton = root.findViewById(R.id.okButton);
         Log.d("ResultFragment", "In Result Fragment!");
 
         okButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //navigate to home page (Garden Fragment)
+
                 Garden.calcAmbience();
                 MainActivity.navController.navigate(R.id.action_resultFragment_to_navigation_garden);
             }
@@ -119,7 +129,28 @@ public class ResultFragment extends Fragment {
             lvlupText.setVisibility(View.VISIBLE);
         }
 
+
+
+
         return root;
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+
+        //render in animations
+        Animation coinsAnim = AnimationUtils.loadAnimation(getContext(), R.anim.fade_in_up);
+        coinsAnim.setStartTime(AnimationUtils.currentAnimationTimeMillis() + 500);
+        coinsConstraint.setAnimation(coinsAnim);
+
+        Animation expAnim = AnimationUtils.loadAnimation(getContext(), R.anim.fade_in_up);
+        expAnim.setStartTime(AnimationUtils.currentAnimationTimeMillis() + 1500);
+        expConstraint.setAnimation(expAnim);
+
+        Animation buttonAnim = AnimationUtils.loadAnimation(getContext(), R.anim.fade_in);
+        buttonAnim.setStartTime(AnimationUtils.currentAnimationTimeMillis() + 3000);
+        okButton.setAnimation(buttonAnim);
     }
 
     private int calcCoinsReward() {
