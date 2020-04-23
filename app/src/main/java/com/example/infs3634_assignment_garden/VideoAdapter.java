@@ -66,24 +66,10 @@ CardView v = (CardView) LayoutInflater.from(parent.getContext()).inflate(R.layou
 
         VideoDetails chosenvideo = videoList.get(position);
         Log.d("Video Adapter", "video title: " + chosenvideo.getTitle());
-        String TitleFixed = chosenvideo.getTitle();
-        //The below code replaces left over HTML components of text with the appropriate character(').
-        if(TitleFixed.contains("&#39;")) {
-
-            TitleFixed = TitleFixed.replace("&#39;","'");
-
-        }
-
-        String ChannelFixed = chosenvideo.getChanneltitle();
-
-        if(ChannelFixed.contains("&#39;")) {
-
-            ChannelFixed = ChannelFixed.replace("&#39;","'");
-
-        }
-
+        String TitleFixed = textfixer(chosenvideo.getTitle());
+        String ChannelFixed = textfixer(chosenvideo.getChanneltitle());
         holder.titlevideo.setText(TitleFixed);
-        holder.channelName.setText(chosenvideo.getChanneltitle());
+        holder.channelName.setText(ChannelFixed);
 
     }
 
@@ -97,8 +83,34 @@ CardView v = (CardView) LayoutInflater.from(parent.getContext()).inflate(R.layou
                 }
         return size;
     }
+    //The below code replaces left over HTML components of text the with the appropriate character.
+    public static String textfixer(String text) {
+
+        if(text.contains("&#39;")) {
+
+            text = text.replace("&#39;","'");
+
+            if(text.contains("&amp;")) {
+
+                text = text.replace("&amp;","&");
+            }
 
 
+        }
+
+        else if (text.contains("&amp;")) {
+
+            text = text.replace("&amp;","&");
+
+            if(text.contains("&#39;")) {
+
+                text = text.replace("&#39;","'");
+            }
+        }
+
+
+        return text;
+    }
 
 
 }

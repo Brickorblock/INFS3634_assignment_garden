@@ -143,31 +143,10 @@ public class VideosFragment extends Fragment implements VideoAdapter.LaunchListe
 //the video search method is called to get the clicked video as a class of Video Details
         //Then the video attributes such as title, ID, description and channel title are all obtained and sent to the YouTube Fragment.
         VideoDetails targetVideo = videoSearch(position);
-        String title = targetVideo.getTitle();
+        String title = textfixer(targetVideo.getTitle());
         String videoId = targetVideo.getVideoId();
-        String description = targetVideo.getDescription();
-        String channeltitle = targetVideo.getChanneltitle();
-
-//The below code replaces left over HTML components of text with the appropriate character(').
-        if(title.contains("&#39;")) {
-
-            title = title.replace("&#39;","'");
-
-        }
-
-        if(channeltitle.contains("&#39;")) {
-
-            channeltitle = channeltitle.replace("&#39;","'");
-
-        }
-
-        if(description.contains("&#39;")) {
-
-            description= description.replace("&#39;","'");
-
-        }
-
-
+        String description = textfixer(targetVideo.getDescription());
+        String channeltitle = textfixer(targetVideo.getChanneltitle());
 
 
         Bundle intentBundle = new Bundle();
@@ -187,5 +166,35 @@ public class VideosFragment extends Fragment implements VideoAdapter.LaunchListe
         VideoDetails targetVideo = FinalVideoList.get(position);
         return targetVideo;
     }
+    //The below code replaces left over HTML components of the text with the appropriate character.
+    public static String textfixer(String text) {
+
+        if(text.contains("&#39;")) {
+
+            text = text.replace("&#39;","'");
+
+            if(text.contains("&amp;")) {
+
+                text = text.replace("&amp;","&");
+            }
+
+
+        }
+
+        else if (text.contains("&amp;")) {
+
+            text = text.replace("&amp;","&");
+
+            if(text.contains("&#39;")) {
+
+                text = text.replace("&#39;","'");
+            }
+        }
+
+
+        return text;
+    }
 }
+
+
 
