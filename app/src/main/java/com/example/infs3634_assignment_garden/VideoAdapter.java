@@ -66,7 +66,23 @@ CardView v = (CardView) LayoutInflater.from(parent.getContext()).inflate(R.layou
 
         VideoDetails chosenvideo = videoList.get(position);
         Log.d("Video Adapter", "video title: " + chosenvideo.getTitle());
-        holder.titlevideo.setText(chosenvideo.getTitle());
+        String TitleFixed = chosenvideo.getTitle();
+        //The below code replaces left over HTML components of text with the appropriate character(').
+        if(TitleFixed.contains("&#39;")) {
+
+            TitleFixed = TitleFixed.replace("&#39;","'");
+
+        }
+
+        String ChannelFixed = chosenvideo.getChanneltitle();
+
+        if(ChannelFixed.contains("&#39;")) {
+
+            ChannelFixed = ChannelFixed.replace("&#39;","'");
+
+        }
+
+        holder.titlevideo.setText(TitleFixed);
         holder.channelName.setText(chosenvideo.getChanneltitle());
 
     }
@@ -81,6 +97,8 @@ CardView v = (CardView) LayoutInflater.from(parent.getContext()).inflate(R.layou
                 }
         return size;
     }
+
+
 
 
 }

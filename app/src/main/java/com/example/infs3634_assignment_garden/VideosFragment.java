@@ -148,6 +148,28 @@ public class VideosFragment extends Fragment implements VideoAdapter.LaunchListe
         String description = targetVideo.getDescription();
         String channeltitle = targetVideo.getChanneltitle();
 
+//The below code replaces left over HTML components of text with the appropriate character(').
+        if(title.contains("&#39;")) {
+
+            title = title.replace("&#39;","'");
+
+        }
+
+        if(channeltitle.contains("&#39;")) {
+
+            channeltitle = channeltitle.replace("&#39;","'");
+
+        }
+
+        if(description.contains("&#39;")) {
+
+            description= description.replace("&#39;","'");
+
+        }
+
+
+
+
         Bundle intentBundle = new Bundle();
         intentBundle.putString("title", title);
         intentBundle.putString("videoId", videoId);
