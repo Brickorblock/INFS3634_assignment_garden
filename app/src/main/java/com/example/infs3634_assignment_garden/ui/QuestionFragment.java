@@ -18,7 +18,9 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.infs3634_assignment_garden.AppDatabase;
 import com.example.infs3634_assignment_garden.MainActivity;
+import com.example.infs3634_assignment_garden.QuestionsDao;
 
 import com.example.infs3634_assignment_garden.R;
 import com.example.infs3634_assignment_garden.entities.Garden;
@@ -30,6 +32,7 @@ import java.security.SignedObject;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+import java.util.concurrent.ExecutionException;
 
 import static com.example.infs3634_assignment_garden.MainActivity.appDatabase;
 
@@ -51,17 +54,27 @@ public class QuestionFragment extends Fragment {
     private int mQuestionNumber = 0;
     private int plantIndex;
     private int quizIndex;
+    private List<Question> allQuestions;
+
+    private AppDatabase db;
 
     //setting up array lists as global variables that will be used layer.
-    public ArrayList<Question> questionBank = new ArrayList<>();
+    public List<Question> questionBank = new ArrayList<>();
     public ArrayList<Question> randomisedQuestions = new ArrayList<>();
-    public List<Question> allQuestions = new ArrayList<>();
+    // public ArrayList<Question> allQuestions = new ArrayList<>();
 
     public QuestionFragment() {
-//        new insertData();
-//        Log.d("QuestionFragment: ", "all questions: " + allQuestions);
-        allQuestions = appDatabase.questionsDao().getData();
 
+        //call async task that populates all questions with the select query of every question in the database.
+        try {
+            this.allQuestions = new insertQuestionsAsyncTask().execute().get();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        Log.d("Question Fragment", "All Questions" + allQuestions);
     }
 
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
@@ -82,26 +95,25 @@ public class QuestionFragment extends Fragment {
         mButtonChoice3 = root.findViewById(R.id.choice3);
         mButtonChoice4 = root.findViewById(R.id.choice4);
         Bundle bundle = getArguments();
-        String topic = bundle.getString(QuizFragment.KEY_TOPIC);
-        Log.d("Question Fragment", "topic: " + topic);
+        String topics = bundle.getString(QuizFragment.KEY_TOPIC);
+        Log.d("Question Fragment", "topic: " + topics);
         //Grabbing the plant and quix index from the quix fragment.
         plantIndex = bundle.getInt(QuizFragment.KEY_PLANT);
         quizIndex = bundle.getInt(QuizFragment.KEY_QUIZ);
 
         // This loop goes through the entire list and filters for every question that has the topic that was clicked on from the Quiz Fragment
-        //As a result, as all topics should have 20 questions (except stars for now!), the size of the question bank will always be 20.
+        //As a result, as all topics should have 20 questions, the size of the question bank will always be 20.
         for (int i = 0; i < allQuestions.size(); i++) {
 
-            if (allQuestions.get(i).getTopic().equals(topic)) {
+            if (allQuestions.get(i).getTopic().equals(topics)) {
 
                 questionBank.add(allQuestions.get(i));
             }
         }
 
-
-
         //generate a quiz of 10 questions, randomly pulling from the topic quizbank
         // each number generated = a question in the bank
+
         Log.d("TAG", "question bank: " + questionBank.size());
         Random rand = new Random();
         ArrayList<Integer> pastNums = new ArrayList<>();
@@ -118,7 +130,7 @@ public class QuestionFragment extends Fragment {
             Boolean duplicateFound = false;
             if (pastNums.size() != 0) {
                 for (int j = 0; j < pastNums.size(); j++) {
-                    if (pastNums.get(j) == x){
+                    if (pastNums.get(j) == x) {
                         duplicateFound = true;
                         Log.d("TAG", "onCreateView: dupe found!");
                         break;
@@ -141,9 +153,9 @@ public class QuestionFragment extends Fragment {
         }
 
         Log.d("TAG", "randomised questions: " + randomisedQuestions.size());
-//Updating the first question shown.
+    //Updating the first question shown.
         updateQuestion();
-//Whenever a choice button is clicked a questions are updated and so are the button choices.
+    //Whenever a choice button is clicked a questions are updated and so are the button choices.
         mButtonChoice1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -180,16 +192,18 @@ public class QuestionFragment extends Fragment {
         return root;
     }
 
-    //This method updates the question and button choices.
+
+
+        //This method updates the question and button choices.
     private void updateQuestion() {
 
         Log.d("TAG", "randomised questions:" + randomisedQuestions);
-//If the question number reaches 10, the the quiz is finished.
+        //If the question number reaches 10, the the quiz is finished.
         if (mQuestionNumber == Quiz.QUESTION_SIZE) {
             endQuiz();
 
         } else {
-//This grabs the next question in the randomised Questions bank.
+        //This grabs the next question in the randomised Questions bank.
             Question finalquestion = randomisedQuestions.get(mQuestionNumber);
 
             mQuestionView.setText(finalquestion.getQuestion());
@@ -222,7 +236,7 @@ public class QuestionFragment extends Fragment {
             mNumberView.setText("Q" + displayQuestionNumber);
         }
 
-        if (mButtonChoice.getText() == mAnswer) {
+        if (mButtonChoice.getText().equals(mAnswer)) {
             mScore = mScore + 1;
             updateScore(mScore);
 
@@ -234,7 +248,7 @@ public class QuestionFragment extends Fragment {
         updateQuestion();
     }
 
-    private void endQuiz(){
+    private void endQuiz() {
         // navigate to results fragment on last question
         Bundle bundle = new Bundle();
         bundle.putInt(KEY_SCORE, mScore);
@@ -250,41 +264,17 @@ public class QuestionFragment extends Fragment {
         Garden.generateQuizzes();
     }
 
-    public class insertData extends AsyncTask<Void, Void, List<Question>>{
+    public class insertQuestionsAsyncTask extends AsyncTask<Void, Void, List<Question>> {
 
         @Override
         protected List<Question> doInBackground(Void... voids) {
 
-            List<Question> getQuestion = appDatabase.questionsDao().getData();
+            List<Question> Q1 = appDatabase.questionsDao().getData();
 
-            Log.d("Main Activity:", "all questions: " +  appDatabase.questionsDao().getData());
-            Log.d("Main Activity:", "all questions: " +  appDatabase.questionsDao().getData().size());
-
-            allQuestions = getQuestion;
-
-            return getQuestion;
+            return Q1;
         }
 
 
     }
-
-
-
-//    @Override
-////    public void onDetach() {
-////        super.onDetach();
-////
-////        try {
-////            Field childFragmentManager = Fragment.class.getDeclaredField("mChildFragmentManager");
-////            childFragmentManager.setAccessible(true);
-////            childFragmentManager.set(this, null);
-////
-////        } catch (NoSuchFieldException e) {
-////            throw new RuntimeException(e);
-////        } catch (IllegalAccessException e) {
-////            throw new RuntimeException(e);
-////        }
-////    }
-
 
 }

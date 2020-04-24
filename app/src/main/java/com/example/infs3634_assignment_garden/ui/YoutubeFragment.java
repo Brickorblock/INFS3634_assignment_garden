@@ -74,7 +74,8 @@ Videourl.setOnClickListener(new View.OnClickListener() {
         //This then replaces the frame layout in the xml with this fragment.
 
         YouTubePlayerSupportFragmentX youtubePlayerFragment = new YouTubePlayerSupportFragmentX();
-        youtubePlayerFragment.initialize("AIzaSyDxidLcL8C1mzLznTTqmniCrGm6yT3Ymu4", this);
+        //Old Key = AIzaSyDxidLcL8C1mzLznTTqmniCrGm6yT3Ymu4
+        youtubePlayerFragment.initialize("AIzaSyBtIjC6RTOMN3ZAq_pvpjympgqfjjGCn1s", this);
 
         FragmentManager fragmentManager = getChildFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();

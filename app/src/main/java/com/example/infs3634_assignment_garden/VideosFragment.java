@@ -76,7 +76,8 @@ public class VideosFragment extends Fragment implements VideoAdapter.LaunchListe
             //Physically calling the video service interface to grab the search data from the google API.
             // The parameters allow us to control the information that is grabbed from the internet.
             //e.g. the search query of the chapter name, the number of max results which we need to be 10, and the public API key we will use to access YouTube data.
-            Call<VideoResponse> call = service.getVideo("snippet", chapter, "video", "closedCaption", "10", "AIzaSyDxidLcL8C1mzLznTTqmniCrGm6yT3Ymu4");
+            //Old Key = AIzaSyDxidLcL8C1mzLznTTqmniCrGm6yT3Ymu4
+            Call<VideoResponse> call = service.getVideo("snippet", chapter, "video", "closedCaption", "10", "AIzaSyBtIjC6RTOMN3ZAq_pvpjympgqfjjGCn1s");
             //Establishing a Video Details Arraylist which will be filled in during the execution of the call.
             List<VideoDetails> VideoList = new ArrayList<VideoDetails>();
             try {
@@ -142,10 +143,11 @@ public class VideosFragment extends Fragment implements VideoAdapter.LaunchListe
 //the video search method is called to get the clicked video as a class of Video Details
         //Then the video attributes such as title, ID, description and channel title are all obtained and sent to the YouTube Fragment.
         VideoDetails targetVideo = videoSearch(position);
-        String title = targetVideo.getTitle();
+        String title = textfixer(targetVideo.getTitle());
         String videoId = targetVideo.getVideoId();
-        String description = targetVideo.getDescription();
-        String channeltitle = targetVideo.getChanneltitle();
+        String description = textfixer(targetVideo.getDescription());
+        String channeltitle = textfixer(targetVideo.getChanneltitle());
+
 
         Bundle intentBundle = new Bundle();
         intentBundle.putString("title", title);
@@ -164,5 +166,35 @@ public class VideosFragment extends Fragment implements VideoAdapter.LaunchListe
         VideoDetails targetVideo = FinalVideoList.get(position);
         return targetVideo;
     }
+    //The below code replaces left over HTML components of the text with the appropriate character.
+    public static String textfixer(String text) {
+
+        if(text.contains("&#39;")) {
+
+            text = text.replace("&#39;","'");
+
+            if(text.contains("&amp;")) {
+
+                text = text.replace("&amp;","&");
+            }
+
+
+        }
+
+        else if (text.contains("&amp;")) {
+
+            text = text.replace("&amp;","&");
+
+            if(text.contains("&#39;")) {
+
+                text = text.replace("&#39;","'");
+            }
+        }
+
+
+        return text;
+    }
 }
+
+
 
