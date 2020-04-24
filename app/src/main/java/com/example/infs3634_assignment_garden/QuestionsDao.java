@@ -15,15 +15,16 @@ import java.util.List;
 public interface QuestionsDao {
 
     @Insert
-    void insert(Question question);
+    void insert(Question...question);
 
     @Query("SELECT * FROM Question WHERE topic = :topic")
-    LiveData<List<Question>> getAllQuestion(String topic);
+    List<Question> populateQuestionBank(String topic);
 
+    @Query("SELECT * FROM Question")
+    List<Question> getData();
 
-
-
-
+    @Query("DELETE FROM Question")
+    void deleteAllQuestions();
 
 
 
