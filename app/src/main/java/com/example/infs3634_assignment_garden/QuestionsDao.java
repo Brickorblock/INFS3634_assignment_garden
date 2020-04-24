@@ -14,16 +14,18 @@ import java.util.List;
 @Dao
 public interface QuestionsDao {
 
-    @Insert()
+    @Insert
     void insert(Question...question);
 
     @Query("SELECT * FROM Question WHERE topic = :topic")
-   List<Question> PopulateQuestionBank(String topic);
+    List<Question> populateQuestionBank(String topic);
 
     @Query("SELECT * FROM Question")
     List<Question> getData();
 
     @Query("DELETE FROM Question")
     void deleteAllQuestions();
+
+
 
 }

@@ -1,6 +1,7 @@
 package com.example.infs3634_assignment_garden.ui;
 
 import android.content.res.Resources;
+import android.os.AsyncTask;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
@@ -17,9 +18,10 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.infs3634_assignment_garden.AppDatabase;
 import com.example.infs3634_assignment_garden.MainActivity;
 import com.example.infs3634_assignment_garden.QuestionsDao;
-//import com.example.infs3634_assignment_garden.QuestionsViewModel;
+
 import com.example.infs3634_assignment_garden.R;
 import com.example.infs3634_assignment_garden.entities.Garden;
 import com.example.infs3634_assignment_garden.entities.Question;
@@ -30,6 +32,8 @@ import java.security.SignedObject;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+
+import static com.example.infs3634_assignment_garden.MainActivity.appDatabase;
 
 public class QuestionFragment extends Fragment {
     public static final String KEY_SCORE = "QuestionFragment_Score";
@@ -49,28 +53,22 @@ public class QuestionFragment extends Fragment {
     private int mQuestionNumber = 0;
     private int plantIndex;
     private int quizIndex;
- //   private QuestionsViewModel viewModel;
+    private String allQuestions;
+
+    private AppDatabase db;
 
     //setting up array lists as global variables that will be used layer.
-    public List<Question> questionBank;
+    public List<Question> questionBank = new ArrayList<>();
     public ArrayList<Question> randomisedQuestions = new ArrayList<>();
-    public ArrayList<Question> allQuestions = new ArrayList<>();
+   // public ArrayList<Question> allQuestions = new ArrayList<>();
 
     public QuestionFragment() {
-        this.allQuestions = Question.createQuestions(allQuestions);
+//        this.allQuestions = Question.createQuestions(allQuestions);
     }
 
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-//        viewModel  = new ViewModelProvider(this).get(QuestionsViewModel.class);
-//        viewModel.getAllQuestions().observe(getViewLifecycleOwner(), new Observer<List<Question>>(){
-//
-//            @Override
-//            public void onChanged(@Nullable List<Question> questions) {
-//
-//            }
-//        });
 
     }
 
@@ -86,8 +84,8 @@ public class QuestionFragment extends Fragment {
         mButtonChoice3 = root.findViewById(R.id.choice3);
         mButtonChoice4 = root.findViewById(R.id.choice4);
         Bundle bundle = getArguments();
-        String topic = bundle.getString(QuizFragment.KEY_TOPIC);
-        Log.d("Question Fragment", "topic: " + topic);
+        String topics = bundle.getString(QuizFragment.KEY_TOPIC);
+        Log.d("Question Fragment", "topic: " + topics);
         //Grabbing the plant and quix index from the quix fragment.
         plantIndex = bundle.getInt(QuizFragment.KEY_PLANT);
         quizIndex = bundle.getInt(QuizFragment.KEY_QUIZ);
@@ -102,10 +100,16 @@ public class QuestionFragment extends Fragment {
 //            }
 //        }
 
+       // questionBank = appDatabase.questionsDao().populateQuestionBank(topic);
 
+//        db.questionsDao().insert(questionBank);
         //call async task that populates question bank with the select query from question dao passing in the topic which is coming from a bundle from quiz
         //database in main activity
 
+        new insertQuestionsAsyncTask();
+
+        Log.d("Question", "all questions: " + new insertQuestionsAsyncTask());
+        Log.d("Question", "all questions: " + new insertQuestionsAsyncTask());
 
 
         //generate a quiz of 10 questions, randomly pulling from the topic quizbank
@@ -186,6 +190,21 @@ public class QuestionFragment extends Fragment {
 
         // Inflate the layout for this fragment
         return root;
+    }
+
+    public class insertQuestionsAsyncTask extends AsyncTask<Void, Void, List<Question>>{
+
+        String topic = getArguments().getString(QuizFragment.KEY_QUIZ);
+
+        @Override
+        protected List<Question> doInBackground(Void... voids) {
+
+            questionBank = appDatabase.questionsDao().populateQuestionBank(topic);
+
+            return questionBank;
+        }
+
+
     }
 
 //This method updates the question and button choices.

@@ -15,22 +15,22 @@
 //
 //
 //public class QuestionsViewModel extends AndroidViewModel {
-//
-//    private QuestionsRepository repository;
-//    private LiveData<List<Question>> allQuestions;
-//
-//    public QuestionsViewModel(@NonNull Application application) {
-//        super(application);
-//        repository = new QuestionsRepository(application);
-//        allQuestions = repository.getAllQuestion();
-//    }
-//
-//    public void insert(Question question) {
-//        repository.insert(question);
-//    }
-//
-//    public LiveData<List<Question>> getAllQuestions() {
-//        return allQuestions;
-//    }
+////
+////    private QuestionsRepository repository;
+////    private LiveData<List<Question>> allQuestions;
+////
+////    public QuestionsViewModel(@NonNull Application application) {
+////        super(application);
+////        repository = new QuestionsRepository(application);
+////        allQuestions = repository.getAllQuestion();
+////    }
+////
+////    public void insert(Question question) {
+////        repository.insert(question);
+////    }
+////
+////    public LiveData<List<Question>> getAllQuestions() {
+////        return allQuestions;
+////    }
 //
 //}

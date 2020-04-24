@@ -6,9 +6,13 @@ import android.util.Log;
 
 import com.example.infs3634_assignment_garden.entities.Garden;
 import com.example.infs3634_assignment_garden.entities.Question;
+import com.example.infs3634_assignment_garden.ui.QuestionFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
@@ -21,7 +25,7 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity {
     public static Garden garden;
     public static NavController navController;
-    public static AppDatabase Db;
+    public static AppDatabase appDatabase;
 
 
     @Override
@@ -42,10 +46,14 @@ public class MainActivity extends AppCompatActivity {
         navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(navView, navController);
-        Db = Room.databaseBuilder(getApplicationContext(), AppDatabase.class, "Db")
+
+        appDatabase = Room.databaseBuilder(getApplicationContext(), AppDatabase.class, "Db")
                 .build();
+
         new PopulateQuestionsAsyncTask().execute();
         new ShowData().execute();
+
+
         //create Garden class (stores global info about progress, etc.)
 
 
@@ -57,6 +65,10 @@ public class MainActivity extends AppCompatActivity {
         garden.setCoins(5000);
 
 
+//        InsertDataAsyncTask insertDataAsyncTask = new InsertDataAsyncTask();
+//        insertDataAsyncTask.setContext(getApplicationContext());
+//        insertDataAsyncTask.execute();
+
     }
 
     @Override
@@ -65,17 +77,15 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-
     private static class PopulateQuestionsAsyncTask extends AsyncTask<Void, Void, Question[]> {
 
         @Override
         protected Question[] doInBackground(Void... voids) {
 //VERY IMPORTANT LINE...
-           Db.questionsDao().deleteAllQuestions();
+            appDatabase.questionsDao().deleteAllQuestions();
             Log.d("Main Activity", "In here");
 //...VERY IMPORTANT LINE
             List<Question> Questions = new ArrayList<>();
-
 
             Questions.add(new Question("Solar Systems", "Which of the following is an example of a celestial body?", "Sun", "Moon", "Stars", "All of the Above", "All of the Above"));
             Questions.add(new Question("Solar Systems", "Which planet has rings around it?", "Jupiter", "Saturn", "Uranus", "All of the Above", "All of the Above"));
@@ -141,7 +151,7 @@ public class MainActivity extends AppCompatActivity {
             Questions.add(new Question("Stars", "A star that explodes is known as a", "Nebula", "Supershell", "Neutron star", "Supernova", "Supernova"));
 
             Question[] questionArray = Questions.toArray(new Question[Questions.size()]);
-            Db.questionsDao().insert(questionArray);
+            appDatabase.questionsDao().insert(questionArray);
             return questionArray;
         }
     }
@@ -149,18 +159,21 @@ public class MainActivity extends AppCompatActivity {
 
     public class ShowData extends AsyncTask<Void, Void, List<Question>>{
 
-
         @Override
         protected List<Question> doInBackground(Void... voids) {
 
-            List<Question> allQuestions = Db.questionsDao().getData();
+            List<Question> allQuestions = appDatabase.questionsDao().getData();
 
-            Log.d("Main Activity:", "all questions: " +  Db.questionsDao().getData());
-            Log.d("Main Activity:", "all questions: " +  Db.questionsDao().getData().size());
+            Log.d("Main Activity:", "all questions: " +  appDatabase.questionsDao().getData());
+            Log.d("Main Activity:", "all questions: " +  appDatabase.questionsDao().getData().size());
+
             return allQuestions;
         }
 
 
     }
+
+
+
 
 }

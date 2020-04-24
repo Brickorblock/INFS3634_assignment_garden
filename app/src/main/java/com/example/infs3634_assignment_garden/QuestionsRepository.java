@@ -1,4 +1,3 @@
-///*
 //package com.example.infs3634_assignment_garden;
 //
 //import android.app.Application;
@@ -48,4 +47,3 @@
 //    }
 //
 //}
-//*/
