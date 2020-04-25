@@ -28,7 +28,7 @@ public class Garden {
     private static double ambienceProgress;
     @PrimaryKey (autoGenerate = true)
     private int id;
-    private static int coins;
+    private int coins;
     @Ignore
     public static ArrayList<Plant> plants;
     @Ignore
@@ -63,7 +63,7 @@ public class Garden {
         this.ambienceLvl = ambienceLvl;
     }
 
-    public static int getCoins() {
+    public int getCoins() {
         return coins;
     }
 
@@ -71,11 +71,11 @@ public class Garden {
         this.coins = coins;
     }
 
-    public static void addCoins(int amt) {
+    public void addCoins(int amt) {
         coins += amt;
     }
 
-    public static void deductCoins(int amt) {
+    public void deductCoins(int amt) {
         coins -= amt;
     }
 
