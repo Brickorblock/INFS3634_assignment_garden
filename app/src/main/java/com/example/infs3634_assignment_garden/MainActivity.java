@@ -56,8 +56,11 @@ public class MainActivity extends AppCompatActivity {
         appDatabase = Room.databaseBuilder(getApplicationContext(), AppDatabase.class, "Db")
                 .build();
 
+
+        // instantiate DB tables and populate data
         new PopulateQuestionsAsyncTask().execute();
         new ShowData().execute();
+
 
         //create Garden class (stores global info about progress, etc.)
 
@@ -188,6 +191,7 @@ public class MainActivity extends AppCompatActivity {
 
             appDatabase.plantDao().deleteAllPlant();
 
+            //some dummy data for examining purposes
             List<Plant> Plants = new ArrayList<>();
 
             Plants.add(new Evergreen(true));
@@ -200,6 +204,20 @@ public class MainActivity extends AppCompatActivity {
         }
 
 
+    }
+
+    private static class PopulateGardenTask extends AsyncTask<Void, Void, Integer> {
+        @Override
+        protected Integer doInBackground(Void... voids) {
+
+            // instantiate some dummy data if db is empty (starting coin balance)
+            if (appDatabase.gardenDao().getGarden() == null) {
+                appDatabase.gardenDao().delete(garden);
+
+            }
+
+            return null;
+        }
     }
 
 

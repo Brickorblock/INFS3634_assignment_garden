@@ -18,11 +18,11 @@ public interface GardenDao {
     @Insert
     void insert(Garden garden);
 
-    @Update
-    void update(Garden garden);
+    @Query("UPDATE Garden SET coins =:coins")
+    void updateCoin(int coins, int id);
 
-    @Delete
-    void delete(Garden garden);
+    @Query("DELETE FROM Garden")
+    void delete();
 
     @Query("SELECT * FROM Garden")
     List<Garden> getGarden();
