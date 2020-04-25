@@ -39,13 +39,9 @@ public class QuizFragment extends Fragment implements QuizAdapter.LaunchListener
     private TextView noticeText;
     private RecyclerView.Adapter myAdapter;
     private RecyclerView.LayoutManager myLayoutManager;
-//    private ArrayList<Quiz> currList = new ArrayList<>();
+    //    private ArrayList<Quiz> currList = new ArrayList<>();
     List<Quiz> quizzes;
     List<Quiz> myquizzes;
-
-
-
-
 
 
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -89,7 +85,8 @@ public class QuizFragment extends Fragment implements QuizAdapter.LaunchListener
 
         return root;
     }
-//Whenever a quiz is clicked the quiz details are passed in a bundle to the question fragment.
+
+    //Whenever a quiz is clicked the quiz details are passed in a bundle to the question fragment.
     @Override
     public void launch(int position) {
 
@@ -113,10 +110,11 @@ public class QuizFragment extends Fragment implements QuizAdapter.LaunchListener
         MainActivity.navController.navigate(R.id.action_navigation_quiz_to_questionFragment, intentBundle);
 
     }
-//Grabs the topic name using the clicked position of the chosen quiz.
+
+    //Grabs the topic name using the clicked position of the chosen quiz.
     public String getTopic(int position) {
 
-      //  ArrayList<Quiz> myquizzes = Garden.getQuizzes();
+        //  ArrayList<Quiz> myquizzes = Garden.getQuizzes();
 
         try {
             myquizzes = new insertQuizAsyncTask().execute().get();
@@ -137,31 +135,16 @@ public class QuizFragment extends Fragment implements QuizAdapter.LaunchListener
         return topic;
     }
 
-    public class insertTopicAsyncTask extends AsyncTask<Void, Void, List<Quiz>> {
+
+    public class insertQuizAsyncTask extends AsyncTask<Void, Void, List<Quiz>> {
 
         @Override
         protected List<Quiz> doInBackground(Void... voids) {
 
-            List<Quiz> Q1 = appDatabase.quizDao().getTopic();
+            List<Quiz> Q2 = appDatabase.quizDao().getQuiz();
 
-            return Q1;
+            return Q2;
         }
-
-
-    }
-
-        public class insertQuizAsyncTask extends AsyncTask<Void, Void, List<Quiz>> {
-
-            @Override
-            protected List<Quiz> doInBackground(Void... voids) {
-
-                List<Quiz> Q2 = appDatabase.quizDao().getQuiz();
-
-                return Q2;
-            }
-
-
-
 
 
     }

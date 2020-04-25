@@ -18,7 +18,8 @@ public class Quiz {
     @PrimaryKey(autoGenerate = true)
     private int id;
 
-
+    public Quiz() {
+    }
 
     public Quiz(Plant plant, int questions) {
         this.plantIndex = Garden.plantIndexSearch(plant);

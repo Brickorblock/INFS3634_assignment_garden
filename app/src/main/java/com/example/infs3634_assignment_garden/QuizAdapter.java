@@ -19,7 +19,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class QuizAdapter extends RecyclerView.Adapter<QuizAdapter.MyViewHolder> {
-    private ArrayList<Quiz> dataset;
+    private List<Quiz> dataset;
     private LaunchListener mLaunchListener;
 
     public QuizAdapter(List<Quiz> dataset, LaunchListener launchListener) {
