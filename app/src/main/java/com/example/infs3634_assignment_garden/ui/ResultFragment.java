@@ -168,7 +168,7 @@ public class ResultFragment extends Fragment {
         //round amt to nearest int
         int coinsRewardRounded = (int) Math.round(coinsReward);
         //add coins
-        Garden.addCoins(coinsRewardRounded);
+        MainActivity.garden.addCoins(coinsRewardRounded);
 
         return coinsRewardRounded;
     }

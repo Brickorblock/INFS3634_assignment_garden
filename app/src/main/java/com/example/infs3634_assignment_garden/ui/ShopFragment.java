@@ -1,5 +1,6 @@
 package com.example.infs3634_assignment_garden.ui;
 
+import android.os.AsyncTask;
 import android.os.BadParcelableException;
 import android.os.Bundle;
 import android.util.Log;
@@ -23,6 +24,9 @@ import com.example.infs3634_assignment_garden.entities.Plant;
 import com.example.infs3634_assignment_garden.entities.ShopItem;
 
 import java.util.ArrayList;
+
+import static com.example.infs3634_assignment_garden.MainActivity.appDatabase;
+import static com.example.infs3634_assignment_garden.MainActivity.garden;
 
 public class ShopFragment extends Fragment implements ShopAdapter.ClickListener {
     //todo
@@ -55,9 +59,12 @@ public class ShopFragment extends Fragment implements ShopAdapter.ClickListener 
     public Boolean purchasePlant(Plant purchaseItem, int cost) {
         Boolean purchaseSuccessful = false;
             if (Garden.getPlants().size() < Garden.MAX_PLANTS) {
-                if (Garden.getCoins() >= cost) {
-                    Garden.deductCoins(cost);
+                if (garden.getCoins() >= cost) {
+                    garden.deductCoins(cost);
                     Garden.addPlant(purchaseItem);
+
+                    //persist to db
+                    new UpdateGardenTask().execute();
 
                     //navigate back to Garden screen
                     MainActivity.navController.popBackStack();
@@ -75,5 +82,18 @@ public class ShopFragment extends Fragment implements ShopAdapter.ClickListener 
                 Toast.makeText(getContext(), msg, Toast.LENGTH_SHORT).show();
             }
         return purchaseSuccessful;
+    }
+
+    private static class UpdateGardenTask extends AsyncTask<Void, Void, Integer> {
+        @Override
+        protected Integer doInBackground(Void... voids) {
+            Log.d("TAG", "doInBackground: writing to DB, coins = " + garden.getCoins());
+
+            appDatabase.gardenDao().updateCoin(garden.getCoins(), garden.getId());
+
+            Log.d("TAG", "doInBackground: coins from db = " + appDatabase.gardenDao().getCoin(garden.getId()));
+
+            return garden.getCoins();
+        }
     }
 }

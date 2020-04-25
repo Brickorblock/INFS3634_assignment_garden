@@ -27,6 +27,7 @@ import androidx.room.Room;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 
 public class MainActivity extends AppCompatActivity {
     public static Garden garden;
@@ -61,6 +62,15 @@ public class MainActivity extends AppCompatActivity {
         new PopulateQuestionsAsyncTask().execute();
         new ShowData().execute();
 
+        new PopulateGardenTask().execute();
+
+//        try {
+//            new PopulateGardenTask().get();
+//        } catch (ExecutionException e) {
+//            e.printStackTrace();
+//        } catch (InterruptedException e) {
+//            e.printStackTrace();
+//        }
 
         //create Garden class (stores global info about progress, etc.)
 
@@ -68,7 +78,7 @@ public class MainActivity extends AppCompatActivity {
         //TODO: remove this temp dev debugging method
         garden.getTempPlants();
         garden.getTempQuizzes();
-        garden.setCoins(5000);
+//        garden.setCoins(5000);
 
 
 //        InsertDataAsyncTask insertDataAsyncTask = new InsertDataAsyncTask();
@@ -210,13 +220,30 @@ public class MainActivity extends AppCompatActivity {
         @Override
         protected Integer doInBackground(Void... voids) {
 
-            // instantiate some dummy data if db is empty (starting coin balance)
-            if (appDatabase.gardenDao().getGarden() == null) {
-                appDatabase.gardenDao().delete(garden);
+//            // instantiate some dummy data if db is empty (starting coin balance)
+//            if (appDatabase.gardenDao().getGarden().isEmpty()) {
+//                Log.d("TAG", "doInBackground: adding coins");
+//                appDatabase.gardenDao().delete();
+//                garden.setCoins(5000);
+//                appDatabase.gardenDao().insert(garden);
+//
+//                Log.d("TAG", "doInBackground: coins in db = " + appDatabase.gardenDao().getCoin(garden.getId()));
+//
+//            } else {
+//                // fetch the amt in database
+//                int coinsInDb = appDatabase.gardenDao().getCoin(garden.getId());
+//                garden.setCoins(coinsInDb);
+//
+//            }
 
-            }
+            Log.d("TAG", "doInBackground: adding coins");
+            appDatabase.gardenDao().delete();
+            garden.setCoins(5000);
+            appDatabase.gardenDao().insert(garden);
 
-            return null;
+            Log.d("TAG", "doInBackground: coins in db = " + appDatabase.gardenDao().getCoin(garden.getId()));
+
+            return garden.getCoins();
         }
     }
 
