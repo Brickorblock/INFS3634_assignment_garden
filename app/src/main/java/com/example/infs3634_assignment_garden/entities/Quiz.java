@@ -19,7 +19,6 @@ public class Quiz {
     private int id;
 
 
-
     public Quiz(Plant plant, int questions) {
         this.plantIndex = Garden.plantIndexSearch(plant);
         this.questions = questions;

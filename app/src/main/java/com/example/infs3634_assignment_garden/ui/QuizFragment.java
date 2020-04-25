@@ -137,7 +137,7 @@ public class QuizFragment extends Fragment implements QuizAdapter.LaunchListener
         return topic;
     }
 
-    public class insertTopicAsyncTask extends AsyncTask<Void, Void, List<Quiz>> {
+    public class insertQuizTopicAsyncTask extends AsyncTask<Void, Void, List<Quiz>> {
 
         @Override
         protected List<Quiz> doInBackground(Void... voids) {
