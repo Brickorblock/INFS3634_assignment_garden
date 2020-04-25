@@ -1,5 +1,6 @@
 package com.example.infs3634_assignment_garden.ui;
 
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -12,14 +13,21 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.infs3634_assignment_garden.AppDatabase;
 import com.example.infs3634_assignment_garden.MainActivity;
 import com.example.infs3634_assignment_garden.QuizAdapter;
 import com.example.infs3634_assignment_garden.R;
 import com.example.infs3634_assignment_garden.entities.Garden;
 import com.example.infs3634_assignment_garden.entities.Plant;
+import com.example.infs3634_assignment_garden.entities.Question;
 import com.example.infs3634_assignment_garden.entities.Quiz;
+import com.example.infs3634_assignment_garden.entities.Topics;
 
 import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.ExecutionException;
+
+import static com.example.infs3634_assignment_garden.MainActivity.appDatabase;
 
 public class QuizFragment extends Fragment implements QuizAdapter.LaunchListener {
 
@@ -32,13 +40,26 @@ public class QuizFragment extends Fragment implements QuizAdapter.LaunchListener
     private RecyclerView.Adapter myAdapter;
     private RecyclerView.LayoutManager myLayoutManager;
 //    private ArrayList<Quiz> currList = new ArrayList<>();
-    ArrayList<Quiz> quizzes;
+    List<Quiz> quizzes;
+    List<Quiz> myquizzes;
+
+
+
+
+
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_quiz, container, false);
-        //Grabbing the list of quizzes from Garden.
-        quizzes = Garden.getQuizzes();
+        //Grabbing the list of quizzes from quiz table.
+        try {
+            quizzes = new insertQuizAsyncTask().execute().get();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
 //Whenever a user has no quizzes, a notice text is shown telling them that they have no active quizzes.
         if (quizzes.size() != 0) {
 
@@ -95,7 +116,15 @@ public class QuizFragment extends Fragment implements QuizAdapter.LaunchListener
 //Grabs the topic name using the clicked position of the chosen quiz.
     public String getTopic(int position) {
 
-        ArrayList<Quiz> myquizzes = Garden.getQuizzes();
+      //  ArrayList<Quiz> myquizzes = Garden.getQuizzes();
+
+        try {
+            myquizzes = new insertQuizAsyncTask().execute().get();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
 
         Log.d("main activity", "position: " + position);
 
@@ -107,5 +136,35 @@ public class QuizFragment extends Fragment implements QuizAdapter.LaunchListener
 
         return topic;
     }
+
+    public class insertTopicAsyncTask extends AsyncTask<Void, Void, List<Quiz>> {
+
+        @Override
+        protected List<Quiz> doInBackground(Void... voids) {
+
+            List<Quiz> Q1 = appDatabase.quizDao().getTopic();
+
+            return Q1;
+        }
+
+
+    }
+
+        public class insertQuizAsyncTask extends AsyncTask<Void, Void, List<Quiz>> {
+
+            @Override
+            protected List<Quiz> doInBackground(Void... voids) {
+
+                List<Quiz> Q2 = appDatabase.quizDao().getQuiz();
+
+                return Q2;
+            }
+
+
+
+
+
+    }
+
 
 }

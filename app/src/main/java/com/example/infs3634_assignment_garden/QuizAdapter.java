@@ -16,12 +16,13 @@ import com.example.infs3634_assignment_garden.entities.Plant;
 import com.example.infs3634_assignment_garden.entities.Quiz;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class QuizAdapter extends RecyclerView.Adapter<QuizAdapter.MyViewHolder> {
     private ArrayList<Quiz> dataset;
     private LaunchListener mLaunchListener;
 
-    public QuizAdapter(ArrayList<Quiz> dataset, LaunchListener launchListener) {
+    public QuizAdapter(List<Quiz> dataset, LaunchListener launchListener) {
         this.dataset = dataset;
         this.mLaunchListener = launchListener;
         Log.d("Quiz Adapter", "in constructor");

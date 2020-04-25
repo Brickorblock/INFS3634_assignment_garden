@@ -2,25 +2,38 @@ package com.example.infs3634_assignment_garden.entities;
 
 import android.util.Log;
 
+import androidx.room.Entity;
+import androidx.room.Ignore;
+import androidx.room.PrimaryKey;
+
 import com.example.infs3634_assignment_garden.R;
 import com.example.infs3634_assignment_garden.entities.subclasses.AppleTree;
 import com.example.infs3634_assignment_garden.entities.subclasses.Evergreen;
 import com.example.infs3634_assignment_garden.entities.subclasses.LemonTree;
 import com.example.infs3634_assignment_garden.entities.subclasses.OrangeTree;
+import com.google.gson.annotations.Expose;
 
 import java.util.ArrayList;
 import java.util.Random;
 
+@Entity
 public class Garden {
     //this class encapsulates global information about user's progress, plants, quizzes, etc
     public static final int MAX_PLANTS = 16;
-
+    @Ignore
     private static int ambienceLvl;
+    @Ignore
     private static int ambienceTotal;
+    @Ignore
     private static double ambienceProgress;
+    @PrimaryKey
+    @Expose
     private static int coins;
-    private static ArrayList<Plant> plants;
+    @Ignore
+    public static ArrayList<Plant> plants;
+    @Ignore
     private static ArrayList<Quiz> quizzes;
+    @Ignore
     public static ArrayList<Topics> topics;
 
     private static int[] milestones = {300, 800, 1500};
@@ -298,6 +311,7 @@ public class Garden {
         quizzes.add(new Quiz(plants.get(0), Quiz.QUESTION_SIZE));
         quizzes.add(new Quiz(plants.get(1), Quiz.QUESTION_SIZE));
         quizzes.add(new Quiz(plants.get(2), Quiz.QUESTION_SIZE));
+
 
         return quizzes;
     }

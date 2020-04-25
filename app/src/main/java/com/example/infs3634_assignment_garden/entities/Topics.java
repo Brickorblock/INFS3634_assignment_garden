@@ -3,14 +3,17 @@ package com.example.infs3634_assignment_garden.entities;
 import android.os.Build;
 
 import androidx.annotation.RequiresApi;
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+@Entity
 public class Topics {
 
-
+    @PrimaryKey
     private String topic;
     private int image;
 

@@ -3,6 +3,7 @@ package com.example.infs3634_assignment_garden.entities;
 import android.util.Log;
 
 import androidx.room.Entity;
+import androidx.room.PrimaryKey;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -10,6 +11,7 @@ import java.util.Arrays;
 @Entity
 public class Plant extends ArrayList<Plant> {
 
+    @PrimaryKey
     private int plantIndex;
     private int plantImage;
     //array of images to store different images for each level

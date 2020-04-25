@@ -20,9 +20,11 @@ public abstract class AppDatabase extends RoomDatabase {
 //
 //    public abstract GardenDao gardenDao();
 //
-//    public abstract QuizDao quizDao();
-//
-//    public abstract PlantDao plantDao();
+    public abstract QuizDao quizDao();
+
+    public abstract PlantDao plantDao();
+
+    public abstract TopicDao topicDao();
 
 
 

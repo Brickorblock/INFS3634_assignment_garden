@@ -1,5 +1,6 @@
 package com.example.infs3634_assignment_garden.ui;
 
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -21,8 +22,13 @@ import com.example.infs3634_assignment_garden.entities.Garden;
 import com.example.infs3634_assignment_garden.entities.Plant;
 import com.example.infs3634_assignment_garden.PlantAdapter;
 import com.example.infs3634_assignment_garden.R;
+import com.example.infs3634_assignment_garden.entities.Topics;
 
 import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.ExecutionException;
+
+import static com.example.infs3634_assignment_garden.MainActivity.appDatabase;
 
 public class GardenFragment extends Fragment implements PlantAdapter.LaunchListener{
 
@@ -30,11 +36,21 @@ public class GardenFragment extends Fragment implements PlantAdapter.LaunchListe
     private RecyclerView.Adapter myAdapter;
     private RecyclerView.LayoutManager myLayoutManager;
     private ArrayList<Plant> currList;
+    List<Plant> plant;
 
     public static String key1 = "GardenFragment_positionBundle";
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
+
+        //insert plant table
+        try {
+            plant = new GardenFragment.insertPlantAsyncTask().execute().get();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
 
         //specify fragment root
         View root = inflater.inflate(R.layout.fragment_garden, container, false);
@@ -90,6 +106,19 @@ public class GardenFragment extends Fragment implements PlantAdapter.LaunchListe
         Bundle positionBundle = new Bundle();
         positionBundle.putInt(key1, position);
         fragment.setArguments(positionBundle);
+
+    }
+
+    public class insertPlantAsyncTask extends AsyncTask<Void, Void, List<Plant>> {
+
+        @Override
+        protected List<Plant> doInBackground(Void... voids) {
+
+            List<Plant> Q1 = appDatabase.plantDao().getPlant();
+
+            return Q1;
+        }
+
 
     }
 }
