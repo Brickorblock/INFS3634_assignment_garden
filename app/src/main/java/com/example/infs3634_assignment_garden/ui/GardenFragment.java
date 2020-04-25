@@ -29,6 +29,7 @@ import java.util.List;
 import java.util.concurrent.ExecutionException;
 
 import static com.example.infs3634_assignment_garden.MainActivity.appDatabase;
+import static com.example.infs3634_assignment_garden.MainActivity.garden;
 
 public class GardenFragment extends Fragment implements PlantAdapter.LaunchListener{
 
@@ -73,7 +74,7 @@ public class GardenFragment extends Fragment implements PlantAdapter.LaunchListe
         TextView coinText = root.findViewById(R.id.coinText);
         Button shopButton = root.findViewById(R.id.shopButton);
 
-        Garden.calcAmbience();
+        garden.calcAmbience();
 
         ambienceLvl.setText("Lvl " + Integer.toString(MainActivity.garden.getAmbienceLvl()));
         ambienceBar.setProgress((int) MainActivity.garden.getAmbienceProgress());

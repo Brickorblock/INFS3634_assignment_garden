@@ -35,6 +35,7 @@ import java.util.Random;
 import java.util.concurrent.ExecutionException;
 
 import static com.example.infs3634_assignment_garden.MainActivity.appDatabase;
+import static com.example.infs3634_assignment_garden.MainActivity.garden;
 
 public class QuestionFragment extends Fragment {
     public static final String KEY_SCORE = "QuestionFragment_Score";
@@ -259,9 +260,9 @@ public class QuestionFragment extends Fragment {
         Log.d("TAG", "score: " + mScore);
 
         // also remove this quiz from the quiz list since it's now complete
-        Garden.removeQuiz(quizIndex);
+        garden.removeQuiz(quizIndex);
         // also generate new quizzes to add to list
-        Garden.generateQuizzes();
+        garden.generateQuizzes();
     }
 
     public class insertQuestionsAsyncTask extends AsyncTask<Void, Void, List<Question>> {

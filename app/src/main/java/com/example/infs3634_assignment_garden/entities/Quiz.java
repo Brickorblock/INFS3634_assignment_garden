@@ -5,6 +5,9 @@ import androidx.room.ForeignKey;
 import androidx.room.PrimaryKey;
 
 import java.util.ArrayList;
+
+import static com.example.infs3634_assignment_garden.MainActivity.garden;
+
 //This class stores quiz objects which are used to allow users to access quizzes for specific plants.
 //Done through using a plant Index- essentially a foreign that links plants to quizzes.
 @Entity
@@ -22,7 +25,7 @@ public class Quiz {
     }
 
     public Quiz(Plant plant, int questions) {
-        this.plantIndex = Garden.plantIndexSearch(plant);
+        this.plantIndex = garden.plantIndexSearch(plant);
         this.questions = questions;
         this.topic = plant.getTopic();
     }
@@ -60,7 +63,7 @@ public class Quiz {
 
     public static ArrayList<Quiz> createQuizzes(ArrayList<Quiz> quizList) {
 
-        ArrayList<Quiz> myquizzes = Garden.getTempQuizzes();
+        ArrayList<Quiz> myquizzes = garden.getTempQuizzes();
         quizList.addAll(myquizzes);
 
         return quizList;

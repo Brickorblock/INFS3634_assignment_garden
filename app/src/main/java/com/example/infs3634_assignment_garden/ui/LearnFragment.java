@@ -22,12 +22,14 @@ import com.example.infs3634_assignment_garden.entities.Topics;
 
 import java.util.ArrayList;
 
+import static com.example.infs3634_assignment_garden.MainActivity.garden;
+
 @RequiresApi(api = Build.VERSION_CODES.N)
 public class LearnFragment extends Fragment implements TopicsAdapter.LaunchListener {
     public static final String KEY_TOPIC = "LearnFragment_Topic";
 
     //Create the list of static topics from Garden.
-   public static final ArrayList<Topics> TopicList = Garden.getTopics();
+   public static final ArrayList<Topics> TopicList = garden.getTopics();
 
    //Set up the recyclerview.
     private RecyclerView myRecyclerView;

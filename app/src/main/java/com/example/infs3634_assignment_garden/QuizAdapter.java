@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.infs3634_assignment_garden.entities.Garden;
 import com.example.infs3634_assignment_garden.entities.Plant;
 import com.example.infs3634_assignment_garden.entities.Quiz;
+import static com.example.infs3634_assignment_garden.MainActivity.garden;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -75,9 +76,9 @@ public class QuizAdapter extends RecyclerView.Adapter<QuizAdapter.MyViewHolder> 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
 
-        if (Garden.getQuizzes() != null) {
+        if (garden.getQuizzes() != null) {
             Quiz quiz = dataset.get(position);
-            Plant plant = Garden.plantSearch(quiz.getPlantIndex());
+            Plant plant = garden.plantSearch(quiz.getPlantIndex());
 
             Log.d("Quiz Adapter", "plant toString " + plant.toString());
 

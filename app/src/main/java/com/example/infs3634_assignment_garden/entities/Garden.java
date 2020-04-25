@@ -2,6 +2,7 @@ package com.example.infs3634_assignment_garden.entities;
 
 import android.util.Log;
 
+import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
@@ -20,22 +21,23 @@ public class Garden {
     //this class encapsulates global information about user's progress, plants, quizzes, etc
     @Ignore
     public static final int MAX_PLANTS = 16;
-
-    private static int ambienceLvl;
     @Ignore
-    private static int ambienceTotal;
+    private int ambienceLvl;
     @Ignore
-    private static double ambienceProgress;
+    private int ambienceTotal;
+    @Ignore
+    private double ambienceProgress;
     @PrimaryKey (autoGenerate = true)
-    private int id;
+    private int id = 1;
     private int coins;
     @Ignore
-    public static ArrayList<Plant> plants;
+    public ArrayList<Plant> plants;
     @Ignore
-    private static ArrayList<Quiz> quizzes;
+    private ArrayList<Quiz> quizzes;
     @Ignore
-    public static ArrayList<Topics> topics;
+    public ArrayList<Topics> topics;
 
+    @Ignore
     private static int[] milestones = {300, 800, 1500};
 
     // "ambience" = user's total exp
@@ -55,7 +57,7 @@ public class Garden {
         calcAmbience();
     }
 
-    public static int getAmbienceLvl() {
+    public int getAmbienceLvl() {
         return ambienceLvl;
     }
 
@@ -79,7 +81,7 @@ public class Garden {
         coins -= amt;
     }
 
-    public static ArrayList<Plant> getPlants() {
+    public ArrayList<Plant> getPlants() {
         return plants;
     }
 
@@ -87,7 +89,7 @@ public class Garden {
         this.plants = plants;
     }
 
-    public static int getAmbienceTotal() {
+    public int getAmbienceTotal() {
         return ambienceTotal;
     }
 
@@ -95,7 +97,7 @@ public class Garden {
         this.ambienceTotal = ambienceTotal;
     }
 
-    public static double getAmbienceProgress() {
+    public double getAmbienceProgress() {
         return ambienceProgress;
     }
 
@@ -111,16 +113,16 @@ public class Garden {
         Garden.milestones = milestones;
     }
 
-    public static ArrayList<Quiz> getQuizzes() {
+    public ArrayList<Quiz> getQuizzes() {
         return quizzes;
     }
 
-    public static void setQuizzes(ArrayList<Quiz> quizzes) {
-        Garden.quizzes = quizzes;
+    public void setQuizzes(ArrayList<Quiz> quizzes) {
+        this.quizzes = quizzes;
     }
 
-    public static void setTopics(ArrayList<Topics> topics) {
-        Garden.topics = topics;
+    public void setTopics(ArrayList<Topics> topics) {
+        this.topics = topics;
     }
 
     public int getId() {
@@ -133,7 +135,7 @@ public class Garden {
 
     // ==============================================================
 
-    public static int calcAmbienceLvl() {
+    public int calcAmbienceLvl() {
 
         ambienceLvl = 0;
 
@@ -150,7 +152,7 @@ public class Garden {
         return ambienceLvl;
     }
 
-    public static int calcAmbienceTotal() {
+    public int calcAmbienceTotal() {
         //ambience = sum of each plant's individual growthTotals
 
         ambienceTotal = 0;
@@ -162,7 +164,7 @@ public class Garden {
         return ambienceTotal;
     }
 
-    public static double calcAmbienceProgress() {
+    public double calcAmbienceProgress() {
         int amtNeeded = 0;
         int currAmt = 0;
 
@@ -189,19 +191,19 @@ public class Garden {
         return ambienceProgress;
     }
 
-    public static void calcAmbience() {
+    public void calcAmbience() {
         calcAmbienceTotal();
         calcAmbienceLvl();
         calcAmbienceProgress();
         Log.d("TAG", "calcAmbience: called - ambienceTotal = " + ambienceTotal);
     }
 
-    public static void addPlant(Plant newPlant) {
+    public void addPlant(Plant newPlant) {
         plants.add(newPlant);
     }
 
     // searches for a plant in the list based on ArrayList index
-    public static Plant plantSearch(int index) {
+    public Plant plantSearch(int index) {
         Plant targetPlant = plants.get(index);
 
         return targetPlant;
@@ -209,7 +211,7 @@ public class Garden {
     }
 
     // searches for the index of specified plant
-    public static int plantIndexSearch(Plant targetPlant) {
+    public int plantIndexSearch(Plant targetPlant) {
         int index = 0;
 
         Log.d("TAG", "plantIndexSearch: searching for - " + targetPlant.toString());
@@ -230,17 +232,17 @@ public class Garden {
 
     }
 
-    public static void addQuiz(Quiz newQuiz) {
+    public void addQuiz(Quiz newQuiz) {
         quizzes.add(newQuiz);
     }
 
-    public static void removeQuiz(int quizIndex) {
+    public void removeQuiz(int quizIndex) {
         quizzes.remove(quizIndex);
     }
 
     //generates quizzes (sets quizReady = true) for 1-3 plants randomly
     // this is how users get more quizzes
-    public static int generateQuizzes() {
+    public int generateQuizzes() {
         // first RNG how many quizzes to generate (1 - 3)
         Random rand = new Random();
         int generateAmt;
@@ -283,7 +285,7 @@ public class Garden {
     }
 
     //returns the list of plants that currently have quizzes ready
-    public static ArrayList<Plant> getPlantsWithQuizzes() {
+    public ArrayList<Plant> getPlantsWithQuizzes() {
         ArrayList<Plant> plantsWithQuizzes = new ArrayList<>();
 
         for (int i = 0; i < plants.size(); i++) {
@@ -296,7 +298,7 @@ public class Garden {
     }
 
     //returns the list of plants that DON'T have quizzes ready
-    public static ArrayList<Plant> getPlantsWithoutQuizzes() {
+    public ArrayList<Plant> getPlantsWithoutQuizzes() {
         ArrayList<Plant> plantsWithoutQuizzes = new ArrayList<>();
 
         for (int i = 0; i < plants.size(); i++) {
@@ -318,17 +320,16 @@ public class Garden {
         Helper.calcAllGrowth(plants);
     }
 
-    public static ArrayList<Quiz> getTempQuizzes() {
+    public ArrayList<Quiz> getTempQuizzes() {
 
         quizzes.add(new Quiz(plants.get(0), Quiz.QUESTION_SIZE));
         quizzes.add(new Quiz(plants.get(1), Quiz.QUESTION_SIZE));
         quizzes.add(new Quiz(plants.get(2), Quiz.QUESTION_SIZE));
-
-
+        Log.d("TAG", "getTempQuizzes: quizzes = " + quizzes.toString());
         return quizzes;
     }
 
-    public static ArrayList<Topics> getTopics() {
+    public ArrayList<Topics> getTopics() {
         topics.add(new Topics("Solar Systems", R.drawable.solarsystem));
         topics.add(new Topics("Cosmology", R.drawable.cosmology));
         topics.add(new Topics("Stars", R.drawable.stars));
