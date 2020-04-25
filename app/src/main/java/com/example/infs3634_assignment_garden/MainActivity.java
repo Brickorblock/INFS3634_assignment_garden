@@ -56,13 +56,13 @@ public class MainActivity extends AppCompatActivity {
         appDatabase = Room.databaseBuilder(getApplicationContext(), AppDatabase.class, "Db")
                 .build();
 
+
+        // instantiate DB tables and populate data
         new PopulateQuestionsAsyncTask().execute();
         new ShowData().execute();
 
 
         //create Garden class (stores global info about progress, etc.)
-
-
 
         this.garden = new Garden();
         //TODO: remove this temp dev debugging method
@@ -87,13 +87,13 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         protected Question[] doInBackground(Void... voids) {
-//VERY IMPORTANT LINE...
+            //VERY IMPORTANT LINE...
             appDatabase.questionsDao().deleteAllQuestions();
             Log.d("Main Activity", "In here");
-//...VERY IMPORTANT LINE
+            //...VERY IMPORTANT LINE
             List<Question> Questions = new ArrayList<>();
 
-            if(appDatabase.questionsDao().getData() == null) {
+            if (appDatabase.questionsDao().getData() == null) {
                 Questions.add(new Question("Solar Systems", "Which of the following is an example of a celestial body?", "Sun", "Moon", "Stars", "All of the Above", "All of the Above"));
                 Questions.add(new Question("Solar Systems", "Which planet has rings around it?", "Jupiter", "Saturn", "Uranus", "All of the Above", "All of the Above"));
                 Questions.add(new Question("Solar Systems", "The Sun is ___ million km away from the Earth.", "100", "150", "200", "250", "150"));
@@ -160,25 +160,23 @@ public class MainActivity extends AppCompatActivity {
 
             }
 
-                Question[] questionArray = Questions.toArray(new Question[Questions.size()]);
-                appDatabase.questionsDao().insert(questionArray);
+            Question[] questionArray = Questions.toArray(new Question[Questions.size()]);
+            appDatabase.questionsDao().insert(questionArray);
 
-                return questionArray;
-
-
+            return questionArray;
         }
     }
 
 
-    public class ShowData extends AsyncTask<Void, Void, List<Question>>{
+    public class ShowData extends AsyncTask<Void, Void, List<Question>> {
 
         @Override
         protected List<Question> doInBackground(Void... voids) {
 
             List<Question> allQuestions = appDatabase.questionsDao().getData();
 
-            Log.d("Main Activity:", "all questions: " +  appDatabase.questionsDao().getData());
-            Log.d("Main Activity:", "all questions: " +  appDatabase.questionsDao().getData().size());
+            Log.d("Main Activity:", "all questions: " + appDatabase.questionsDao().getData());
+            Log.d("Main Activity:", "all questions: " + appDatabase.questionsDao().getData().size());
 
             return allQuestions;
         }
@@ -193,6 +191,7 @@ public class MainActivity extends AppCompatActivity {
 
             appDatabase.plantDao().deleteAllPlant();
 
+            //some dummy data for examining purposes
             List<Plant> Plants = new ArrayList<>();
 
             Plants.add(new Evergreen(true));
@@ -206,26 +205,19 @@ public class MainActivity extends AppCompatActivity {
 
 
     }
-    private static class PopulateTopicTask extends AsyncTask<Void, Void, Topics[]> {
 
+    private static class PopulateGardenTask extends AsyncTask<Void, Void, Integer> {
         @Override
-        protected Topics[] doInBackground(Void... voids) {
+        protected Integer doInBackground(Void... voids) {
 
-            appDatabase.topicDao().deleteAllTopic();
+            // instantiate some dummy data if db is empty (starting coin balance)
+            if (appDatabase.gardenDao().getGarden() == null) {
+                appDatabase.gardenDao().delete(garden);
 
-            List<Topics> topics = new ArrayList<>();
+            }
 
-            topics.add(new Topics("Solar Systems", R.drawable.solarsystem));
-            topics.add(new Topics("Cosmology", R.drawable.cosmology));
-            topics.add(new Topics("Stars", R.drawable.stars));
-
-            Topics[] topicArray = topics.toArray(new Topics[topics.size()]);
-            appDatabase.topicDao().insert(topicArray);
-
-            return topicArray;
+            return null;
         }
-
-
     }
 
 

@@ -27,8 +27,4 @@ public interface QuestionsDao {
     @Query("DELETE FROM Question")
     void deleteAllQuestions();
 
-
-
-
-
 }

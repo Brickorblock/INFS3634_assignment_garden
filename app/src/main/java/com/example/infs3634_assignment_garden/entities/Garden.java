@@ -7,7 +7,6 @@ import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
 import com.example.infs3634_assignment_garden.R;
-import com.example.infs3634_assignment_garden.entities.subclasses.AppleTree;
 import com.example.infs3634_assignment_garden.entities.subclasses.Evergreen;
 import com.example.infs3634_assignment_garden.entities.subclasses.LemonTree;
 import com.example.infs3634_assignment_garden.entities.subclasses.OrangeTree;
@@ -19,6 +18,7 @@ import java.util.Random;
 @Entity
 public class Garden {
     //this class encapsulates global information about user's progress, plants, quizzes, etc
+    @Ignore
     public static final int MAX_PLANTS = 16;
 
     private static int ambienceLvl;
@@ -26,8 +26,8 @@ public class Garden {
     private static int ambienceTotal;
     @Ignore
     private static double ambienceProgress;
-    @PrimaryKey
-    @Expose
+    @PrimaryKey (autoGenerate = true)
+    private int id;
     private static int coins;
     @Ignore
     public static ArrayList<Plant> plants;
@@ -117,6 +117,18 @@ public class Garden {
 
     public static void setQuizzes(ArrayList<Quiz> quizzes) {
         Garden.quizzes = quizzes;
+    }
+
+    public static void setTopics(ArrayList<Topics> topics) {
+        Garden.topics = topics;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     // ==============================================================

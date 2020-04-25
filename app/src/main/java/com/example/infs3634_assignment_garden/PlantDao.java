@@ -26,9 +26,6 @@ public interface PlantDao {
     void deleteAllPlant();
 
     @Query("SELECT PlantIndex FROM Plant")
-    List<Plant> getPlantIndex();
-
-
-
+    int getPlantIndex();
 
 }

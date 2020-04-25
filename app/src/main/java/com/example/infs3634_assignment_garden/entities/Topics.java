@@ -10,10 +10,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-@Entity
 public class Topics {
 
-    @PrimaryKey
     private String topic;
     private int image;
 

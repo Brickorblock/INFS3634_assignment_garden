@@ -22,9 +22,6 @@ public interface QuizDao {
     @Query("SELECT * FROM Quiz")
     List<Quiz> getQuiz();
 
-    @Query("SELECT topic FROM Quiz")
-    List<Quiz> getTopic();
-
     @Query("DELETE FROM Quiz")
     void deleteAllQuiz();
 

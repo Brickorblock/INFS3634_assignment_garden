@@ -3,6 +3,7 @@ package com.example.infs3634_assignment_garden.entities;
 import android.util.Log;
 
 import androidx.room.Entity;
+import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
 import java.util.ArrayList;
@@ -15,6 +16,7 @@ public class Plant extends ArrayList<Plant> {
     private int plantIndex;
     private int plantImage;
     //array of images to store different images for each level
+    @Ignore
     private int[] plantImages = new int[4];
     private String name;
     private String topic;
@@ -125,6 +127,14 @@ public class Plant extends ArrayList<Plant> {
 
     public void setRarity(int rarity) {
         this.rarity = rarity;
+    }
+
+    public int getPlantIndex() {
+        return plantIndex;
+    }
+
+    public void setPlantIndex(int plantIndex) {
+        this.plantIndex = plantIndex;
     }
 
     @Override
