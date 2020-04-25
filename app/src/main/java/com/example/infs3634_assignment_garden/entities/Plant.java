@@ -35,6 +35,10 @@ public class Plant extends ArrayList<Plant> {
     //  - growthProgress = will be shown in the plant progress bar
     //  - milestones = amount needed for each level
 
+    public Plant(){
+
+    }
+
     public Plant(Boolean quizReady) {
         //name, subject, image & rarity fields are set by subclasses
         this.growthTotal = 0;

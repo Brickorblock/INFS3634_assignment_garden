@@ -28,6 +28,7 @@ import java.util.List;
 import java.util.concurrent.ExecutionException;
 
 import static com.example.infs3634_assignment_garden.MainActivity.appDatabase;
+import static com.example.infs3634_assignment_garden.MainActivity.garden;
 
 public class QuizFragment extends Fragment implements QuizAdapter.LaunchListener {
 
@@ -102,10 +103,10 @@ public class QuizFragment extends Fragment implements QuizAdapter.LaunchListener
         intentBundle.putInt(KEY_QUIZ, position);
 
         //get the plant belonging to the specific quiz that was just clicked
-        Plant plant = Garden.plantSearch(quizzes.get(position).getPlantIndex());
+        Plant plant = garden.plantSearch(quizzes.get(position).getPlantIndex());
 
         //get that plant's index in the Garden Plant arrayList
-        int plantIndex = Garden.plantIndexSearch(plant);
+        int plantIndex = garden.plantIndexSearch(plant);
         intentBundle.putInt(KEY_PLANT, plantIndex);
         MainActivity.navController.navigate(R.id.action_navigation_quiz_to_questionFragment, intentBundle);
 

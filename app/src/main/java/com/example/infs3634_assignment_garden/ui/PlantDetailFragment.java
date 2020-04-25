@@ -22,6 +22,8 @@ import com.example.infs3634_assignment_garden.entities.Plant;
 import com.example.infs3634_assignment_garden.R;
 import com.example.infs3634_assignment_garden.entities.Quiz;
 
+import static com.example.infs3634_assignment_garden.MainActivity.garden;
+
 public class PlantDetailFragment extends Fragment{
     Plant currPlant;
 
@@ -44,7 +46,7 @@ public class PlantDetailFragment extends Fragment{
         Log.d("TAG", "onActivityCreated: positionClicked = " + positionClicked);
 
         //set plant detail fields
-        currPlant = Garden.plantSearch(positionClicked);
+        currPlant = garden.plantSearch(positionClicked);
 
         plantImage.setImageResource(currPlant.getPlantImage());
         plantBar.setProgress((int) currPlant.getGrowthProgress());
@@ -87,7 +89,7 @@ public class PlantDetailFragment extends Fragment{
     //adds corresponding quiz to quiz list
     private void acceptQuiz(){
         Quiz newQuiz = new Quiz(currPlant, Quiz.QUESTION_SIZE);
-        Garden.addQuiz(newQuiz);
+        garden.addQuiz(newQuiz);
 
         currPlant.setQuizReady(false);
         //refresh the page

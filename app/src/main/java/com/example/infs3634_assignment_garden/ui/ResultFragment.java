@@ -22,6 +22,8 @@ import com.example.infs3634_assignment_garden.entities.Garden;
 import com.example.infs3634_assignment_garden.entities.Plant;
 import com.example.infs3634_assignment_garden.entities.Quiz;
 
+import static com.example.infs3634_assignment_garden.MainActivity.garden;
+
 public class ResultFragment extends Fragment {
     // base values used to calculate rewards
     private static final int COINS_BASE = 10;
@@ -55,7 +57,7 @@ public class ResultFragment extends Fragment {
         Bundle bundle = getArguments();
         score = bundle.getInt(QuestionFragment.KEY_SCORE);
         plantIndex = bundle.getInt(QuestionFragment.KEY_PLANT);
-        plant = Garden.plantSearch(plantIndex);
+        plant = garden.plantSearch(plantIndex);
 
         TextView congratsText = root.findViewById(R.id.congratsText);
         TextView scoreText = root.findViewById(R.id.scoreText);
@@ -75,7 +77,7 @@ public class ResultFragment extends Fragment {
             public void onClick(View v) {
                 //navigate to home page (Garden Fragment)
 
-                Garden.calcAmbience();
+                garden.calcAmbience();
                 MainActivity.navController.navigate(R.id.action_resultFragment_to_navigation_garden);
             }
         });

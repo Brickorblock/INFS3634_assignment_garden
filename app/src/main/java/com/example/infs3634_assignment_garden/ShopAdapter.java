@@ -19,6 +19,8 @@ import com.example.infs3634_assignment_garden.entities.ShopItem;
 
 import java.util.ArrayList;
 
+import static com.example.infs3634_assignment_garden.MainActivity.garden;
+
 public class  ShopAdapter extends RecyclerView.Adapter<ShopAdapter.MyViewHolder> {
     private ArrayList<ShopItem> dataset;
     private ClickListener mClickListener;
@@ -57,7 +59,7 @@ public class  ShopAdapter extends RecyclerView.Adapter<ShopAdapter.MyViewHolder>
 
 
         int requiredlvl = shopItem.getLevelRequirement();
-        int userLvl = Garden.getAmbienceLvl();
+        int userLvl = garden.getAmbienceLvl();
 
         if(userLvl >= requiredlvl){
             //user has met required level

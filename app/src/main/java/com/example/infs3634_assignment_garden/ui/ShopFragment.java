@@ -58,10 +58,10 @@ public class ShopFragment extends Fragment implements ShopAdapter.ClickListener 
     @Override
     public Boolean purchasePlant(Plant purchaseItem, int cost) {
         Boolean purchaseSuccessful = false;
-            if (Garden.getPlants().size() < Garden.MAX_PLANTS) {
+            if (garden.getPlants().size() < Garden.MAX_PLANTS) {
                 if (garden.getCoins() >= cost) {
                     garden.deductCoins(cost);
-                    Garden.addPlant(purchaseItem);
+                    garden.addPlant(purchaseItem);
 
                     //persist to db
                     new UpdateGardenTask().execute();

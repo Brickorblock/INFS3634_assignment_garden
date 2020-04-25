@@ -97,13 +97,13 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         protected Question[] doInBackground(Void... voids) {
-            //VERY IMPORTANT LINE...
-            appDatabase.questionsDao().deleteAllQuestions();
-            Log.d("Main Activity", "In here");
-            //...VERY IMPORTANT LINE
             List<Question> Questions = new ArrayList<>();
 
-            if (appDatabase.questionsDao().getData() == null) {
+            if (appDatabase.questionsDao().getData().isEmpty()) {
+                //VERY IMPORTANT LINE...
+                appDatabase.questionsDao().deleteAllQuestions();
+                Log.d("Main Activity", "In here");
+                //...VERY IMPORTANT LINE
                 Questions.add(new Question("Solar Systems", "Which of the following is an example of a celestial body?", "Sun", "Moon", "Stars", "All of the Above", "All of the Above"));
                 Questions.add(new Question("Solar Systems", "Which planet has rings around it?", "Jupiter", "Saturn", "Uranus", "All of the Above", "All of the Above"));
                 Questions.add(new Question("Solar Systems", "The Sun is ___ million km away from the Earth.", "100", "150", "200", "250", "150"));
@@ -242,6 +242,7 @@ public class MainActivity extends AppCompatActivity {
             appDatabase.gardenDao().insert(garden);
 
             Log.d("TAG", "doInBackground: coins in db = " + appDatabase.gardenDao().getCoin(garden.getId()));
+//            Log.d("TAG", "doInBackground: garden in db = " + appDatabase.gardenDao().getGarden());
 
             return garden.getCoins();
         }
