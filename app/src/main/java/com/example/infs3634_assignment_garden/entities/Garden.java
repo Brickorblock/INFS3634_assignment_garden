@@ -20,7 +20,7 @@ import java.util.Random;
 public class Garden {
     //this class encapsulates global information about user's progress, plants, quizzes, etc
     public static final int MAX_PLANTS = 16;
-    @Ignore
+
     private static int ambienceLvl;
     @Ignore
     private static int ambienceTotal;

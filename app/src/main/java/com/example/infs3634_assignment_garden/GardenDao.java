@@ -24,7 +24,7 @@ public interface GardenDao {
     @Delete
     void delete(Garden garden);
 
-    @Query("SELECT * FROM Garden")
+    @Query("SELECT ambienceLvl FROM Garden")
     List<Garden> getGarden();
 
 
