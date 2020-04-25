@@ -1,5 +1,6 @@
 package com.example.infs3634_assignment_garden.ui;
 
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -22,8 +23,13 @@ import com.example.infs3634_assignment_garden.entities.Plant;
 import com.example.infs3634_assignment_garden.R;
 import com.example.infs3634_assignment_garden.entities.Quiz;
 
+import java.util.List;
+
+import static com.example.infs3634_assignment_garden.MainActivity.appDatabase;
+
 public class PlantDetailFragment extends Fragment{
     Plant currPlant;
+
 
 
     @Override
@@ -87,7 +93,9 @@ public class PlantDetailFragment extends Fragment{
     //adds corresponding quiz to quiz list
     private void acceptQuiz(){
         Quiz newQuiz = new Quiz(currPlant, Quiz.QUESTION_SIZE);
-        Garden.addQuiz(newQuiz);
+       // Garden.addQuiz(newQuiz);
+        appDatabase.quizDao().insert(newQuiz);
+
 
         currPlant.setQuizReady(false);
         //refresh the page
@@ -95,5 +103,18 @@ public class PlantDetailFragment extends Fragment{
 
         Toast.makeText(getActivity(), "Quiz Accepted!", Toast.LENGTH_SHORT).show();
     }
+    public class insertPlantAsyncTask extends AsyncTask<Void, Void, List<Plant>> {
+
+        @Override
+        protected List<Plant> doInBackground(Void... voids) {
+
+            List<Plant> Q2 = appDatabase.plantDao().getPlant();
+
+            return Q2;
+        }
+
+
+    }
+
 
 }
