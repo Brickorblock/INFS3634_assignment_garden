@@ -28,7 +28,7 @@ public class Garden {
     @Ignore
     private double ambienceProgress;
     @PrimaryKey (autoGenerate = true)
-    private int id = 1;
+    private int id;
     private int coins;
     @Ignore
     public ArrayList<Plant> plants;
@@ -50,6 +50,7 @@ public class Garden {
         this.ambienceLvl = 0;
         this.ambienceTotal = 0;
         this.coins = 0;
+        this.id = 1;
         this.plants = new ArrayList<>();
         this.quizzes = new ArrayList<>();
         this.topics = new ArrayList<>();
