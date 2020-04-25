@@ -102,7 +102,7 @@ public class MainActivity extends AppCompatActivity {
             if (appDatabase.questionsDao().getData().isEmpty()) {
                 //VERY IMPORTANT LINE...
                 appDatabase.questionsDao().deleteAllQuestions();
-                Log.d("Main Activity", "In here");
+                Log.d("Main Activity", "adding starter data");
                 //...VERY IMPORTANT LINE
                 Questions.add(new Question("Solar Systems", "Which of the following is an example of a celestial body?", "Sun", "Moon", "Stars", "All of the Above", "All of the Above"));
                 Questions.add(new Question("Solar Systems", "Which planet has rings around it?", "Jupiter", "Saturn", "Uranus", "All of the Above", "All of the Above"));
@@ -220,29 +220,23 @@ public class MainActivity extends AppCompatActivity {
         @Override
         protected Integer doInBackground(Void... voids) {
 
-//            // instantiate some dummy data if db is empty (starting coin balance)
-//            if (appDatabase.gardenDao().getGarden().isEmpty()) {
-//                Log.d("TAG", "doInBackground: adding coins");
-//                appDatabase.gardenDao().delete();
-//                garden.setCoins(5000);
-//                appDatabase.gardenDao().insert(garden);
-//
-//                Log.d("TAG", "doInBackground: coins in db = " + appDatabase.gardenDao().getCoin(garden.getId()));
-//
-//            } else {
-//                // fetch the amt in database
-//                int coinsInDb = appDatabase.gardenDao().getCoin(garden.getId());
-//                garden.setCoins(coinsInDb);
-//
-//            }
+            // instantiate some dummy data if db is empty (starting coin balance)
+            if (appDatabase.gardenDao().getGarden().isEmpty()) {
+                Log.d("TAG", "doInBackground: adding coins");
+                appDatabase.gardenDao().delete();
+                garden.setCoins(5000);
+                appDatabase.gardenDao().insert(garden);
 
-            Log.d("TAG", "doInBackground: adding coins");
-            appDatabase.gardenDao().delete();
-            garden.setCoins(5000);
-            appDatabase.gardenDao().insert(garden);
+            } else {
+                // fetch the amt in database
+                int coinsInDb = appDatabase.gardenDao().getCoin(garden.getId());
+                garden.setCoins(coinsInDb);
+
+            }
 
             Log.d("TAG", "doInBackground: coins in db = " + appDatabase.gardenDao().getCoin(garden.getId()));
-//            Log.d("TAG", "doInBackground: garden in db = " + appDatabase.gardenDao().getGarden());
+//            Log.d("TAG", "doInBackground: gardenID in db = " + appDatabase.gardenDao().getGarden().get(garden.getId()).getId());
+//            Log.d("TAG", "doInBackground: gardenID in code = " + garden.getId());
 
             return garden.getCoins();
         }

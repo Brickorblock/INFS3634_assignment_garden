@@ -91,7 +91,8 @@ public class ShopFragment extends Fragment implements ShopAdapter.ClickListener 
 
             appDatabase.gardenDao().updateCoin(garden.getCoins(), garden.getId());
 
-            Log.d("TAG", "doInBackground: coins from db = " + appDatabase.gardenDao().getCoin(garden.getId()));
+            int coinsInDb = appDatabase.gardenDao().getCoin(garden.getId());
+            Log.d("TAG", "doInBackground: coins from db = " + coinsInDb);
 
             return garden.getCoins();
         }

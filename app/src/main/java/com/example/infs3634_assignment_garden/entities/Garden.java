@@ -2,6 +2,7 @@ package com.example.infs3634_assignment_garden.entities;
 
 import android.util.Log;
 
+import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
@@ -27,7 +28,7 @@ public class Garden {
     @Ignore
     private double ambienceProgress;
     @PrimaryKey (autoGenerate = true)
-    private int id;
+    private int id = 1;
     private int coins;
     @Ignore
     public ArrayList<Plant> plants;
