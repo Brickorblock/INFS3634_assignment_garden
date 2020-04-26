@@ -283,12 +283,18 @@ public class QuestionFragment extends Fragment {
 //        }
 //
 //    }
-    private class RemoveQuizAsyncTask extends AsyncTask<Bundle, Void, Void> {
-        protected Void doInBackground(Bundle...quizIndex) {
+private class RemoveQuizAsyncTask extends AsyncTask<Void, Void, Integer> {
+    @Override
+    protected Integer doInBackground(Void... voids) {
 
-            appDatabase.quizDao().deleteAllQuiz();
-            return null;
-        }
+        Bundle bundle = getArguments();
+        int quizIndex2 = bundle.getInt(QuizFragment.KEY_QUIZ);
+        Log.d("TAG", "Quiz Index 2: " + quizIndex2);
+
+     appDatabase.quizDao().deleteAllQuiz(quizIndex2);
+
+        return garden.getCoins();
     }
+}
 
 }

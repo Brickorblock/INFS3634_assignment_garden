@@ -30,7 +30,7 @@ public interface QuizDao {
     List<Quiz> getQuiz();
 
     @Query("DELETE FROM Quiz WHERE id =:id")
-    void deleteAllQuiz();
+    void deleteAllQuiz(int id);
 
 
 
