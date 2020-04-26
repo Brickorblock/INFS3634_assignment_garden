@@ -197,6 +197,8 @@ public class ResultFragment extends Fragment {
         //add exp
         Log.d("TAG", "calcExpReward: images before addGrowth = "  + plant.getPlantImages()[0]+  " " + plant.getPlantImages()[1] + "...");
         plant.addGrowth(expRewardRounded);
+        new UpdateEXPTask().execute();
+
 
         return expRewardRounded;
     }
@@ -210,6 +212,17 @@ public class ResultFragment extends Fragment {
         }
     }
 
+
+    private class UpdateEXPTask extends AsyncTask<Void, Void, Integer> {
+        @Override
+        protected Integer doInBackground(Void... voids) {
+
+
+            appDatabase.plantDao().updateExp(plant.getGrowthTotal(), garden.plantIndexSearch(plant));
+
+            return garden.getCoins();
+        }
+    }
 
 
 

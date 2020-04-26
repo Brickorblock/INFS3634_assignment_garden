@@ -240,7 +240,7 @@ public class MainActivity extends AppCompatActivity {
             if (appDatabase.gardenDao().getGarden().isEmpty()) {
                 Log.d("TAG", "doInBackground: adding coins");
                 appDatabase.gardenDao().delete();
-                garden.setCoins(5000);
+                garden.setCoins(500);
                 appDatabase.gardenDao().insert(garden);
 
             } else {
