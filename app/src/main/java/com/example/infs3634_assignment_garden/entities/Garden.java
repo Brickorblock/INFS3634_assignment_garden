@@ -1,5 +1,6 @@
 package com.example.infs3634_assignment_garden.entities;
 
+import android.os.AsyncTask;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
@@ -15,6 +16,7 @@ import com.example.infs3634_assignment_garden.entities.subclasses.OrangeTree;
 import com.google.gson.annotations.Expose;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 @Entity
@@ -283,6 +285,9 @@ public class Garden {
             // now setQuizReady = true for the randomly generated plant
             Plant targetPlant = plantsWithoutQuizzes.get(targetPlantIndex);
             targetPlant.setQuizReady(true);
+            //update targetPlant in database here
+            //updateQuizReady(targetPlant.isQuizReady(), targetPlant.getPlantIndex());
+
             i++;
         }
 
@@ -332,4 +337,7 @@ public class Garden {
         Log.d("Garden", "Topics: " + topics);
         return topics;
     }
+
+
+
 }

@@ -29,7 +29,6 @@ import static com.example.infs3634_assignment_garden.MainActivity.appDatabase;
 import static com.example.infs3634_assignment_garden.MainActivity.garden;
 
 public class ShopFragment extends Fragment implements ShopAdapter.ClickListener {
-    //todo
     private RecyclerView myRecyclerView;
     private RecyclerView.Adapter myAdapter;
     private RecyclerView.LayoutManager myLayoutManager;
@@ -62,7 +61,8 @@ public class ShopFragment extends Fragment implements ShopAdapter.ClickListener 
                 if (garden.getCoins() >= cost) {
                     garden.deductCoins(cost);
                     garden.addPlant(purchaseItem);
-                    //todo
+                    //set plantIndex for new plant (this is required for writing to db)
+                    purchaseItem.setPlantIndex(garden.plantIndexSearch(purchaseItem));
 
                     //persist to db
                     new UpdateGardenTask().execute();
