@@ -14,7 +14,7 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.infs3634_assignment_garden.AppDatabase;
+import com.example.infs3634_assignment_garden.database.AppDatabase;
 import com.example.infs3634_assignment_garden.MainActivity;
 
 import com.example.infs3634_assignment_garden.R;
@@ -249,17 +249,14 @@ public class QuestionFragment extends Fragment {
 
         Log.d("TAG", "score: " + mScore);
 
-        // also remove this quiz from the quiz list since it's now complete
-        //garden.removeQuiz(quizIndex);
-
-
+        //calls task to remove quiz
         new RemoveQuizAsyncTask().execute();
 
-        // also generate new quizzes to add to list
+        //generate new quizzes to add to list
         garden.generateQuizzes();
 
     }
-
+    //inserts list of questions from database
     public class insertQuestionsAsyncTask extends AsyncTask<Void, Void, List<Question>> {
 
         @Override
@@ -272,7 +269,7 @@ public class QuestionFragment extends Fragment {
 
 
     }
-
+    //removes this quiz from the quiz list since it's now complete
     private class RemoveQuizAsyncTask extends AsyncTask<Void, Void, Integer> {
         @Override
         protected Integer doInBackground(Void... voids) {

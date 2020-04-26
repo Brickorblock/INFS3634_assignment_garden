@@ -1,19 +1,12 @@
-package com.example.infs3634_assignment_garden;
+package com.example.infs3634_assignment_garden.database;
 
-import android.content.Context;
-import android.os.AsyncTask;
-
-import androidx.annotation.NonNull;
 import androidx.room.Database;
-import androidx.room.Room;
 import androidx.room.RoomDatabase;
-import androidx.sqlite.db.SupportSQLiteDatabase;
 
 import com.example.infs3634_assignment_garden.entities.Garden;
 import com.example.infs3634_assignment_garden.entities.Plant;
 import com.example.infs3634_assignment_garden.entities.Question;
 import com.example.infs3634_assignment_garden.entities.Quiz;
-import com.example.infs3634_assignment_garden.entities.Topics;
 
 @Database(entities = {Question.class, Quiz.class, Plant.class, Garden.class}, version = 1)
 public abstract class AppDatabase extends RoomDatabase {

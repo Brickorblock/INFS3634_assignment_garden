@@ -129,7 +129,7 @@ public class ResultFragment extends Fragment {
             //did not lvl up
             lvlupText.setVisibility(View.INVISIBLE);
         } else {
-            //levlled up
+            //levelled up
             lvlupText.setText("LEVEL UP!");
             lvlupText.setVisibility(View.VISIBLE);
         }
@@ -173,10 +173,9 @@ public class ResultFragment extends Fragment {
         //round amt to nearest int
         int coinsRewardRounded = (int) Math.round(coinsReward);
         //add coins
-
         garden.addCoins(coinsRewardRounded);
-
-        new UpdateGardenTask().execute();
+        //calls task to update coin into database
+        new UpdateCoinTask().execute();
 
         return coinsRewardRounded;
     }
@@ -197,12 +196,12 @@ public class ResultFragment extends Fragment {
         //add exp
         Log.d("TAG", "calcExpReward: images before addGrowth = "  + plant.getPlantImages()[0]+  " " + plant.getPlantImages()[1] + "...");
         plant.addGrowth(expRewardRounded);
+        //calls task to update EXP into database
         new UpdateEXPTask().execute();
-
 
         return expRewardRounded;
     }
-    private static class UpdateGardenTask extends AsyncTask<Void, Void, Integer> {
+    private static class UpdateCoinTask extends AsyncTask<Void, Void, Integer> {
         @Override
         protected Integer doInBackground(Void... voids) {
 
@@ -211,19 +210,14 @@ public class ResultFragment extends Fragment {
             return garden.getCoins();
         }
     }
-
-
     private class UpdateEXPTask extends AsyncTask<Void, Void, Integer> {
         @Override
         protected Integer doInBackground(Void... voids) {
-
 
             appDatabase.plantDao().updateExp(plant.getGrowthTotal(), garden.plantIndexSearch(plant));
 
             return garden.getCoins();
         }
     }
-
-
 
 }

@@ -1,4 +1,4 @@
-package com.example.infs3634_assignment_garden;
+package com.example.infs3634_assignment_garden.database;
 
 
 import androidx.room.Dao;
@@ -16,9 +16,6 @@ public interface QuizDao {
 
     @Insert
     void insert(Quiz...quiz);
-
-    @Delete
-    void delete(Quiz...quiz);
 
     @Insert
     void insert2(Quiz quiz);

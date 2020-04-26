@@ -4,22 +4,17 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 
+import com.example.infs3634_assignment_garden.database.AppDatabase;
 import com.example.infs3634_assignment_garden.entities.Garden;
 import com.example.infs3634_assignment_garden.entities.Helper;
 import com.example.infs3634_assignment_garden.entities.Plant;
 import com.example.infs3634_assignment_garden.entities.Question;
-import com.example.infs3634_assignment_garden.entities.Quiz;
-import com.example.infs3634_assignment_garden.entities.Topics;
 import com.example.infs3634_assignment_garden.entities.subclasses.Evergreen;
 import com.example.infs3634_assignment_garden.entities.subclasses.LemonTree;
 import com.example.infs3634_assignment_garden.entities.subclasses.OrangeTree;
-import com.example.infs3634_assignment_garden.ui.QuestionFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
@@ -28,7 +23,6 @@ import androidx.room.Room;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.ExecutionException;
 
 public class MainActivity extends AppCompatActivity {
     public static Garden garden;

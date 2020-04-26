@@ -103,8 +103,9 @@ public class PlantDetailFragment extends Fragment {
         }
         currPlant.setQuizReady(false);
 
+        //ensures quiz status is constant in database
         new updateQuizReady().execute();
-        
+
         //refresh the page
         MainActivity.navController.navigate(R.id.navigation_garden);
 
@@ -120,11 +121,10 @@ public class PlantDetailFragment extends Fragment {
             quiz2.setPlantIndex(garden.plantIndexSearch(currPlant));
             quiz2.setQuestions(Quiz.QUESTION_SIZE);
             quiz2.setTopic(currPlant.getTopic());
-            //    MainActivity.appDatabase.quizDao().deleteAllQuiz();
             appDatabase.quizDao().insert2(quiz2);
             Log.d("TAG", "doInBackground: quiz db = " + appDatabase.quizDao().getQuiz());
 
-//            Log.d("TAG", "doInBackground: gardenID in code = " + garden.getId());
+            //Log.d("TAG", "doInBackground: gardenID in code = " + garden.getId());
 
             return appDatabase.quizDao().getQuiz();
         }
