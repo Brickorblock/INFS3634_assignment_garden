@@ -25,10 +25,12 @@ import com.example.infs3634_assignment_garden.entities.Quiz;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 
+import static com.example.infs3634_assignment_garden.MainActivity.appDatabase;
 import static com.example.infs3634_assignment_garden.MainActivity.garden;
 
-public class PlantDetailFragment extends Fragment{
+public class PlantDetailFragment extends Fragment {
     Plant currPlant;
+    String quizReady;
 
 
     @Override
@@ -90,7 +92,7 @@ public class PlantDetailFragment extends Fragment{
     }
 
     //adds corresponding quiz to quiz list
-    private void acceptQuiz(){
+    private void acceptQuiz() {
 
         try {
             new PopulateQuizTask().execute().get();
@@ -101,11 +103,14 @@ public class PlantDetailFragment extends Fragment{
         }
         currPlant.setQuizReady(false);
 
+        new updateQuizReady().execute();
+        
         //refresh the page
         MainActivity.navController.navigate(R.id.navigation_garden);
 
         Toast.makeText(getActivity(), "Quiz Accepted!", Toast.LENGTH_SHORT).show();
     }
+
     private class PopulateQuizTask extends AsyncTask<Void, Void, List<Quiz>> {
         @Override
         protected List<Quiz> doInBackground(Void... voids) {
@@ -115,13 +120,26 @@ public class PlantDetailFragment extends Fragment{
             quiz2.setPlantIndex(garden.plantIndexSearch(currPlant));
             quiz2.setQuestions(Quiz.QUESTION_SIZE);
             quiz2.setTopic(currPlant.getTopic());
-        //    MainActivity.appDatabase.quizDao().deleteAllQuiz();
-            MainActivity.appDatabase.quizDao().insert2(quiz2);
-            Log.d("TAG", "doInBackground: quiz db = " + MainActivity.appDatabase.quizDao().getQuiz());
+            //    MainActivity.appDatabase.quizDao().deleteAllQuiz();
+            appDatabase.quizDao().insert2(quiz2);
+            Log.d("TAG", "doInBackground: quiz db = " + appDatabase.quizDao().getQuiz());
 
 //            Log.d("TAG", "doInBackground: gardenID in code = " + garden.getId());
 
-            return MainActivity.appDatabase.quizDao().getQuiz();
+            return appDatabase.quizDao().getQuiz();
         }
     }
+
+    private class updateQuizReady extends AsyncTask<Void, Void, Integer> {
+        @Override
+        protected Integer doInBackground(Void... voids) {
+
+            appDatabase.plantDao().updateQuizReady(false, garden.plantIndexSearch(currPlant));
+
+            return null;
+
+        }
+
+    }
+
 }
