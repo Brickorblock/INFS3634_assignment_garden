@@ -342,12 +342,12 @@ public class Garden {
         Log.d("Garden", "Topics: " + topics);
         return topics;
     }
-
+    //This method updates the quizzes which are ready in the database
     private static class updateQuizReady extends AsyncTask<Integer, Void, Integer> {
 
         @Override
         protected Integer doInBackground(Integer... integers) {
-
+        //Integers is received as an array so in order to get our plant index we have to get the first integer array and cast it to int.
             Integer[] plant = integers;
             int plantindex = plant[0];
 
@@ -359,7 +359,7 @@ public class Garden {
 
 
             Log.d("Garden", "targetPlant Async task: "+ targetPlant);
-            
+
             return null;
         }
     }

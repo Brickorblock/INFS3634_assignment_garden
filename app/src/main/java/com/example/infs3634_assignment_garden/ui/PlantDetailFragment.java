@@ -129,7 +129,7 @@ public class PlantDetailFragment extends Fragment {
             return appDatabase.quizDao().getQuiz();
         }
     }
-
+    //This method changes the quiz ready status of plants to false so that after a quiz is accepted, the quiz ready icon does not appear.
     private class updateQuizReady extends AsyncTask<Void, Void, Integer> {
         @Override
         protected Integer doInBackground(Void... voids) {
