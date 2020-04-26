@@ -106,7 +106,7 @@ public class QuizFragment extends Fragment implements QuizAdapter.LaunchListener
         //pass bundle containing quiz topic, quiz index & plant
         Bundle intentBundle = new Bundle();
         intentBundle.putString(KEY_TOPIC, topic);
-        intentBundle.putInt(KEY_QUIZ, position);
+        intentBundle.putInt(KEY_QUIZ, quizzes.get(position).getId());
 
         //get the plant belonging to the specific quiz that was just clicked
         Plant plant = garden.plantSearch(quizzes.get(position).getPlantIndex());

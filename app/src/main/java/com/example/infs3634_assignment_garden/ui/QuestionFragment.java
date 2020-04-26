@@ -1,14 +1,10 @@
 package com.example.infs3634_assignment_garden.ui;
 
-import android.content.res.Resources;
 import android.os.AsyncTask;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProvider;
-import androidx.lifecycle.ViewModelProviders;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,15 +16,11 @@ import android.widget.Toast;
 
 import com.example.infs3634_assignment_garden.AppDatabase;
 import com.example.infs3634_assignment_garden.MainActivity;
-import com.example.infs3634_assignment_garden.QuestionsDao;
 
 import com.example.infs3634_assignment_garden.R;
-import com.example.infs3634_assignment_garden.entities.Garden;
 import com.example.infs3634_assignment_garden.entities.Question;
 import com.example.infs3634_assignment_garden.entities.Quiz;
 
-import java.lang.reflect.Field;
-import java.security.SignedObject;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -98,7 +90,7 @@ public class QuestionFragment extends Fragment {
         Bundle bundle = getArguments();
         String topics = bundle.getString(QuizFragment.KEY_TOPIC);
         Log.d("Question Fragment", "topic: " + topics);
-        //Grabbing the plant and quix index from the quix fragment.
+        //Grabbing the plant and quiz index from the quiz fragment.
         plantIndex = bundle.getInt(QuizFragment.KEY_PLANT);
         quizIndex = bundle.getInt(QuizFragment.KEY_QUIZ);
 
@@ -259,7 +251,10 @@ public class QuestionFragment extends Fragment {
         Log.d("TAG", "score: " + mScore);
 
         // also remove this quiz from the quiz list since it's now complete
-        garden.removeQuiz(quizIndex);
+        //garden.removeQuiz(quizIndex);
+
+        new RemoveQuizAsyncTask().execute();
+
         // also generate new quizzes to add to list
         garden.generateQuizzes();
     }
@@ -275,6 +270,25 @@ public class QuestionFragment extends Fragment {
         }
 
 
+    }
+
+//    public class OldRemoveQuizAsyncTask extends AsyncTask<Void, Void, List<Quiz>> {
+//
+//        @Override
+//        protected List<Quiz> doInBackground(Void...voids) {
+//
+//            appDatabase.quizDao().deleteAllQuiz(quizIndex);
+//
+//            return null;
+//        }
+//
+//    }
+    private class RemoveQuizAsyncTask extends AsyncTask<Bundle, Void, Void> {
+        protected Void doInBackground(Bundle...quizIndex) {
+
+            appDatabase.quizDao().deleteAllQuiz();
+            return null;
+        }
     }
 
 }
