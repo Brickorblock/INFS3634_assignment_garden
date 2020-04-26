@@ -226,6 +226,9 @@ public class MainActivity extends AppCompatActivity {
             // from the code, each time the app is launched
             Helper.populatePlantImages(garden.plants);
 
+            //calculate all plants exp
+            Helper.calcAllGrowth(garden.plants);
+
             return plantArray;
         }
 
