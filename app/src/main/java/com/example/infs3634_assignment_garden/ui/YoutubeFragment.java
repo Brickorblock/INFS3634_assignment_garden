@@ -37,7 +37,8 @@ public class YoutubeFragment extends Fragment implements YouTubePlayer.OnInitial
 
         Bundle bundle = getArguments();
         //   final String youtubelink = bundle.getString(ChapterFragment.KEY_Youtubelink);
-//Grabbing the video details from the video fragment.
+        //Grabbing the video details from the video fragment.
+        //Google cloud platform used to generate API key: Console.cloud.google.com. 2020. Google Cloud Platform. [online] Available at: <https://console.cloud.google.com/apis/api/youtube.googleapis.com/overview?project=myproject1-273913&supportedpurview=project> [Accessed 26 April 2020].
         final String Title = bundle.getString("title");
         final String Description = bundle.getString("description");
         //Concatenating strings to make the youtube url
@@ -72,6 +73,9 @@ Videourl.setOnClickListener(new View.OnClickListener() {
 
         //This creates a new youtube support fragment player using the public API that we created when creating the Youtube Data project on Google cloud.
         //This then replaces the frame layout in the xml with this fragment.
+
+        //Had to download youtube support fragment from the internet as Google's current youtube player support fragment doesn't support androidX:
+            //Sakout, M., 2020. Solution: Youtubeplayersupportfragment That Supports Androidx. [online] Gist. Available at: <https://gist.github.com/medyo/f226b967213c3b8ec6f6bebb5338a492> [Accessed 26 April 2020].
 
         YouTubePlayerSupportFragmentX youtubePlayerFragment = new YouTubePlayerSupportFragmentX();
         //Old Key = AIzaSyDxidLcL8C1mzLznTTqmniCrGm6yT3Ymu4
