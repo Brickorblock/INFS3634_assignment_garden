@@ -1,5 +1,6 @@
 package com.example.infs3634_assignment_garden.ui;
 
+import android.os.AsyncTask;
 import android.os.Bundle;
 
 import androidx.constraintlayout.widget.ConstraintLayout;
@@ -22,6 +23,7 @@ import com.example.infs3634_assignment_garden.entities.Garden;
 import com.example.infs3634_assignment_garden.entities.Plant;
 import com.example.infs3634_assignment_garden.entities.Quiz;
 
+import static com.example.infs3634_assignment_garden.MainActivity.appDatabase;
 import static com.example.infs3634_assignment_garden.MainActivity.garden;
 
 public class ResultFragment extends Fragment {
@@ -170,7 +172,10 @@ public class ResultFragment extends Fragment {
         //round amt to nearest int
         int coinsRewardRounded = (int) Math.round(coinsReward);
         //add coins
-        MainActivity.garden.addCoins(coinsRewardRounded);
+
+        garden.addCoins(coinsRewardRounded);
+
+        new UpdateGardenTask().execute();
 
         return coinsRewardRounded;
     }
@@ -193,6 +198,17 @@ public class ResultFragment extends Fragment {
 
         return expRewardRounded;
     }
+    private static class UpdateGardenTask extends AsyncTask<Void, Void, Integer> {
+        @Override
+        protected Integer doInBackground(Void... voids) {
+
+            appDatabase.gardenDao().updateCoin(garden.getCoins(), garden.getId());
+
+            return garden.getCoins();
+        }
+    }
+
+
 
 
 }

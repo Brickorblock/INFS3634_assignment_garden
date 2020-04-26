@@ -1,5 +1,6 @@
 package com.example.infs3634_assignment_garden.ui;
 
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -20,8 +21,12 @@ import com.example.infs3634_assignment_garden.MainActivity;
 import com.example.infs3634_assignment_garden.entities.Garden;
 import com.example.infs3634_assignment_garden.entities.Plant;
 import com.example.infs3634_assignment_garden.R;
+import com.example.infs3634_assignment_garden.entities.Question;
 import com.example.infs3634_assignment_garden.entities.Quiz;
 
+import java.util.List;
+
+import static com.example.infs3634_assignment_garden.MainActivity.appDatabase;
 import static com.example.infs3634_assignment_garden.MainActivity.garden;
 
 public class PlantDetailFragment extends Fragment{
@@ -97,5 +102,18 @@ public class PlantDetailFragment extends Fragment{
 
         Toast.makeText(getActivity(), "Quiz Accepted!", Toast.LENGTH_SHORT).show();
     }
+    public class insertQuizAsyncTask extends AsyncTask<Void, Void, List<Quiz>> {
+
+        @Override
+        protected List<Quiz> doInBackground(Void... voids) {
+
+            List<Quiz> Q1 = appDatabase.quizDao().getQuiz();
+
+            return Q1;
+        }
+
+
+    }
+
 
 }
