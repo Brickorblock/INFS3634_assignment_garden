@@ -249,16 +249,14 @@ public class QuestionFragment extends Fragment {
 
         Log.d("TAG", "score: " + mScore);
 
-        // also remove this quiz from the quiz list since it's now complete
-        //garden.removeQuiz(quizIndex);
-
+        //calls async task to remove quiz
         new RemoveQuizAsyncTask().execute();
 
-        // also generate new quizzes to add to list
+        // generate new quizzes to add to list
         garden.generateQuizzes();
 
     }
-
+    //inserts questions list from database
     public class insertQuestionsAsyncTask extends AsyncTask<Void, Void, List<Question>> {
 
         @Override
@@ -270,7 +268,7 @@ public class QuestionFragment extends Fragment {
         }
 
     }
-
+    //removes quiz from quiz list since it's now complete
     private class RemoveQuizAsyncTask extends AsyncTask<Void, Void, Integer> {
         @Override
         protected Integer doInBackground(Void... voids) {

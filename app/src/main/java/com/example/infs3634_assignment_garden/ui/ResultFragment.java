@@ -172,9 +172,8 @@ public class ResultFragment extends Fragment {
         //round amt to nearest int
         int coinsRewardRounded = (int) Math.round(coinsReward);
         //add coins
-
         garden.addCoins(coinsRewardRounded);
-
+        //calls task to update coin into database
         new UpdateCoinTask().execute();
 
         return coinsRewardRounded;
@@ -195,9 +194,7 @@ public class ResultFragment extends Fragment {
         int expRewardRounded = (int) Math.round(expReward);
         //add exp
         plant.addGrowth(expRewardRounded);
-        new UpdateEXPTask().execute();
-
-
+        //calls task to update EXP into database
         new UpdateEXPTask().execute();
 
         return expRewardRounded;
@@ -220,19 +217,5 @@ public class ResultFragment extends Fragment {
             return garden.getCoins();
         }
     }
-
-
-    private class UpdateEXPTask extends AsyncTask<Void, Void, Integer> {
-        @Override
-        protected Integer doInBackground(Void... voids) {
-
-
-            appDatabase.plantDao().updateExp(plant.getGrowthTotal(), garden.plantIndexSearch(plant));
-
-            return garden.getCoins();
-        }
-    }
-
-
 
 }
