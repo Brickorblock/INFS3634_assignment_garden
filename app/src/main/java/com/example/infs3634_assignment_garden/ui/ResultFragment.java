@@ -195,6 +195,8 @@ public class ResultFragment extends Fragment {
         int expRewardRounded = (int) Math.round(expReward);
         //add exp
         plant.addGrowth(expRewardRounded);
+        new UpdateEXPTask().execute();
+
 
         return expRewardRounded;
     }
@@ -208,6 +210,17 @@ public class ResultFragment extends Fragment {
         }
     }
 
+
+    private class UpdateEXPTask extends AsyncTask<Void, Void, Integer> {
+        @Override
+        protected Integer doInBackground(Void... voids) {
+
+
+            appDatabase.plantDao().updateExp(plant.getGrowthTotal(), garden.plantIndexSearch(plant));
+
+            return garden.getCoins();
+        }
+    }
 
 
 
