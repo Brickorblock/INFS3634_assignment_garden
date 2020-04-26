@@ -60,6 +60,7 @@ public class ResultFragment extends Fragment {
         score = bundle.getInt(QuestionFragment.KEY_SCORE);
         plantIndex = bundle.getInt(QuestionFragment.KEY_PLANT);
         plant = garden.plantSearch(plantIndex);
+        Log.d("TAG", "onCreateView: plant = " + plant.toString());
 
         TextView congratsText = root.findViewById(R.id.congratsText);
         TextView scoreText = root.findViewById(R.id.scoreText);
@@ -194,6 +195,7 @@ public class ResultFragment extends Fragment {
         //round amt to nearest int
         int expRewardRounded = (int) Math.round(expReward);
         //add exp
+        Log.d("TAG", "calcExpReward: images before addGrowth = "  + plant.getPlantImages()[0]+  " " + plant.getPlantImages()[1] + "...");
         plant.addGrowth(expRewardRounded);
 
         return expRewardRounded;

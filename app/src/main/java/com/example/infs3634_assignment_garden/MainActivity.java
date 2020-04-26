@@ -35,6 +35,8 @@ public class MainActivity extends AppCompatActivity {
     public static NavController navController;
     public static AppDatabase appDatabase;
 
+    public Plant plant;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

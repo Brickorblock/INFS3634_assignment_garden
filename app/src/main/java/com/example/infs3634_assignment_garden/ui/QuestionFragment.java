@@ -252,6 +252,7 @@ public class QuestionFragment extends Fragment {
         // also remove this quiz from the quiz list since it's now complete
         //garden.removeQuiz(quizIndex);
 
+
         new RemoveQuizAsyncTask().execute();
 
         // also generate new quizzes to add to list
