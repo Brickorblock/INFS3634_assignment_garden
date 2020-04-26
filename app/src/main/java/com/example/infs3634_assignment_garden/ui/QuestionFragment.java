@@ -283,8 +283,8 @@ public class QuestionFragment extends Fragment {
 //        }
 //
 //    }
-    private class RemoveQuizAsyncTask extends AsyncTask<Bundle, Void, Void> {
-        protected Void doInBackground(Bundle...quizIndex) {
+    private class RemoveQuizAsyncTask extends AsyncTask<Quiz, Void, Void> {
+        protected Void doInBackground(Quiz...quiz) {
 
             appDatabase.quizDao().deleteAllQuiz();
             return null;
