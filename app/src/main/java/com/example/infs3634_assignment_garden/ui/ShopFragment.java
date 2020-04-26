@@ -62,6 +62,7 @@ public class ShopFragment extends Fragment implements ShopAdapter.ClickListener 
                 if (garden.getCoins() >= cost) {
                     garden.deductCoins(cost);
                     garden.addPlant(purchaseItem);
+                    //todo
 
                     //persist to db
                     new UpdateGardenTask().execute();

@@ -19,8 +19,8 @@ public interface PlantDao {
     @Query("UPDATE Plant SET growthTotal = :growthTotal WHERE plantIndex =:id")
     void updateExp(int growthTotal, int id);
 
-    @Query("UPDATE Plant SET isQuizReady = :isQuizReady WHERE plantIndex =:id")
-    void updateQuizReady(Boolean isQuizReady, int id);
+    @Query("UPDATE Plant SET quizReady = :quizReady WHERE plantIndex =:id")
+    void updateQuizReady(Boolean quizReady, int id);
 
     @Query("SELECT * FROM Plant")
     List<Plant> getPlant();
