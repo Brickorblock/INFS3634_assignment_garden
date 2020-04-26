@@ -215,7 +215,6 @@ public class QuestionFragment extends Fragment {
 
             mAnswer = finalquestion.getAnswer();
 
-
             Log.d("TAG", "question number: " + mQuestionNumber);
         }
     }
