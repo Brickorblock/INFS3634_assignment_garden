@@ -23,25 +23,30 @@ public class Evergreen extends Plant {
 
     }
 
-    @Override
-    public int calcGrowthLvl() {
-        int growthLvl = super.getGrowthLvl();
-
-        int plantImage = plantImages[0];
-
-        Log.d("TAG", "calcGrowthLvl: growthTotal = " + super.getGrowthTotal() + "milestones = " + super.getMilestones());
-        if (super.getGrowthTotal() >= super.getMilestones()[2]) {
-            growthLvl = 3;
-            plantImage = plantImages[3];
-        } else if (super.getGrowthTotal() >= super.getMilestones()[1]) {
-            growthLvl = 2;
-            plantImage = plantImages[2];
-        } else if (super.getGrowthTotal() >= super.getMilestones()[0]) {
-            growthLvl = 1;
-            plantImage = plantImages[1];
-        }
-
-        super.setPlantImage(plantImage);
-        return growthLvl;
+    public static int[] getSubclassImages() {
+        Log.d("TAG", "getPlantImages: calling overridden GET");
+        return plantImages;
     }
+
+//    @Override
+//    public int calcGrowthLvl() {
+//        int growthLvl = super.getGrowthLvl();
+//
+//        int plantImage = plantImages[0];
+//
+//        Log.d("TAG", "calcGrowthLvl: growthTotal = " + super.getGrowthTotal() + "milestones = " + super.getMilestones());
+//        if (super.getGrowthTotal() >= super.getMilestones()[2]) {
+//            growthLvl = 3;
+//            plantImage = plantImages[3];
+//        } else if (super.getGrowthTotal() >= super.getMilestones()[1]) {
+//            growthLvl = 2;
+//            plantImage = plantImages[2];
+//        } else if (super.getGrowthTotal() >= super.getMilestones()[0]) {
+//            growthLvl = 1;
+//            plantImage = plantImages[1];
+//        }
+//
+//        super.setPlantImage(plantImage);
+//        return growthLvl;
+//    }
 }

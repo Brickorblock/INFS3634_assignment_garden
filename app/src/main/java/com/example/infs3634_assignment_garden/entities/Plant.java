@@ -169,7 +169,7 @@ public class Plant extends ArrayList<Plant> {
 
     public void calcGrowth(){
         Log.d("TAG", "calcGrowth: called!");
-        growthLvl = calcGrowthLvl();
+        calcGrowthLvl();
         calcGrowthProgress();
     }
 
@@ -212,7 +212,24 @@ public class Plant extends ArrayList<Plant> {
     //calculates current growth based on total & milestone
     // also sets the corresponding plant img for the current level
     public int calcGrowthLvl() {
-        //IMPLEMENTATION IS OVERRIDDEN BY EACH SUBCLASS -> check the subclasses for the code
-        return 0;
+        growthLvl = 0;
+
+        plantImage = plantImages[0];
+
+        if (growthTotal >= milestones[2]) {
+            growthLvl = 3;
+            plantImage = plantImages[3];
+        } else if (growthTotal >= milestones[1]) {
+            growthLvl = 2;
+            plantImage = plantImages[2];
+        } else if (growthTotal >= milestones[0]) {
+            growthLvl = 1;
+            plantImage = plantImages[1];
+        }
+
+        Log.d("TAG", "calcGrowthLvl: milestones = " + milestones);
+        Log.d("TAG", "calcGrowthLvl: growthTotal = " + growthTotal +" | GrowthLvl = " + growthLvl );
+
+        return growthLvl;
     }
 }
