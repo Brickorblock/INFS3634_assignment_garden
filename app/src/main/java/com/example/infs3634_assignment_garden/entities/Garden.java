@@ -53,6 +53,7 @@ public class Garden {
         this.ambienceLvl = 0;
         this.ambienceTotal = 0;
         this.coins = 0;
+        this.id = 1;
         this.plants = new ArrayList<>();
         this.quizzes = new ArrayList<>();
         this.topics = new ArrayList<>();
@@ -324,14 +325,14 @@ public class Garden {
         Helper.calcAllGrowth(plants);
     }
 
-    public ArrayList<Quiz> getTempQuizzes() {
-
-        quizzes.add(new Quiz(plants.get(0), Quiz.QUESTION_SIZE));
-        quizzes.add(new Quiz(plants.get(1), Quiz.QUESTION_SIZE));
-        quizzes.add(new Quiz(plants.get(2), Quiz.QUESTION_SIZE));
-        Log.d("TAG", "getTempQuizzes: quizzes = " + quizzes.toString());
-        return quizzes;
-    }
+//    public ArrayList<Quiz> getTempQuizzes() {
+//
+//        quizzes.add(new Quiz(plants.get(0), Quiz.QUESTION_SIZE));
+//        quizzes.add(new Quiz(plants.get(1), Quiz.QUESTION_SIZE));
+//        quizzes.add(new Quiz(plants.get(2), Quiz.QUESTION_SIZE));
+//        Log.d("TAG", "getTempQuizzes: quizzes = " + quizzes.toString());
+//        return quizzes;
+//    }
 
     public ArrayList<Topics> getTopics() {
         topics.add(new Topics("Solar Systems", R.drawable.solarsystem));

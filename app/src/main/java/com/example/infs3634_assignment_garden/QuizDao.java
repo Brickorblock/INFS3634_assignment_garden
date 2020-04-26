@@ -16,6 +16,9 @@ public interface QuizDao {
     @Insert
     void insert(Quiz...quiz);
 
+    @Insert
+    void insert2(Quiz quiz);
+
     @Update
     void update(Quiz...quiz);
 
