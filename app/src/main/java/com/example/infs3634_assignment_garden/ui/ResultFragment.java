@@ -175,7 +175,7 @@ public class ResultFragment extends Fragment {
 
         garden.addCoins(coinsRewardRounded);
 
-        new UpdateGardenTask().execute();
+        new UpdateCoinTask().execute();
 
         return coinsRewardRounded;
     }
@@ -196,13 +196,24 @@ public class ResultFragment extends Fragment {
         //add exp
         plant.addGrowth(expRewardRounded);
 
+        new UpdateEXPTask().execute();
+
         return expRewardRounded;
     }
-    private static class UpdateGardenTask extends AsyncTask<Void, Void, Integer> {
+    private static class UpdateCoinTask extends AsyncTask<Void, Void, Integer> {
         @Override
         protected Integer doInBackground(Void... voids) {
 
             appDatabase.gardenDao().updateCoin(garden.getCoins(), garden.getId());
+
+            return garden.getCoins();
+        }
+    }
+    private class UpdateEXPTask extends AsyncTask<Void, Void, Integer> {
+        @Override
+        protected Integer doInBackground(Void... voids) {
+
+            appDatabase.plantDao().updateExp(plant.getGrowthTotal(), garden.plantIndexSearch(plant));
 
             return garden.getCoins();
         }

@@ -104,7 +104,7 @@ public class PlantDetailFragment extends Fragment {
         currPlant.setQuizReady(false);
 
         new updateQuizReady().execute();
-        
+
         //refresh the page
         MainActivity.navController.navigate(R.id.navigation_garden);
 

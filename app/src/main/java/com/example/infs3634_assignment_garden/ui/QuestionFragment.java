@@ -269,7 +269,6 @@ public class QuestionFragment extends Fragment {
             return Q1;
         }
 
-
     }
 
     private class RemoveQuizAsyncTask extends AsyncTask<Void, Void, Integer> {
