@@ -16,8 +16,11 @@ public interface PlantDao {
     @Insert
     void insert(Plant...plant);
 
-    @Update
-    void update(Plant...plant);
+    @Query("UPDATE Plant SET growthTotal = :growthTotal WHERE plantIndex =:id")
+    void updateExp(int growthTotal, int id);
+
+    @Query("UPDATE Plant SET isQuizReady = :isQuizReady WHERE plantIndex =:id")
+    void updateQuizReady(Boolean isQuizReady, int id);
 
     @Query("SELECT * FROM Plant")
     List<Plant> getPlant();
@@ -25,7 +28,7 @@ public interface PlantDao {
     @Query("DELETE FROM Plant")
     void deleteAllPlant();
 
-    @Query("SELECT PlantIndex FROM Plant")
-    int getPlantIndex();
+    @Query("SELECT plantIndex FROM Plant WHERE plantIndex =:id")
+    int getPlantIndex(int id);
 
 }

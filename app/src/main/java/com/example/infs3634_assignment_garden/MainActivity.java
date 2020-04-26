@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.util.Log;
 
 import com.example.infs3634_assignment_garden.entities.Garden;
+import com.example.infs3634_assignment_garden.entities.Helper;
 import com.example.infs3634_assignment_garden.entities.Plant;
 import com.example.infs3634_assignment_garden.entities.Question;
 import com.example.infs3634_assignment_garden.entities.Quiz;
@@ -57,33 +58,19 @@ public class MainActivity extends AppCompatActivity {
         appDatabase = Room.databaseBuilder(getApplicationContext(), AppDatabase.class, "Db")
                 .build();
 
+        //create Garden class (stores global info about progress, etc.)
+
+        this.garden = new Garden();
 
         // instantiate DB tables and populate data
         new PopulateQuestionsAsyncTask().execute();
         new ShowData().execute();
-
         new PopulateGardenTask().execute();
+        new PopulatePlantAsyncTask().execute();
 
-//        try {
-//            new PopulateGardenTask().get();
-//        } catch (ExecutionException e) {
-//            e.printStackTrace();
-//        } catch (InterruptedException e) {
-//            e.printStackTrace();
-//        }
-
-        //create Garden class (stores global info about progress, etc.)
-
-        this.garden = new Garden();
         //TODO: remove this temp dev debugging method
-        garden.getTempPlants();
-        garden.getTempQuizzes();
-//        garden.setCoins(5000);
+//        garden.getTempQuizzes();
 
-
-//        InsertDataAsyncTask insertDataAsyncTask = new InsertDataAsyncTask();
-//        insertDataAsyncTask.setContext(getApplicationContext());
-//        insertDataAsyncTask.execute();
 
     }
 
@@ -98,6 +85,7 @@ public class MainActivity extends AppCompatActivity {
         @Override
         protected Question[] doInBackground(Void... voids) {
             List<Question> Questions = new ArrayList<>();
+            Question[] questionArray = null;
 
             if (appDatabase.questionsDao().getData().isEmpty()) {
                 //VERY IMPORTANT LINE...
@@ -167,11 +155,21 @@ public class MainActivity extends AppCompatActivity {
                 Questions.add(new Question("Stars", "Which property of a star tells us the composition of that Star?", "Luminosity", "Apparent magnitude", "Spectrum", "Absolute magnitude", "Spectrum"));
                 Questions.add(new Question("Stars", "A star that explodes is known as a", "Nebula", "Supershell", "Neutron star", "Supernova", "Supernova"));
 
+                questionArray = Questions.toArray(new Question[Questions.size()]);
+                appDatabase.questionsDao().insert(questionArray);
+
+                //testing...
+                Question q1 = questionArray[0];
+                Question q2 = questionArray[1];
+                Question q3 = questionArray[2];
+                Log.d("TAG", "doInBackground: 1 questionID in db = " + appDatabase.questionsDao().getData().get(q1.getId()).getId());
+                Log.d("TAG", "doInBackground: 1 questionID in code = " + q1.getId());
+                Log.d("TAG", "doInBackground: 2 questionID in db = " + appDatabase.questionsDao().getData().get(q2.getId()).getId());
+                Log.d("TAG", "doInBackground: 2 questionID in code = " + q2.getId());
+                Log.d("TAG", "doInBackground: 3 questionID in db = " + appDatabase.questionsDao().getData().get(q3.getId()).getId());
+                Log.d("TAG", "doInBackground: 3 questionID in code = " + q3.getId());
 
             }
-
-            Question[] questionArray = Questions.toArray(new Question[Questions.size()]);
-            appDatabase.questionsDao().insert(questionArray);
 
             return questionArray;
         }
@@ -198,18 +196,34 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         protected Plant[] doInBackground(Void... voids) {
+            Plant[] plantArray = null;
+            if (appDatabase.plantDao().getPlant().isEmpty()) {
+                // populate some starter data
+                appDatabase.plantDao().deleteAllPlant();
 
-            appDatabase.plantDao().deleteAllPlant();
+                //some dummy data for examining purposes
 
-            //some dummy data for examining purposes
-            List<Plant> Plants = new ArrayList<>();
+                garden.plants.add(new Evergreen(true));
+                garden.plants.add(new LemonTree(true));
+                garden.plants.add(new OrangeTree(true));
+                // set plantIndexes for these new plants
+                Helper.setPlantIndexes(garden.plants);
 
-            Plants.add(new Evergreen(true));
-            Plants.add(new LemonTree(true));
-            Plants.add(new OrangeTree(true));
+                Log.d("TAG", "doInBackground: 1 plantIndexSearch = " + garden.plantIndexSearch(garden.plants.get(0)));
+                Log.d("TAG", "doInBackground: 2 plantIndexSearch = " + garden.plantIndexSearch(garden.plants.get(1)));
+                Log.d("TAG", "doInBackground: 3 plantIndexSearch = " + garden.plantIndexSearch(garden.plants.get(2)));
 
-            Plant[] plantArray = Plants.toArray(new Plant[Plants.size()]);
-            appDatabase.plantDao().insert(plantArray);
+                plantArray = garden.plants.toArray(new Plant[garden.plants.size()]);
+                appDatabase.plantDao().insert(plantArray);
+
+                Plant plant1 = plantArray[0];
+                Log.d("TAG", "doInBackground: 1 plantId in db = " + appDatabase.plantDao().getPlantIndex(plant1.getPlantIndex()));
+                Log.d("TAG", "doInBackground: 1 plantId in code = " + plant1.getPlantIndex());
+            } else  {
+                //fetch existing data from db
+                garden.plants = (ArrayList<Plant>) appDatabase.plantDao().getPlant();
+            }
+
             return plantArray;
         }
 
@@ -236,7 +250,7 @@ public class MainActivity extends AppCompatActivity {
 
             Log.d("TAG", "doInBackground: coins in db = " + appDatabase.gardenDao().getCoin(garden.getId()));
 //            Log.d("TAG", "doInBackground: gardenID in db = " + appDatabase.gardenDao().getGarden().get(garden.getId()).getId());
-//            Log.d("TAG", "doInBackground: gardenID in code = " + garden.getId());
+            Log.d("TAG", "doInBackground: gardenID in code = " + garden.getId());
 
             return garden.getCoins();
         }

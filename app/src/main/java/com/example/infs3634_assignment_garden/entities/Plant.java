@@ -9,9 +9,12 @@ import androidx.room.PrimaryKey;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+import static com.example.infs3634_assignment_garden.MainActivity.garden;
+
 @Entity
 public class Plant extends ArrayList<Plant> {
 
+    // plantIndex = index of plant in Garden's arraylist - this is treated as the PK
     @PrimaryKey
     private int plantIndex;
     private int plantImage;
@@ -45,6 +48,10 @@ public class Plant extends ArrayList<Plant> {
         this.growthLvl = 0;
         this.growthProgress = 0;
         this.quizReady = quizReady;
+        //instantiate plantIndex with "null" value - this will be set properly later in the code
+        this.plantIndex = -1;
+
+        Log.d("TAG", "Plant: new plant - id " + plantIndex);
 
         calcGrowth();
     }
@@ -144,6 +151,7 @@ public class Plant extends ArrayList<Plant> {
     @Override
     public String toString() {
         return "Plant{" +
+                "plantIndex = " + plantIndex +
                 "plantImage=" + plantImage +
                 ", plantImages=" + Arrays.toString(plantImages) +
                 ", name='" + name + '\'' +

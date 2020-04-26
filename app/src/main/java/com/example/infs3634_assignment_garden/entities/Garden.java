@@ -2,6 +2,7 @@ package com.example.infs3634_assignment_garden.entities;
 
 import android.util.Log;
 
+import androidx.annotation.NonNull;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.Ignore;
@@ -28,7 +29,7 @@ public class Garden {
     @Ignore
     private double ambienceProgress;
     @PrimaryKey (autoGenerate = true)
-    private int id = 1;
+    private int id;
     private int coins;
     @Ignore
     public ArrayList<Plant> plants;
@@ -47,6 +48,8 @@ public class Garden {
     //  - milestones = amount needed for each level
 
     public Garden() {
+        // there will always only be one garden, so set a static id = 1
+        this.id = 1;
         this.ambienceLvl = 0;
         this.ambienceTotal = 0;
         this.coins = 0;
@@ -219,6 +222,7 @@ public class Garden {
         //loop through whole arraylist until reaching specified plant
         int i = 0;
         while (i < plants.size()) {
+            Log.d("TAG", "plantIndexSearch: entering search...");
             if (plants.get(i) == targetPlant) {
                 index = i;
                 Log.d("TAG", "plantIndexSearch: FOUND!! " + plants.get(i).toString());

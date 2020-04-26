@@ -65,6 +65,7 @@ public class ShopFragment extends Fragment implements ShopAdapter.ClickListener 
 
                     //persist to db
                     new UpdateGardenTask().execute();
+                    new UpdatePlantTask().execute(purchaseItem);
 
                     //navigate back to Garden screen
                     MainActivity.navController.popBackStack();
@@ -95,6 +96,16 @@ public class ShopFragment extends Fragment implements ShopAdapter.ClickListener 
             Log.d("TAG", "doInBackground: coins from db = " + coinsInDb);
 
             return garden.getCoins();
+        }
+    }
+    private static class UpdatePlantTask extends AsyncTask<Plant, Void, Void> {
+        @Override
+        protected Void doInBackground(Plant... plants) {
+            //writing newly purchased plant to DB
+            Log.d("TAG", "doInBackground: writing plant to db - " + plants.toString());
+            appDatabase.plantDao().insert(plants);
+
+            return null;
         }
     }
 }
