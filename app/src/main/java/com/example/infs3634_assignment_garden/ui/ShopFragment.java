@@ -61,7 +61,7 @@ public class ShopFragment extends Fragment implements ShopAdapter.ClickListener 
                 if (garden.getCoins() >= cost) {
                     garden.deductCoins(cost);
                     garden.addPlant(purchaseItem);
-                    //set plantIndex for new plant (this is required for writing to db)Rohto Z!
+                    //set plantIndex for new plant (this is required for writing to db)
                     purchaseItem.setPlantIndex(garden.plantIndexSearch(purchaseItem));
 
                     //persist to db

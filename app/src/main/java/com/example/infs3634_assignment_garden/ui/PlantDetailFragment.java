@@ -91,8 +91,7 @@ public class PlantDetailFragment extends Fragment{
 
     //adds corresponding quiz to quiz list
     private void acceptQuiz(){
-//        Quiz newQuiz = new Quiz(currPlant, Quiz.QUESTION_SIZE);
-//        garden.addQuiz(newQuiz);
+
         try {
             new PopulateQuizTask().execute().get();
         } catch (ExecutionException e) {
@@ -101,6 +100,7 @@ public class PlantDetailFragment extends Fragment{
             e.printStackTrace();
         }
         currPlant.setQuizReady(false);
+
         //refresh the page
         MainActivity.navController.navigate(R.id.navigation_garden);
 

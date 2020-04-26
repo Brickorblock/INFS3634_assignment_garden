@@ -146,9 +146,9 @@ public class QuestionFragment extends Fragment {
         }
 
         Log.d("TAG", "randomised questions: " + randomisedQuestions.size());
-    //Updating the first question shown.
+        //Updating the first question shown.
         updateQuestion();
-    //Whenever a choice button is clicked a questions are updated and so are the button choices.
+        //Whenever a choice button is clicked a questions are updated and so are the button choices.
         mButtonChoice1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -186,8 +186,7 @@ public class QuestionFragment extends Fragment {
     }
 
 
-
-        //This method updates the question and button choices.
+    //This method updates the question and button choices.
     private void updateQuestion() {
 
         Log.d("TAG", "randomised questions:" + randomisedQuestions);
@@ -196,7 +195,7 @@ public class QuestionFragment extends Fragment {
             endQuiz();
 
         } else {
-        //This grabs the next question in the randomised Questions bank.
+            //This grabs the next question in the randomised Questions bank.
             Question finalquestion = randomisedQuestions.get(mQuestionNumber);
 
             mQuestionView.setText(finalquestion.getQuestion());
@@ -257,6 +256,7 @@ public class QuestionFragment extends Fragment {
 
         // also generate new quizzes to add to list
         garden.generateQuizzes();
+
     }
 
     public class insertQuestionsAsyncTask extends AsyncTask<Void, Void, List<Question>> {
@@ -272,29 +272,18 @@ public class QuestionFragment extends Fragment {
 
     }
 
-//    public class OldRemoveQuizAsyncTask extends AsyncTask<Void, Void, List<Quiz>> {
-//
-//        @Override
-//        protected List<Quiz> doInBackground(Void...voids) {
-//
-//            appDatabase.quizDao().deleteAllQuiz(quizIndex);
-//
-//            return null;
-//        }
-//
-//    }
-private class RemoveQuizAsyncTask extends AsyncTask<Void, Void, Integer> {
-    @Override
-    protected Integer doInBackground(Void... voids) {
+    private class RemoveQuizAsyncTask extends AsyncTask<Void, Void, Integer> {
+        @Override
+        protected Integer doInBackground(Void... voids) {
 
-        Bundle bundle = getArguments();
-        int quizIndex2 = bundle.getInt(QuizFragment.KEY_QUIZ);
-        Log.d("TAG", "Quiz Index 2: " + quizIndex2);
+            Bundle bundle = getArguments();
+            int quizIndex2 = bundle.getInt(QuizFragment.KEY_QUIZ);
+            Log.d("TAG", "Quiz Index 2: " + quizIndex2);
 
-     appDatabase.quizDao().deleteAllQuiz(quizIndex2);
+            appDatabase.quizDao().deleteAllQuiz(quizIndex2);
 
-        return garden.getCoins();
+            return garden.getCoins();
+        }
     }
-}
 
 }

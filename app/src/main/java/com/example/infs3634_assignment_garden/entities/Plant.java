@@ -210,6 +210,7 @@ public class Plant extends ArrayList<Plant> {
     //calculates current growth based on total & milestone
     // also sets the corresponding plant img for the current level
     public int calcGrowthLvl(){
+        Log.d("TAG", "calcGrowthLvl: images = " + plantImages.toString());
         this.growthLvl = 0;
         plantImage = plantImages[0];
 
