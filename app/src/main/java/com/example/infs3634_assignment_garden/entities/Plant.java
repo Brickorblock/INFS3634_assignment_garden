@@ -148,6 +148,8 @@ public class Plant extends ArrayList<Plant> {
         this.plantIndex = plantIndex;
     }
 
+
+
     @Override
     public String toString() {
         return "Plant{" +
@@ -209,9 +211,9 @@ public class Plant extends ArrayList<Plant> {
 
     //calculates current growth based on total & milestone
     // also sets the corresponding plant img for the current level
-    public int calcGrowthLvl(){
-        Log.d("TAG", "calcGrowthLvl: images = " + plantImages.toString());
-        this.growthLvl = 0;
+    public int calcGrowthLvl() {
+        growthLvl = 0;
+
         plantImage = plantImages[0];
 
         if (growthTotal >= milestones[2]) {
@@ -224,6 +226,9 @@ public class Plant extends ArrayList<Plant> {
             growthLvl = 1;
             plantImage = plantImages[1];
         }
+
+        Log.d("TAG", "calcGrowthLvl: milestones = " + milestones);
+        Log.d("TAG", "calcGrowthLvl: growthTotal = " + growthTotal +" | GrowthLvl = " + growthLvl );
 
         return growthLvl;
     }

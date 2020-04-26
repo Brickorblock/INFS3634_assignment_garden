@@ -35,6 +35,8 @@ public class MainActivity extends AppCompatActivity {
     public static NavController navController;
     public static AppDatabase appDatabase;
 
+    public Plant plant;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,10 +69,6 @@ public class MainActivity extends AppCompatActivity {
         new ShowData().execute();
         new PopulateGardenTask().execute();
         new PopulatePlantAsyncTask().execute();
-
-        //TODO: remove this temp dev debugging method
-//        garden.getTempQuizzes();
-
 
     }
 
@@ -223,6 +221,10 @@ public class MainActivity extends AppCompatActivity {
                 //fetch existing data from db
                 garden.plants = (ArrayList<Plant>) appDatabase.plantDao().getPlant();
             }
+
+            //since we aren't storing plantImages (array) in db, we have to populate this manually,
+            // from the code, each time the app is launched
+            Helper.populatePlantImages(garden.plants);
 
             return plantArray;
         }
