@@ -77,7 +77,7 @@ public class MainActivity extends AppCompatActivity {
         this.garden = new Garden();
         //TODO: remove this temp dev debugging method
         garden.getTempPlants();
-        garden.getTempQuizzes();
+//        garden.getTempQuizzes();
 //        garden.setCoins(5000);
 
 

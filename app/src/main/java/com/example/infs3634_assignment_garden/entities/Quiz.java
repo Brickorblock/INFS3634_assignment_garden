@@ -2,6 +2,7 @@ package com.example.infs3634_assignment_garden.entities;
 
 import androidx.room.Entity;
 import androidx.room.ForeignKey;
+import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
 import java.util.ArrayList;
@@ -16,6 +17,7 @@ public class Quiz {
     public int plantIndex;
     private int questions;
     private String topic;
+    @Ignore
     public static final int QUESTION_SIZE = 10;
 
     @PrimaryKey(autoGenerate = true)
@@ -24,10 +26,11 @@ public class Quiz {
     public Quiz() {
     }
 
-    public Quiz(Plant plant, int questions) {
+    public Quiz(Plant plant, int questions, int id) {
         this.plantIndex = garden.plantIndexSearch(plant);
         this.questions = questions;
         this.topic = plant.getTopic();
+        this.id = id;
     }
     public void setId(int id) {
         this.id = id;
@@ -61,14 +64,14 @@ public class Quiz {
         this.topic = topic;
     }
 
-    public static ArrayList<Quiz> createQuizzes(ArrayList<Quiz> quizList) {
-
-        ArrayList<Quiz> myquizzes = garden.getTempQuizzes();
-        quizList.addAll(myquizzes);
-
-        return quizList;
-
-    }
+//    public static ArrayList<Quiz> createQuizzes(ArrayList<Quiz> quizList) {
+//
+//        ArrayList<Quiz> myquizzes = garden.getTempQuizzes();
+//        quizList.addAll(myquizzes);
+//
+//        return quizList;
+//
+//    }
 
     @Override
     public String toString() {

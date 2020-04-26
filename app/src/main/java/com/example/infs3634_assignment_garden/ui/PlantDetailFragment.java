@@ -1,5 +1,6 @@
 package com.example.infs3634_assignment_garden.ui;
 
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -17,10 +18,12 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 
 import com.example.infs3634_assignment_garden.MainActivity;
-import com.example.infs3634_assignment_garden.entities.Garden;
 import com.example.infs3634_assignment_garden.entities.Plant;
 import com.example.infs3634_assignment_garden.R;
 import com.example.infs3634_assignment_garden.entities.Quiz;
+
+import java.util.List;
+import java.util.concurrent.ExecutionException;
 
 import static com.example.infs3634_assignment_garden.MainActivity.garden;
 
@@ -88,14 +91,37 @@ public class PlantDetailFragment extends Fragment{
 
     //adds corresponding quiz to quiz list
     private void acceptQuiz(){
-        Quiz newQuiz = new Quiz(currPlant, Quiz.QUESTION_SIZE);
-        garden.addQuiz(newQuiz);
-
+//        Quiz newQuiz = new Quiz(currPlant, Quiz.QUESTION_SIZE);
+//        garden.addQuiz(newQuiz);
+        try {
+            new PopulateQuizTask().execute().get();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         currPlant.setQuizReady(false);
         //refresh the page
         MainActivity.navController.navigate(R.id.navigation_garden);
 
         Toast.makeText(getActivity(), "Quiz Accepted!", Toast.LENGTH_SHORT).show();
     }
+    private class PopulateQuizTask extends AsyncTask<Void, Void, List<Quiz>> {
+        @Override
+        protected List<Quiz> doInBackground(Void... voids) {
 
+            Quiz quiz2 = new Quiz();
+
+            quiz2.setPlantIndex(garden.plantIndexSearch(currPlant));
+            quiz2.setQuestions(Quiz.QUESTION_SIZE);
+            quiz2.setTopic(currPlant.getTopic());
+        //    MainActivity.appDatabase.quizDao().deleteAllQuiz();
+            MainActivity.appDatabase.quizDao().insert2(quiz2);
+            Log.d("TAG", "doInBackground: quiz db = " + MainActivity.appDatabase.quizDao().getQuiz());
+
+//            Log.d("TAG", "doInBackground: gardenID in code = " + garden.getId());
+
+            return MainActivity.appDatabase.quizDao().getQuiz();
+        }
+    }
 }

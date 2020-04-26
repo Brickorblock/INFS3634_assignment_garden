@@ -45,44 +45,50 @@ public class QuizFragment extends Fragment implements QuizAdapter.LaunchListener
     List<Quiz> myquizzes;
 
 
-    public View onCreateView(@NonNull LayoutInflater inflater,
-                             ViewGroup container, Bundle savedInstanceState) {
-        View root = inflater.inflate(R.layout.fragment_quiz, container, false);
-        //Grabbing the list of quizzes from quiz table.
+    public QuizFragment() {
+
         try {
-            quizzes = new insertQuizAsyncTask().execute().get();
+            quizzes = new GetQuizAsyncTask().execute().get();
+            Log.d("TAG", "Quizzes: " + quizzes);
+
         } catch (ExecutionException e) {
             e.printStackTrace();
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
 
+    }
+
+    public View onCreateView(@NonNull LayoutInflater inflater,
+                             ViewGroup container, Bundle savedInstanceState) {
+        View root = inflater.inflate(R.layout.fragment_quiz, container, false);
+        //Grabbing the list of quizzes from quiz table.
+
 //Whenever a user has no quizzes, a notice text is shown telling them that they have no active quizzes.
         if (quizzes.size() != 0) {
 
-            noticeText = root.findViewById(R.id.noticeText);
-            noticeText.setVisibility(View.INVISIBLE);
+           noticeText = root.findViewById(R.id.noticeText);
+           noticeText.setVisibility(View.INVISIBLE);
 
-            //create recyclerView
-            // Get a handle to the RecyclerView.
-            myRecyclerView = root.findViewById(R.id.quizRecycler);
-            myRecyclerView.setHasFixedSize(true);
+          //create recyclerView
+          // Get a handle to the RecyclerView.
+           myRecyclerView = root.findViewById(R.id.quizRecycler);
+           myRecyclerView.setHasFixedSize(true);
 
-            // Connect the adapter with the RecyclerView and send all information about clicks to the adapter.
-            // Allows for communication between adapter and recylerrview in terrms of clicks.
-            myAdapter = new QuizAdapter(quizzes, this);
-            Log.d("main activity", "listenerset");
+          // Connect the adapter with the RecyclerView and send all information about clicks to the adapter.
+           // Allows for communication between adapter and recylerrview in terrms of clicks.
+          myAdapter = new QuizAdapter(quizzes, this);
+           Log.d("main activity", "listenerset");
 
-            // Give the RecyclerView a default layout manager.
-            myRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-            Log.d("TAG", "onCreateView: setLayout called");
-            // Connect the adapter with the RecyclerView.
-            myRecyclerView.setAdapter(myAdapter);
-        } else {
-            noticeText = root.findViewById(R.id.noticeText);
-            noticeText.setVisibility(View.VISIBLE);
-        }
-
+           // Give the RecyclerView a default layout manager.
+           myRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+           Log.d("TAG", "onCreateView: setLayout called");
+           // Connect the adapter with the RecyclerView.
+           myRecyclerView.setAdapter(myAdapter);
+       } else {
+           noticeText = root.findViewById(R.id.noticeText);
+           noticeText.setVisibility(View.VISIBLE);
+       }
 
         return root;
     }
@@ -118,7 +124,7 @@ public class QuizFragment extends Fragment implements QuizAdapter.LaunchListener
         //  ArrayList<Quiz> myquizzes = Garden.getQuizzes();
 
         try {
-            myquizzes = new insertQuizAsyncTask().execute().get();
+            new GetQuizAsyncTask().execute().get();
         } catch (ExecutionException e) {
             e.printStackTrace();
         } catch (InterruptedException e) {
@@ -127,7 +133,7 @@ public class QuizFragment extends Fragment implements QuizAdapter.LaunchListener
 
         Log.d("main activity", "position: " + position);
 
-        Quiz chosenquiz = myquizzes.get(position);
+        Quiz chosenquiz = quizzes.get(position);
 
         Log.d("main activity", "chosenquiz: " + chosenquiz);
 
@@ -137,12 +143,14 @@ public class QuizFragment extends Fragment implements QuizAdapter.LaunchListener
     }
 
 
-    public class insertQuizAsyncTask extends AsyncTask<Void, Void, List<Quiz>> {
+    public class GetQuizAsyncTask extends AsyncTask<Void, Void, List<Quiz>> {
 
         @Override
         protected List<Quiz> doInBackground(Void... voids) {
 
             List<Quiz> Q2 = appDatabase.quizDao().getQuiz();
+            Log.d("TAG", "Quizzes in async task: " + appDatabase.quizDao().getQuiz());
+
 
             return Q2;
         }
