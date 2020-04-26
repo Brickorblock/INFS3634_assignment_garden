@@ -9,15 +9,20 @@ import androidx.room.Entity;
 import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
+import com.example.infs3634_assignment_garden.MainActivity;
 import com.example.infs3634_assignment_garden.R;
 import com.example.infs3634_assignment_garden.entities.subclasses.Evergreen;
 import com.example.infs3634_assignment_garden.entities.subclasses.LemonTree;
 import com.example.infs3634_assignment_garden.entities.subclasses.OrangeTree;
 import com.google.gson.annotations.Expose;
 
+import java.lang.reflect.Parameter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+
+import static com.example.infs3634_assignment_garden.MainActivity.appDatabase;
+import static com.example.infs3634_assignment_garden.MainActivity.garden;
 
 @Entity
 public class Garden {
@@ -283,10 +288,10 @@ public class Garden {
             int targetPlantIndex = rand.nextInt(((targetMax - targetMin) + 1) + targetMin);
 
             // now setQuizReady = true for the randomly generated plant
-            Plant targetPlant = plantsWithoutQuizzes.get(targetPlantIndex);
-            targetPlant.setQuizReady(true);
+          Plant  generatetargetPlant = plantsWithoutQuizzes.get(targetPlantIndex);
+            generatetargetPlant.setQuizReady(true);
             //update targetPlant in database here
-            //updateQuizReady(targetPlant.isQuizReady(), targetPlant.getPlantIndex());
+            new updateQuizReady().execute(generatetargetPlant.getPlantIndex());
 
             i++;
         }
@@ -336,6 +341,27 @@ public class Garden {
         topics.add(new Topics("Stars", R.drawable.stars));
         Log.d("Garden", "Topics: " + topics);
         return topics;
+    }
+
+    private static class updateQuizReady extends AsyncTask<Integer, Void, Integer> {
+
+        @Override
+        protected Integer doInBackground(Integer... integers) {
+
+            Integer[] plant = integers;
+            int plantindex = plant[0];
+
+            Log.d("Garden", "Plant index: "+ plantindex);
+
+            Plant targetPlant = garden.plantSearch(plantindex);
+
+            appDatabase.plantDao().updateQuizReady(true, targetPlant.getPlantIndex());
+
+
+            Log.d("Garden", "targetPlant Async task: "+ targetPlant);
+            
+            return null;
+        }
     }
 
 
