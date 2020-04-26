@@ -1,4 +1,4 @@
-package com.example.infs3634_assignment_garden;
+package com.example.infs3634_assignment_garden.database;
 
 
 import androidx.room.Dao;

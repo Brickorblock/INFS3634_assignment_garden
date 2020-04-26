@@ -13,17 +13,12 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.infs3634_assignment_garden.AppDatabase;
 import com.example.infs3634_assignment_garden.MainActivity;
 import com.example.infs3634_assignment_garden.QuizAdapter;
 import com.example.infs3634_assignment_garden.R;
-import com.example.infs3634_assignment_garden.entities.Garden;
 import com.example.infs3634_assignment_garden.entities.Plant;
-import com.example.infs3634_assignment_garden.entities.Question;
 import com.example.infs3634_assignment_garden.entities.Quiz;
-import com.example.infs3634_assignment_garden.entities.Topics;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 
@@ -40,7 +35,6 @@ public class QuizFragment extends Fragment implements QuizAdapter.LaunchListener
     private TextView noticeText;
     private RecyclerView.Adapter myAdapter;
     private RecyclerView.LayoutManager myLayoutManager;
-    //    private ArrayList<Quiz> currList = new ArrayList<>();
     List<Quiz> quizzes;
     List<Quiz> myquizzes;
 
@@ -64,7 +58,7 @@ public class QuizFragment extends Fragment implements QuizAdapter.LaunchListener
         View root = inflater.inflate(R.layout.fragment_quiz, container, false);
         //Grabbing the list of quizzes from quiz table.
 
-//Whenever a user has no quizzes, a notice text is shown telling them that they have no active quizzes.
+        //Whenever a user has no quizzes, a notice text is shown telling them that they have no active quizzes.
         if (quizzes.size() != 0) {
 
            noticeText = root.findViewById(R.id.noticeText);
@@ -120,9 +114,6 @@ public class QuizFragment extends Fragment implements QuizAdapter.LaunchListener
 
     //Grabs the topic name using the clicked position of the chosen quiz.
     public String getTopic(int position) {
-
-        //  ArrayList<Quiz> myquizzes = Garden.getQuizzes();
-
         try {
             new GetQuizAsyncTask().execute().get();
         } catch (ExecutionException e) {
@@ -142,7 +133,7 @@ public class QuizFragment extends Fragment implements QuizAdapter.LaunchListener
         return topic;
     }
 
-
+    //gets quiz from database
     public class GetQuizAsyncTask extends AsyncTask<Void, Void, List<Quiz>> {
 
         @Override

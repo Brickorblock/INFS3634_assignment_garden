@@ -129,7 +129,7 @@ public class ResultFragment extends Fragment {
             //did not lvl up
             lvlupText.setVisibility(View.INVISIBLE);
         } else {
-            //levlled up
+            //levelled up
             lvlupText.setText("LEVEL UP!");
             lvlupText.setVisibility(View.VISIBLE);
         }

@@ -109,7 +109,7 @@ public class GardenFragment extends Fragment implements PlantAdapter.LaunchListe
         fragment.setArguments(positionBundle);
 
     }
-
+    //gets plant list from database
     public class insertPlantAsyncTask extends AsyncTask<Void, Void, List<Plant>> {
 
         @Override
